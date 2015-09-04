@@ -229,6 +229,7 @@
 		$database=connect();
 		$res=$database->select("scout",
 		[
+			'idscout',
 			'nome',
 			'cognome',
 			'codice',
@@ -260,6 +261,7 @@
 			"[>]specialita" => ["specialita_idspecialita" => "idspecialita"],
 		],
 		[
+			'specialita.idspecialita',
 			'specialita.nome',
 			'specialita.immagine',
 			'specialitascout.maestro',
@@ -281,6 +283,7 @@
 			"[>]brevetti" => ["brevetti_idbrevetti" => "idbrevetti"],
 		],
 		[
+			'brevetti.idbrevetti',
 			'brevetti.nome',
 			'brevetti.immagine',
 			'brevetti.esempi',

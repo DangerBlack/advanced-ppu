@@ -100,51 +100,51 @@
 						<div class="tab-content">
 							<div id="informazioni" class="tab-pane fade in active">
 								<h3>Informazioni</h3>
-								<table>
+								<table id="infoTable">
 									<tr>
 										<td>Nome:</td>
-										<td><input id="nome" type='text' name='nome' value=''/> </td>
+										<td><span id="nome" type='text' name='nome' value=''/> </td>
 									</tr>
 									<tr>
 
 										<td>Cognome:</td>
-										<td><input id="cognome" type='text' name='cognome' value=''/> </td>
+										<td><span id="cognome" type='text' name='cognome' value=''/> </td>
 									</tr>
 									<tr>
 
-										<td>Codice:</td><td><input id="codice" type='text' name='codice' value=''/> </td>
+										<td>Codice:</td><td><span id="codice" type='text' name='codice' value=''/> </td>
 									</tr>
 									<tr>
 
-										<td>Indirizzo:</td><td> <input id="indirizzo" type='text' name='indirizzo' value=''/> </td>
+										<td>Indirizzo:</td><td> <span id="indirizzo" type='text' name='indirizzo' value=''/> </td>
 									</tr>
 									<tr>
 
-										<td>Data di nascita:</td><td> <input id="datanascita" type='date' name='datanascita' value=''/> </td>
+										<td>Data di nascita:</td><td> <span id="datanascita" type='date' name='datanascita' value=''/> </td>
 									</tr>
 									<tr>
 
-										<td>Residenza:</td><td> <input id="residenza" type='text' name='residenza' value=''/> </td>
+										<td>Residenza:</td><td> <span id="residenza" type='text' name='residenza' value=''/> </td>
 									</tr>
 									<tr>
 
-										<td>Sesso:</td><td> <input id="sesso" type='text' name='sesso' value=''/> </td>
+										<td>Sesso:</td><td> <span id="sesso" type='text' name='sesso' value=''/> </td>
 									</tr>
 									<tr>
 
-										<td>Luogo di nascita:</td><td> <input id="luogo" type='text' name='luogonascita' value=''/> </td>
+										<td>Luogo di nascita:</td><td> <span id="luogo" type='text' name='luogonascita' value=''/> </td>
 									</tr>
 									<tr>
 
-										<td>CAP:</td><td> <input id="cap" type='text' name='cap' value=''/> </td>
+										<td>CAP:</td><td> <span id="cap" type='text' name='cap' value=''/> </td>
 									</tr>
 									<tr>
 
-										<td>Provincia:</td><td> <input id="provincia" type='text' name='provincia' value='BO'/> </td>
+										<td>Provincia:</td><td> <span id="provincia" type='text' name='provincia' value='BO'/> </td>
 									</tr>
 									<tr>
 
-										<td>Nazione:</td><td> <input id="nazione" type='text' name='nazione' value='Ita'/> </td><input type='hidden' name='id' value='44'>   
+										<td>Nazione:</td><td> <span id="nazione" type='text' name='nazione' value='Ita'/> </td><span type='hidden' name='id' value='44'>   
 									</tr>
 									<tr>
 										<td>Squadriglia:</td>
@@ -160,38 +160,38 @@
 							</div>
 							<div id="contatti" class="tab-pane fade">
 								<h3>Contatti</h3>
-								<table>
+								<table id="contattiTable">
 									<tr>
 										<td>Babbo</td>
-										<td><input id="numbabbo" type="text" /></td>
+										<td><span id="numbabbo" type="text" /></td>
 									</tr>
 									<tr>
 										<td>Mamma</td>
-										<td><input id="nummamma" type="text" /></td>
+										<td><span id="nummamma" type="text" /></td>
 									</tr>
 									<tr>
 										<td>numcasa</td>
-										<td><input id="numacasa" type="text" /></td>
+										<td><span id="numacasa" type="text" /></td>
 									</tr>
 									<tr>
 										<td>numcell</td>
-										<td><input id="numcell" type="text" /></td>
+										<td><span id="numcell" type="text" /></td>
 									</tr>
 									<tr>
 										<td>numnonno</td>
-										<td><input id="numnonno" type="text" /></td>
+										<td><span id="numnonno" type="text" /></td>
 									</tr>
 									<tr>
 										<td>mail Babbo</td>
-										<td><input id="mailbabbo" type="text" /></td>
+										<td><span id="mailbabbo" type="text" /></td>
 									</tr>
 									<tr>
 										<td>mail Mamma</td>
-										<td><input id="mailmamma" type="text" /></td>
+										<td><span id="mailmamma" type="text" /></td>
 									</tr>
 									<tr>
 										<td>mail</td>
-										<td><input id="mail" type="text" /></td>
+										<td><span id="mail" type="text" /></td>
 									</tr>
 								</table>
 							</div>

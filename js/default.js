@@ -44,26 +44,26 @@ function initScout(id){
 		var s=js[0];
 			$(".name").html(s.nome+" "+s.cognome);
 			$(".photo").attr("src","archive/bigphoto/"+s.photo);
-			$("#nome").val(s.nome);
-			$("#cognome").val(s.cognome);
-			$("#codice").val(s.codice);
-			$("#indirizzo").val(s.indirizzo);
-			$("#datanascita").val(s.datanascita);
-			$("#residenza").val(s.residenza);
-			$("#sesso").val(s.sesso);
-			$("#luogo").val(s.luogonascita);
-			$("#cap").val(s.cap);
-			$("#provincia").val(s.provincia);
-			$("#nazione").val(s.nazione);
+			$("#nome").html(s.nome);
+			$("#cognome").html(s.cognome);
+			$("#codice").html(s.codice);
+			$("#indirizzo").html(s.indirizzo);
+			$("#datanascita").html(s.datanascita);
+			$("#residenza").html(s.residenza);
+			$("#sesso").html(s.sesso);
+			$("#luogo").html(s.luogonascita);
+			$("#cap").html(s.cap);
+			$("#provincia").html(s.provincia);
+			$("#nazione").html(s.nazione);
 			$("#idsquadriglie").val(s.idsquadriglie);
 			$("#varie").val(s.varie);
-			$("#numbabbo").val(s.numbabbo);
-			$("#nummamma").val(s.numammma);
-			$("#numcasa").val(s.numcasa);
-			$("#numnonno").val(s.numnonno);
-			$("#mailbabbo").val(s.mailbabbo);
-			$("#mailmamma").val(s.mailmamma);
-			$("#mail").val(s.mail);
+			$("#numbabbo").html(s.numbabbo);
+			$("#nummamma").html(s.numammma);
+			$("#numcasa").html(s.numcasa);
+			$("#numnonno").html(s.numnonno);
+			$("#mailbabbo").html('<a href="mailto:'+s.mailbabbo+'" target="_top">'+s.mailbabbo+'</a>');
+			$("#mailmamma").html('<a href="mailto:'+s.mailmammma+'" target="_top">'+s.mailmamma+'</a>');
+			$("#mail").html('<a href="mailto:'+s.mail+'" target="_top">'+s.mail+'</a>');
 			for(var i=0;i<3;i++)
 				if(s.mete[i].conquistata==0){
 					$(".tappa").attr("src","archive/"+s.mete[i].immagine);
@@ -77,39 +77,106 @@ function initScout(id){
 			$("#specInConquista").html('');
 			$.each(s.specialita,function(e,spec){
 				var count=0;
+				var concat='';
 				for(var i=1;i<=6;i++){
-					if((spec['prova'+i] != "")&&(spec['prova'+i]!=null))
+					if((spec['prova'+i] != "")&&(spec['prova'+i]!=null)){
 						count++;
+						concat+=spec['prova'+i]+'<br />';
+					}
+					
 				}
 				if(spec.conquistata!=0)
-					$("#listaSpecialita").append('<li>'+
+					$("#listaSpecialita").append('<li class="spec" value="'+spec.idspecialita+'" ><a href="#" data-toggle="tooltip" data-placement="bottom"'+
+													   'title="" data-html="true" data-original-title="'+concat+'"'+
+													   'class="info-tooltip">'+
 													'<img src="archive/'+spec.immagine+'" />'+
 													'<p>'+spec.nome+' <span class="badge">'+count+'</span></p>'+
+													'</a>'+
 												'</li>');
 				else
-					$("#specInConquista").append('<li>'+
+					$("#specInConquista").append('<li class="spec" value="'+spec.idspecialita+'"><a href="#" data-toggle="tooltip" data-placement="bottom"'+
+													   'title="" data-html="true" data-original-title="'+concat+'"'+
+													   'class="info-tooltip">'+
 													'<img src="archive/'+spec.immagine+'" />'+
 													'<p>'+spec.nome+' <span class="badge">'+count+'</span></p>'+
+													'</a>'+
 												'</li>');
 			});	
 			$("#listaBrevetti").html('');	
 			$("#brevInConquista").html('');
 			$.each(s.brevetti,function(e,brev){
 				var count=0;
+				var concat='';
 				for(var i=1;i<=6;i++){
-					if((brev['prova'+i] != "")&&(brev['prova'+i]!=null))
+					if((brev['prova'+i] != "")&&(brev['prova'+i]!=null)){
 						count++;
+						concat+=brev['prova'+i]+'<br />';
+					}
 				}
 				if(brev.conquistata!=0)
-					$("#listaBrevetti").append('<li>'+
+					$("#listaBrevetti").append('<li class="brev" value="'+brev.idbrevetto+'"><a href="#" data-toggle="tooltip" data-placement="bottom"'+
+													   'title="" data-html="true" data-original-title="'+concat+'"'+
+													   'class="info-tooltip">'+
 													'<img src="archive/'+brev.immagine+'" />'+
 													'<p>'+brev.nome+' <span class="badge">'+count+'</span></p>'+
+													'</a>'+
 												'</li>');
 				else
-					$("#brevInConquista").append('<li>'+
+					$("#brevInConquista").append('<li class="brev" value="'+brev.idbrevetto+'"><a href="#" data-toggle="tooltip" data-placement="bottom"'+
+													   'title="" data-html="true" data-original-title="'+concat+'"'+
+													   'class="info-tooltip">'+
 													'<img src="archive/'+brev.immagine+'" />'+
 													'<p>'+brev.nome+' <span class="badge">'+count+'</span></p>'+
+													'</a>'+
 												'</li>');
 			});
+			$('.spec').click(function(){
+				//var id=$(this).parent().parent().attr("value");
+				var idSpec=$(this).attr("value");
+				window.open('specialita.php?id='+id+'&idS='+idSpec,"_self");
+			});
+			$(".spec").children('a').tooltip();
+			$(".brev").children('a').tooltip();
 	});
+}
+
+function initSpecialita(id,idSpec){
+	$.post("php/getScout.php",{"id":id},function(data){
+		var js=JSON.parse(data);
+		var s=js[0];
+		$(".name").html('<a href="scout.php?id='+id+'">'+s.nome+" "+s.cognome+"</a>");
+		$.each(s.specialita,function(e,spec){
+			if(spec.idspecialita==idSpec){
+				var specName=capitalizeFirstLetter(spec.nome);
+				$(".specialita").html(spec.nome);
+				$(".photo").attr("src","archive/"+spec.immagine);
+				$("#maestro").val(spec.maestro);
+				$("#data").val(spec.data);
+				$("#conquistata").prop('checked',trueAs1(spec.conquistata));
+				$('#listaImpegniSpec').html('');
+				var count=0;
+				var concat='';
+				for(var i=1;i<=6;i++){
+					if((spec['prova'+i] != "")&&(spec['prova'+i]!=null)){
+						count++;
+						$('#listaImpegniSpec').append('<li>'+spec['prova'+i]+'</li>');
+					}
+				}
+				$("#varie").val(spec.varie);
+				$("#metodo").html(spec.metodo);
+				$('iframe').attr('src','http://it.scoutwiki.org/'+specName+'_%28Specialit%C3%A0_E/G%29');
+			}
+		});
+		
+	});
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+function trueAs1(value){
+	if(value=='1'){
+		return true;
+	}
+	return false;
 }
