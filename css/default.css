@@ -1,0 +1,48 @@
+﻿body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+}
+h1{
+  text-align: center;
+}
+.preview{
+	max-width:50px;
+}
+.photo{
+	max-width:100%;
+}
+.listaVuota{
+	list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+.listaVuota li{
+	float:left;
+	margin-right:10px;
+	text-align:center;
+}
+.Specialita img{
+	width:65px;
+}
+.Brevetti img{
+	width:85px;
+}
+.tappa{
+	width:150px;
+}
+#varie{
+	width:99%;
+	min-height:300px;
+}
+button.right{
+	float:right;
+	margin-bottom:2px;
+}
+.panel-heading{
+	font-weight:bold;
+}
+@media only screen and (max-device-width: 480px){
+}
+

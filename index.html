@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="author" content="Daniele Baschieri" />
+<meta name="description" content="Un semplice canzoniere da viaggio per android. Pratico per le route o per tutti gli Scout smemorati." />
+<meta name ="copyright" content="2014" />
+<meta name="keywords" content="CantiScout,canzoniere,canti,canzoni,bans,ballate,cantare,cantiamo,insieme,gioia,scouting,boys,canta,cammina,camminiamo,route,hike,strada,coraggio" />
+
+<title>A-PPU</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
+ <link rel="stylesheet" type="text/css" href="css/default.css" />
+
+
+      
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/datatables.min.js"></script>
+<script type="text/javascript"  src="js/default.js"></script>
+
+
+ 
+ <script type="text/javascript" > 
+ $(document).ready(function(){
+				init();
+			});
+</script>
+<style>
+	
+</style>
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Advanced P.P.U</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="#about">Panoramica</a></li>
+            <li><a href="#contact">Specialità</a></li>
+            <li><a href="#contact">Nuovo Scout</a></li>
+            <li><a href="#contact">Extra</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>Elenco Ragazzi</h1>
+        <table id="tabellaRagazzi" class="display" width="100%" cellspacing="0">
+			<thead>
+				<tr>
+					<th>Foto</th>
+					<th>Cognome</th>
+					<th>Nome</th>
+					<th>Codice</th>
+					<th>Indirizzo</th>
+					<th>Residenza</th>
+					<th>Data di Nascita</th>
+					<th>Sesso</th>
+					<th>Edita</th>
+				</tr>
+			</thead>
+	 
+			<tfoot>
+				<tr>
+					<th>Foto</th>
+					<th>Cognome</th>
+					<th>Nome</th>
+					<th>Codice</th>
+					<th>Indirizzo</th>
+					<th>Residenza</th>
+					<th>Data di Nascita</th>
+					<th>Sesso</th>
+					<th>Edita</th>
+				</tr>
+			</tfoot>
+			<tbody id="elencoRagazzi">
+			</tbody>
+		</table>
+      </div>
+
+    </div>
+	
+</body>
+
+</html>
