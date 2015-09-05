@@ -362,5 +362,16 @@
 		]);
 		return $res;
 	}
-	
+	function getTappe($id){
+		$database=connect();
+		$res=$database->select("tappe",[
+			'idtappe(id)',
+			'nome',
+			'immagine',
+			'metodo'
+		],[
+			'idtappe[=]'=>$id
+		]);
+		return $res;
+	}
 ?>

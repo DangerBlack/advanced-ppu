@@ -32,6 +32,10 @@ h1{
 .tappa{
 	width:150px;
 }
+.smallTappa{
+	margin-top:10px;
+	width:100%;
+}
 #varie{
 	width:99%;
 	min-height:300px;
