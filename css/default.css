@@ -67,7 +67,20 @@ iframe{
 	width:100%;
 	height:300px;
 }
-
+.space{
+	margin-top:5px;
+}
+.verysmall{
+	font-size:0.5em;
+}
+.buttonField{
+	margin-top:10px;
+	display:none;
+}
+.buttonField button{
+	float:right;
+	margin-left:5px;
+}
 @media only screen and (max-device-width: 480px){
 }
 

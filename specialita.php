@@ -114,7 +114,12 @@
 				  <div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-						  <div class="panel-heading">Info da Wiki</div>
+						  <div class="panel-heading">
+							  Info da Wiki 
+							  <button type="button" class="btn btn-xs btn-default openwiki" aria-label="Right Align" onclick="" >
+								  <span class="glyphicon glyphicon glyphicon-new-window" aria-hidden="true"></span>
+							  </button>  
+						  </div>
 						  <div class="panel-body">
 							<iframe src="" ></iframe>
 						  </div>

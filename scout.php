@@ -99,7 +99,11 @@
 						</ul>
 						<div class="tab-content">
 							<div id="informazioni" class="tab-pane fade in active">
-								<h3>Informazioni</h3>
+								<h3>Informazioni 
+									<button type="button" class="btn btn-xs btn-info editInfo" aria-label="Right Align" onclick="" >
+									  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> <span class="">Edit</span>
+									</button> 
+								</h3>
 								<table id="infoTable">
 									<tr>
 										<td>Nome:</td>
@@ -159,7 +163,11 @@
 								</table>
 							</div>
 							<div id="contatti" class="tab-pane fade">
-								<h3>Contatti</h3>
+								<h3>Contatti
+									<button type="button" class="btn btn-xs btn-info editInfo" aria-label="Right Align" onclick="" >
+									  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> <span class="">Edit</span>
+									</button> 
+								</h3>
 								<table id="contattiTable">
 									<tr>
 										<td>Babbo</td>
@@ -170,15 +178,15 @@
 										<td><span id="nummamma" type="text" /></td>
 									</tr>
 									<tr>
-										<td>numcasa</td>
-										<td><span id="numacasa" type="text" /></td>
+										<td>num Casa</td>
+										<td><span id="numcasa" type="text" /></td>
 									</tr>
 									<tr>
-										<td>numcell</td>
+										<td>num Cell</td>
 										<td><span id="numcell" type="text" /></td>
 									</tr>
 									<tr>
-										<td>numnonno</td>
+										<td>num Nonno</td>
 										<td><span id="numnonno" type="text" /></td>
 									</tr>
 									<tr>
@@ -196,6 +204,15 @@
 								</table>
 							</div>
 						</div>
+						<div class="buttonField">
+							<button id="confirmChange" type="button" class="btn btn-sm btn-success" aria-label="Right Align" onclick="" >
+							  <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> <span class=""> Confirm</span>
+							</button>
+							<button id="closeChange" type="button" class="btn btn-sm btn-danger" aria-label="Right Align" onclick="" >
+							  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> <span class=""> Discarge</span>
+							</button>
+							
+						</div> 
 					</div>
 				</div>
 				<div class="row">
@@ -237,7 +254,7 @@
 				  </div>
 				</div>
 				<div class="panel panel-default">
-				  <div class="panel-heading">Specialità in Conquista <button type="button" class="btn btn-success btn-xs right"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Add</button></div>
+				  <div class="panel-heading">Specialità in Conquista<button type="button" class="btn btn-success btn-xs right" data-toggle="modal" data-target="#myModal" data-whatever="@spec"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Add</button></div>
 				  <div class="panel-body">
 					<ul id="specInConquista" class="listaVuota Specialita">
 						<li>
@@ -267,7 +284,7 @@
 				  </div>
 				</div>
 				<div class="panel panel-default">
-				  <div class="panel-heading">Brevetti in Conquista <button type="button" class="btn btn-success btn-xs right"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Add</button></div>
+				  <div class="panel-heading">Brevetti in Conquista <button type="button" class="btn btn-success btn-xs right" data-toggle="modal" data-target="#myModal" data-whatever="@brev"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Add</button></div>
 				  <div class="panel-body">
 					<ul id="brevInConquista" class="listaVuota Brevetti">
 						<li>
@@ -286,7 +303,24 @@
         
       </div>
     </div>
-	
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="send" type="button" class="btn btn-primary">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 
 </html>

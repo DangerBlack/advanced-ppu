@@ -39,6 +39,7 @@ function initTabellRagazzi(){
 }
 
 function initScout(id){
+
 	$.post("php/getScout.php",{"id":id},function(data){
 		var js=JSON.parse(data);
 		var s=js[0];
@@ -130,16 +131,126 @@ function initScout(id){
 													'</a>'+
 												'</li>');
 			});
-			$('.spec').click(function(){
-				//var id=$(this).parent().parent().attr("value");
-				var idSpec=$(this).attr("value");
-				window.open('specialita.php?id='+id+'&idS='+idSpec,"_self");
-			});
-			$(".spec").children('a').tooltip();
-			$(".brev").children('a').tooltip();
+			eventScout(id);
+	});
+}
+function eventScout(id){
+	$(".editInfo").click(function(){
+		$(".buttonField").show();
+		$(".editInfo").hide();
+		var field=["#nome","#cognome","#codice","#indirizzo","#datanascita","#residenza","#sesso","#luogo","#cap","#provincia","#nazione","#numbabbo","#nummamma","#numcasa","#numcell","#numnonno","#mailbabbo","#mailmamma","#mail"];
+		
+		for(var i=0;i<field.length;i++){
+			$(field[i]).replaceWith(function(){
+				var val=$(this).text();
+				var id=$(this).attr("id");
+				return '<input type="text" id="'+id+'" value="'+val+'" />';
+			}); 
+		}
+	});
+	$("#confirmChange").click(function(){
+		var field=["#nome","#cognome","#codice","#indirizzo","#datanascita","#residenza","#sesso","#luogo","#cap","#provincia","#nazione","#numbabbo","#nummamma","#numcasa","#numcell","#numnonno","#mailbabbo","#mailmamma","#mail"];	
+		var dati={};
+		dati['id']=id;
+		for(var i=0;i<field.length;i++){
+			var dato=$(field[i]).val();
+			dati[field[i].slice(1)]=dato;
+		}
+		dati['idsquadriglie']=$("#idsquadriglie").val();
+		$.post("php/updateScout.php",dati,function(data){
+			if(data==202){
+				$(".buttonField").hide();
+				$(".editInfo").show();
+				var field=["#nome","#cognome","#codice","#indirizzo","#datanascita","#residenza","#sesso","#luogo","#cap","#provincia","#nazione","#numbabbo","#nummamma","#numcasa","#numcell","#numnonno","#mailbabbo","#mailmamma","#mail"];
+				for(var i=0;i<field.length;i++)
+					$(field[i]).replaceWith(function(){
+						var val=$(this).val();
+						var id=$(this).attr("id");
+						return '<span type="text" id="'+id+'" >'+val+'</span>';
+					}); 
+				}
+		});
+	});
+	$("#closeChange").click(function(){
+		$(".buttonField").hide();
+		$(".editInfo").show();
+		var field=["#nome","#cognome","#codice","#indirizzo","#datanascita","#residenza","#sesso","#luogo","#cap","#provincia","#nazione","#numbabbo","#nummamma","#numcasa","#numcell","#numnonno","#mailbabbo","#mailmamma","#mail"];
+		for(var i=0;i<field.length;i++)
+			$(field[i]).replaceWith(function(){
+				var val=$(this).val();
+				var id=$(this).attr("id");
+				return '<span type="text" id="'+id+'" >'+val+'</span>';
+			}); 
+	});
+	$('.spec').click(function(){
+		//var id=$(this).parent().parent().attr("value");
+		var idSpec=$(this).attr("value");
+		window.open('specialita.php?id='+id+'&idS='+idSpec,"_self");
+	});
+	$(".spec").children('a').tooltip();
+	$(".brev").children('a').tooltip();
+	
+	$('#myModal').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var recipient = button.data('whatever') // Extract info from data-* attributes
+	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+	  var modal = $(this);
+	  //alert(recipient);
+	  if(recipient=="@spec"){
+		  modal.find('.modal-title').html("Seleziona la Specialità da aggiungere");
+		  $.get("php/getSpecialita.php",function(data){
+			   var lista='<label>Specialità: </label> <select id="specScelta">';
+			   var js=JSON.parse(data);
+			   $.each(js,function(e,spec){
+				   lista+='<option value="'+spec.id+'">'+spec.nome+'</option>';
+			   });
+			   lista+='</select>';
+			   modal.find('.modal-body').html(lista);
+			   modal.find('.modal-body').append('<p class="space"><label>Maestro: </label> <input id="maestro" type="text" placeholder="Maestro" /></p>');
+		  });
+		  $("#send").click(function(){
+			  var maestro=$("#maestro").val();
+			  var idSpec=$("#specScelta").val();
+			  addNuovaSpec(id,idSpec,maestro);
+		  });
+	   }
+	   if(recipient=="@brev"){
+		  modal.find('.modal-title').html("Seleziona il Brevetto da aggiungere");
+		  $.get("php/getBrevetti.php",function(data){
+			   var lista='<label>Brevetto: </label> <select id="brevScelto">';
+			   var js=JSON.parse(data);
+			   $.each(js,function(e,brev){
+				   lista+='<option value="'+brev.id+'">'+brev.nome+'</option>';
+			   });
+			   lista+='</select>';
+			   modal.find('.modal-body').html(lista);
+			   modal.find('.modal-body').append('<p class="space"><label>Maestro: </label> <input id="maestro" type="text" placeholder="Maestro" /></p>');
+		  });
+		  $("#send").click(function(){
+			  var maestro=$("#maestro").val();
+			  var idBrev=$("#brevScelto").val();
+			  addNuovoBrev(id,idBrev,maestro);
+		  });
+	   }
+	   
 	});
 }
 
+function addNuovaSpec(id,idSpec,maestro){
+	$.post("php/addSpec.php",{"id":id,"idS":idSPec,"maestro":maestro},function(data){
+		if(data=="200"){
+			$('#myModal').modal('hide');
+		}
+	});
+}
+function addNuovoBrev(id,idBrev,maestro){
+	$.post("php/addBrev.php",{"id":id,"idC":idBrev,"maestro":maestro},function(data){
+		if(data=="200"){
+			$('#myModal').modal('hide');
+		}
+	});
+}
 function initSpecialita(id,idSpec){
 	$.post("php/getScout.php",{"id":id},function(data){
 		var js=JSON.parse(data);
@@ -165,6 +276,7 @@ function initSpecialita(id,idSpec){
 				$("#varie").val(spec.varie);
 				$("#metodo").html(spec.metodo);
 				$('iframe').attr('src','http://it.scoutwiki.org/'+specName+'_%28Specialit%C3%A0_E/G%29');
+				$('.openwiki').attr('onclick','window.open("http://it.scoutwiki.org/'+specName+'_%28Specialit%C3%A0_E/G%29","_blank")');
 			}
 		});
 		
@@ -180,3 +292,7 @@ function trueAs1(value){
 	}
 	return false;
 }
+
+
+/*Some usefull function*/
+

@@ -146,8 +146,6 @@
 							$mailbabbo,
 							$mailmamma,
 							$mail,
-							$varie,
-							$photo,
 							$squadriglie_idsquadriglie
 						){
 		$database=connect();
@@ -171,8 +169,6 @@
 			'mailbabbo'=>$mailbabbo,
 			'mailmamma'=>$mailmamma,
 			'mail'=>$mail,
-			'varie'=>$varie,
-			'photo'=>$photo,
 			'squadriglie_idsquadriglie'=>$squadriglie_idsquadriglie
 		],
 		[
@@ -209,7 +205,8 @@
 			'squadriglie_idsquadriglie'
 		],
 		[
-			'status[=]'=>$status
+			'status[=]'=>$status,
+			"ORDER" => ["squadriglie_idsquadriglie",'datanascita']
 		]);
 		return $res;
 	}
@@ -326,4 +323,44 @@
 		]);
 		return $res;
 	}
+	
+	function getSpecialitaList(){
+		$database=connect();
+		$res=$database->select("specialita",[
+			'idspecialita(id)',
+			'nome',
+			'immagine',
+			'esempi'
+		]);
+		return $res;
+	}
+	function getBrevettiList(){
+		$database=connect();
+		$res=$database->select("brevetti",[
+			'idbrevetti(id)',
+			'nome',
+			'immagine',
+			'esempi'
+		]);
+		return $res;
+	}
+	function addSpecialita($id,$idSpec,$maestro){
+		$database=connect();
+		$res=$database->insert("specialitascout",[
+			'specialita_idspecialita'=>$idSpec,
+			'scout_idscout'=>$id,
+			'maestro'=>$maestro
+		]);
+		return $res;
+	}
+	function addBrevetti($id,$idBrev,$maestro){
+		$database=connect();
+		$res=$database->insert("brevettiscout",[
+			'brevetti_idbrevetti'=>$idBrev,
+			'scout_idscout'=>$id,
+			'maestro'=>$maestro
+		]);
+		return $res;
+	}
+	
 ?>
