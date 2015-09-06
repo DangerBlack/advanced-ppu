@@ -40,12 +40,9 @@ function initScout(id){
 			$.each(s.specialita,function(e,spec){
 				var count=0;
 				var concat='';
-				for(var i=1;i<=6;i++){
-					if((spec['prova'+i] != "")&&(spec['prova'+i]!=null)){
-						count++;
-						concat+=spec['prova'+i]+'<br />';
-					}
-					
+				for(var i=0;i<spec['impegni'].length;i++){
+					count++;
+					concat+=spec['impegni'][i].impegno +'<br />';					
 				}
 				if(spec.conquistata!=0)
 					$("#listaSpecialita").append('<li class="spec" value="'+spec.idspecialita+'" ><a href="#" data-toggle="tooltip" data-placement="bottom"'+

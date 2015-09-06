@@ -23,7 +23,7 @@ function initTabellRagazzi(){
 										'<td>'+scout.residenza+'</td>'+
 										'<td>'+scout.datanascita+'</td>'+
 										'<td>'+scout.sesso+'</td>'+
-										'<td><button type="button" class="btn btn-default edit"><span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</button></td></tr>');
+										'<td><button type="button" class="btn btn-info edit"><span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</button></td></tr>');
 		});
 		
 		$('#tabellaRagazzi').DataTable({

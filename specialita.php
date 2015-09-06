@@ -91,7 +91,7 @@
 				  </div>
 				  <div class="row">
 					  <div class="panel panel-default">
-						  <div class="panel-heading">Impegni <button type="button" class="btn btn-info btn-xs right"><span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</button></div>
+						  <div class="panel-heading">Impegni <button type="button" class="btn btn-success btn-xs right" data-toggle="modal" data-target="#myModal" data-whatever="@impegno"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Add</button></div>
 						  <div class="panel-body">
 							<ul id="listaImpegniSpec">
 								<li>Fare l'attore</li>
@@ -140,7 +140,23 @@
       </div>
 
     </div>
-	
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+		  </div>
+		  <div class="modal-body">
+			...
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button id="send" type="button" class="btn btn-primary">Send</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
 </body>
 
 </html>

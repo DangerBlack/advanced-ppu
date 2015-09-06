@@ -264,17 +264,27 @@
 			'specialitascout.maestro',
 			'specialitascout.data',
 			'specialitascout.conquistata',
-			'specialitascout.prova1',
-			'specialitascout.prova2',
-			'specialitascout.prova3',
-			'specialitascout.prova4',
-			'specialitascout.prova5',
-			'specialitascout.prova6',
 			'specialitascout.varie'
 		],
 		[
 			'scout_idscout[=]'=>$idscout
 		]);
+		foreach($res[0]['specialita'] as &$r){
+			$r['impegni']=$database->select("specialitaimpegni",
+			[
+				'id',
+				'impegno',
+				'data',
+				'completato'
+			],
+			[
+				'AND'=>[
+					'scout_idscout[=]'=>$idscout,
+					'specialita_idspecialita[=]'=>$r['idspecialita'],
+				]
+			]);
+		}
+		
 		$res[0]['brevetti']=$database->select("brevettiscout",
 		[
 			"[>]brevetti" => ["brevetti_idbrevetti" => "idbrevetti"],
@@ -432,6 +442,25 @@
 		$database=connect();
 		$res=$database->update("metescout",[
 			'raggiunta'=>$raggiunta
+		],[
+			'id[=]'=>$id
+		]);
+		return $res;
+	}
+	
+	function insertImpegno($scout_idscout,$specialita_idspecialita,$impegno){
+		$database=connect();
+		$res=$database->insert("specialitaimpegni",[
+			'scout_idscout'=>$scout_idscout,
+			'specialita_idspecialita'=>$specialita_idspecialita,
+			'impegno'=>$impegno
+		]);
+		return $res;
+	}
+	function setImpegnoCompletato($id,$completato){
+		$database=connect();
+		$res=$database->update("specialitaimpegni",[
+			'completato'=>$completato
 		],[
 			'id[=]'=>$id
 		]);

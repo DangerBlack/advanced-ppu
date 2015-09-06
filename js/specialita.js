@@ -14,18 +14,71 @@ function initSpecialita(id,idSpec){
 				$('#listaImpegniSpec').html('');
 				var count=0;
 				var concat='';
-				for(var i=1;i<=6;i++){
-					if((spec['prova'+i] != "")&&(spec['prova'+i]!=null)){
-						count++;
-						$('#listaImpegniSpec').append('<li>'+spec['prova'+i]+'</li>');
+				for(var i=0;i<spec['impegni'].length;i++){
+					count++;
+					var status="";
+					if(spec['impegni'][i].completato==1){
+						status='checked="checked"';
 					}
+					$('#listaImpegniSpec').append('<li>'+
+													'<input type="checkbox" value="'+spec['impegni'][i].id+'" class="confirmImpegno" '+status+'/> '+
+													spec['impegni'][i].impegno+
+													'<button type="button" class="btn btn-danger btn-xs right deleteImpegno"><span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span></button>'+
+												  '</li>');;					
 				}
+				
 				$("#varie").val(spec.varie);
 				$("#metodo").html(spec.metodo);
 				$('iframe').attr('src','http://it.scoutwiki.org/'+specName+'_%28Specialit%C3%A0_E/G%29');
 				$('.openwiki').attr('onclick','window.open("http://it.scoutwiki.org/'+specName+'_%28Specialit%C3%A0_E/G%29","_blank")');
 			}
 		});
-		
+		eventiSpecialita(id,idSpec);
 	});
+}
+function eventiSpecialita(idScout,idSpec){
+	$('#myModal').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget);
+	  var idTappa = button.data('whatever');
+	  var modal = $(this);
+	  var today = new Date();
+	  var date=today.toISOString().slice(0, 10);
+	  var fine= today.getFullYear()+"-08-01";
+	  if(today.getMonth()>=8)
+		fine= (today.getFullYear()+1)+"-08-01";
+	  modal.find('.modal-title').html("Nuovo Impegno");
+	  modal.find('.modal-body').html('<div class="metaCreator">'+
+									 '<label>Impegno: </label><input id="impegno" type="text" placeholder="obiettivo pratico" /><br />'+
+									 '</div>');
+	  $("#send").click(function(){
+		  var impegno=$("#impegno").val();
+		  addNuovoImpegno(idScout,idSpec,impegno);
+	  }); 
+	});
+	$(".confirmImpegno").click(function(){
+		var id=$(this).val();
+		var completato=$(this).prop("checked");
+		$.post('php/confermaImpegno.php',{'id':id,"completato":completato},function(data){
+			if(data==202){
+				console.log("Impegno completato");
+			}
+		});
+	});
+	$(".deleteImpegno").click(function(){//TODO
+		var id=$(this).val();
+		var completato=$(this).prop("checked");
+		$.post('php/deleteImpegno.php',{'id':id},function(data){
+			if(data==410){
+				console.log("Impegno cancellato");
+			}
+		});
+	});		
+}
+function addNuovoImpegno(id,idS,impegno){
+	$.post('php/addImpegno.php',{'id':id,'idS':idS,"impegno":impegno},function(data){
+			if(data==202){
+				console.log("Impegno completato");
+				window.reload();
+			}
+		});
 }
