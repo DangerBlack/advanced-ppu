@@ -358,15 +358,9 @@ function eventiSentiero(id){
 		  var impegno=$("#impegno").val();
 		  var datainizio=$("#datainizio").val();
 		  var datafine=$("#datafine").val();
-		  addNuovaSpec(id,idSpec,maestro);
+		  addNuovaMeta(idTappa,meta,impegno,datainizio,datafine);
 	  }); 
-	});
-	
-	
-	
-	
-	
-	
+	});	
 	$(".confermaTappa").click(function(){
 			var confermata=$(this).prop('checked');
 			console.log(confermata);
@@ -401,6 +395,13 @@ function eventiSentiero(id){
 			"ordering": false,
 			"info":     false
 		});
+}
+function addNuovaMeta(idTappa,meta,impegno,datainizio,datafine){
+	$.post("addNuovaMeta.php",{'idtappa':idTappa,"meta":meta,"impegno":impegno,"datainizio":datainizio,"datafine":datafine},function(data){
+		if(data==200){
+			
+		}
+	});
 }
 function getTappFromId(id){
 	switch(id){
