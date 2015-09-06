@@ -298,29 +298,37 @@
 		[
 			'scout_idscout[=]'=>$idscout
 		]);
-		$res[0]['mete']=$database->select("mete",
+		$res[0]['tappe']=$database->select("tappescout",
 		[
 			"[>]tappe" => ["tappe_idtappe" => "idtappe"],
 		],
 		[
-			'tappe.idtappe(id)',
+			'tappe.idtappe',
 			'tappe.nome',
 			'tappe.immagine',
-			'tappe.metodo',
-			'mete.capo',
-			'mete.data',
-			'mete.conquistata',
-			'mete.meta1',
-			'mete.meta2',
-			'mete.meta3',
-			'mete.meta4',
-			'mete.meta5',
-			'mete.meta6',
-			'mete.varie'
+			//'tappe.metodo',
+			'tappescout.id',
+			'tappescout.dataconquistata',
+			'tappescout.conquistata'
 		],
 		[
 			'scout_idscout[=]'=>$idscout
 		]);
+		foreach($res[0]['tappe'] as &$r){
+			$r['mete']=$database->select("metescout",
+			[
+				'id',
+				'idtappescout',
+				'datainizio',
+				'dataobiettivo',
+				'raggiunta',
+				'meta',
+				'impegno'
+			],
+			[
+				'idtappescout[=]'=>$r['id']
+			]);
+		}
 		return $res;
 	}
 	
@@ -362,6 +370,7 @@
 		]);
 		return $res;
 	}
+	/*Ottieni le info sulle tre tappe generiche*/
 	function getTappe($id){
 		$database=connect();
 		$res=$database->select("tappe",[
@@ -371,6 +380,60 @@
 			'metodo'
 		],[
 			'idtappe[=]'=>$id
+		]);
+		return $res;
+	}
+	/*Inset 3 tappe per ogni esploratore */
+	function insertTappe($tappe_idtappe,$scout_idscout,$conquistata){
+		$database=connect();
+		$res=$database->insert("tappescout",[
+			'tappe_idtappe'=>$tappe_idtappe,
+			'scout_idscout'=>$scout_idscout,
+			'conquistata'=>$conquistata
+		]);
+		return $res;
+	}
+	/*insert meta per una specifica tappa */
+	function insertMete($idtappescout,$datainizio,$meta,$impegno){
+		$database=connect();
+		$res=$database->insert("metescout",[
+			'idtappescout'=>$idtappescout,
+			'datainizio'=>$datainizio,
+			'meta'=>$meta,
+			'impegno'=>$impegno
+		]);
+		return $res;
+	}
+	function setTappaConquistata($id,$conquistata){
+		if($conquistata==1){
+			$today = date('Y-m-d');
+		}else{
+			$today =null;
+		}
+		$database=connect();
+		$res=$database->update("tappescout",[
+			'conquistata'=>$conquistata,
+			'dataconquistata'=>$today
+		],[
+			'id[=]'=>$id
+		]);
+		return $res;		
+	}
+	function setTappaData($id,$data){
+		$database=connect();
+		$res=$database->update("tappescout",[
+			'dataconquistata'=>$data
+		],[
+			'id[=]'=>$id
+		]);
+		return $res;
+	}
+	function setMetaRaggiunta($id,$raggiunta){
+		$database=connect();
+		$res=$database->update("metescout",[
+			'raggiunta'=>$raggiunta
+		],[
+			'id[=]'=>$id
 		]);
 		return $res;
 	}

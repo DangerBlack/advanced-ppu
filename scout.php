@@ -229,9 +229,9 @@
 			</div>
 			<div class="col-lg-6">
 				<div class="panel panel-default">
-				  <div class="panel-heading">Sentiero <button type="button" class="btn btn-info btn-xs right"><span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</button></div>
+				  <div class="panel-heading">Sentiero <button type="button" class="btn btn-info btn-xs right editSentiero"><span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</button></div>
 				  <div class="panel-body">
-					<img class="tappa" src="archive/tappe/scoperta.jpg" />
+					<img class="tappa" src="archive/tappe/fine.jpg" />
 					<ul id="listaImpegni">
 						<li>Fare tante ba</li>
 						<li>Non picchiare le bambine!</li>

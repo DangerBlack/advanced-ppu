@@ -26,22 +26,12 @@
  
  <script type="text/javascript" > 
  $(document).ready(function(){
-				init();
-				 $('#tabellaMeteScoperta').DataTable( {
-					"paging":   false,
-					"ordering": false,
-					"info":     false
-				});
-				$('#tabellaMeteCompetenza').DataTable( {
-					"paging":   false,
-					"ordering": false,
-					"info":     false
-				});
-				$('#tabellaMeteResponsabilita').DataTable( {
-					"paging":   false,
-					"ordering": false,
-					"info":     false
-				});
+				<?php
+					@$id=$_GET['id'];
+					echo 'var id="'.$id.'";';
+				?>
+				initSentiero(id);
+				
 				$("#metodoScoperta").load("php/getTappe.php?id=1&html=true");
 				$("#metodoCompetenza").load("php/getTappe.php?id=2&html=true");
 				$("#metodoResponsabilita").load("php/getTappe.php?id=3&html=true");
@@ -96,7 +86,7 @@
 								<img src="archive/tappe/scoperta.jpg" class="smallTappa" />
 							</div>
 							<div class="col-lg-9">
-								<p><label>Conquistata: </label> <input type="checkbox" id="conquistataScoperta" /></p>
+								<p><label>Conquistata: </label> <input class="confermaTappa" type="checkbox" id="conquistataScoperta" /></p>
 								<p><label>In cammino da: </label> <input type="data" id="datainzioScoperta" /></p>
 								<p><label>Conquistata il: </label> <input type="data" id="dataScoperta" /></p>
 							</div>
@@ -124,24 +114,12 @@
 										<th>edit</th>
 									</tr>
 								</tfoot>
-								<tbody id="mete">
-									<tr>
-										<td>Diventare più buono</td>
-										<td>Mangiare gelato</td>
-										<td>08/06/1990</td>
-										<td>08/10/1990</td>
-										<td><input type="checkbox" checked="true" /></td>
-										<td>
-											<button type="button" class="btn btn-danger btn-sm">
-											  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-											</button>
-										</td>
-									</tr>
+								<tbody class="mete">
 								</tbody>
 							</table>
 						</div>
 						<div class="row">
-							<button type="button" class="btn btn-success right">
+							<button type="button" class="btn btn-success right addScoperta" data-toggle="modal" data-target="#myModal" data-whatever="@Scoperta">
 							  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> add
 							</button>
 						</div>
@@ -157,7 +135,7 @@
 								<img src="archive/tappe/competenza.jpg" class="smallTappa" />
 							</div>
 							<div class="col-lg-9">
-								<p><label>Conquistata: </label> <input type="checkbox" id="conquistataCompetenza" /></p>
+								<p><label>Conquistata: </label> <input class="confermaTappa" type="checkbox" id="conquistataCompetenza" /></p>
 								<p><label>In cammino da: </label> <input type="data" id="datainzioCompetenza" /></p>
 								<p><label>Conquistata il: </label> <input type="data" id="dataCompetenza" /></p>
 							</div>
@@ -171,6 +149,7 @@
 										<th>data inzio</th>
 										<th>data verifrica</th>
 										<th>raggiunta</th>
+										<th>edit</th>
 									</tr>
 								</thead>
 
@@ -181,21 +160,15 @@
 										<th>data inzio</th>
 										<th>data verifrica</th>
 										<th>raggiunta</th>
+										<th>edit</th>
 									</tr>
 								</tfoot>
-								<tbody id="mete">
-									<tr>
-										<td>Diventare più buono</td>
-										<td>Mangiare gelato</td>
-										<td>08/06/1990</td>
-										<td>08/10/1990</td>
-										<td><input type="checkbox" checked="true" /></td>
-									</tr>
+								<tbody class="mete">
 								</tbody>
 							</table>
 						</div>
 						<div class="row">
-							<button type="button" class="btn btn-success right">
+							<button type="button" class="btn btn-success right addCompetenza" data-toggle="modal" data-target="#myModal" data-whatever="@Competenza">
 							  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> add
 							</button>
 						</div>
@@ -211,7 +184,7 @@
 								<img src="archive/tappe/responsabilita.jpg" class="smallTappa" />
 							</div>
 							<div class="col-lg-9">
-								<p><label>Conquistata: </label> <input type="checkbox" id="conquistataResponsabilita" /></p>
+								<p><label>Conquistata: </label> <input class="confermaTappa" type="checkbox" id="conquistataResponsabilita" /></p>
 								<p><label>In cammino da: </label> <input type="data" id="datainzioResponsabilita" /></p>
 								<p><label>Conquistata il: </label> <input type="data" id="dataResponsabilita" /></p>
 							</div>
@@ -225,6 +198,7 @@
 										<th>data inzio</th>
 										<th>data verifrica</th>
 										<th>raggiunta</th>
+										<th>edit</th>
 									</tr>
 								</thead>
 
@@ -235,21 +209,15 @@
 										<th>data inzio</th>
 										<th>data verifrica</th>
 										<th>raggiunta</th>
+										<th>edit</th>
 									</tr>
 								</tfoot>
-								<tbody id="mete">
-									<tr>
-										<td>Diventare più buono</td>
-										<td>Mangiare gelato</td>
-										<td>08/06/1990</td>
-										<td>08/10/1990</td>
-										<td><input type="checkbox" checked="true" /></td>
-									</tr>
+								<tbody class="mete">
 								</tbody>
 							</table>
 						</div>
 						<div class="row">
-							<button type="button" class="btn btn-success right">
+							<button type="button" class="btn btn-success right addResponsabilita" data-toggle="modal" data-target="#myModal" data-whatever="@Responsabilita">
 							  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> add
 							</button>
 						</div>
@@ -265,7 +233,24 @@
       </div>
 
     </div>
-	
+	<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="send" type="button" class="btn btn-primary">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 
 </html>
