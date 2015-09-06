@@ -56,7 +56,6 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="#about">Panoramica</a></li>
             <li><a href="#contact">Specialità</a></li>
-            <li><a href="#contact">Nuovo Scout</a></li>
             <li><a href="#contact">Extra</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">

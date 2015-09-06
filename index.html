@@ -52,7 +52,6 @@
             <li class="active"><a href="index.html">Home</a></li>
             <li><a href="#about">Panoramica</a></li>
             <li><a href="#contact">Specialità</a></li>
-            <li><a href="#contact">Nuovo Scout</a></li>
             <li><a href="#contact">Extra</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -62,40 +61,51 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>Elenco Ragazzi</h1>
-        <table id="tabellaRagazzi" class="display" width="100%" cellspacing="0">
-			<thead>
-				<tr>
-					<th>Foto</th>
-					<th>Cognome</th>
-					<th>Nome</th>
-					<th>Codice</th>
-					<th>Indirizzo</th>
-					<th>Residenza</th>
-					<th>Data di Nascita</th>
-					<th>Sesso</th>
-					<th>Edita</th>
-				</tr>
-			</thead>
-	 
-			<tfoot>
-				<tr>
-					<th>Foto</th>
-					<th>Cognome</th>
-					<th>Nome</th>
-					<th>Codice</th>
-					<th>Indirizzo</th>
-					<th>Residenza</th>
-					<th>Data di Nascita</th>
-					<th>Sesso</th>
-					<th>Edita</th>
-				</tr>
-			</tfoot>
-			<tbody id="elencoRagazzi">
-			</tbody>
-		</table>
+		<div class="row">
+			<h1>Elenco Ragazzi
+			<a href="newScout.hml">
+				<button type="button" class="btn btn-success right addScout">
+				  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> add
+				</button>
+			</a>
+			</h1>
+		</div>
+		<div class="row">
+			
+			<table id="tabellaRagazzi" class="display" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>Foto</th>
+						<th>Cognome</th>
+						<th>Nome</th>
+						<th>Codice</th>
+						<th>Indirizzo</th>
+						<th>Residenza</th>
+						<th>Data di Nascita</th>
+						<th>Sesso</th>
+						<th>Edita</th>
+					</tr>
+				</thead>
+		 
+				<tfoot>
+					<tr>
+						<th>Foto</th>
+						<th>Cognome</th>
+						<th>Nome</th>
+						<th>Codice</th>
+						<th>Indirizzo</th>
+						<th>Residenza</th>
+						<th>Data di Nascita</th>
+						<th>Sesso</th>
+						<th>Edita</th>
+					</tr>
+				</tfoot>
+				<tbody id="elencoRagazzi">
+				</tbody>
+			</table>
+		</div>
       </div>
-
+		
     </div>
 	
 </body>

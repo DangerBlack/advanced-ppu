@@ -19,7 +19,7 @@ function initTabellRagazzi(){
 										'<td>'+scout.cognome+'</td>'+
 										'<td>'+scout.nome+'</td>'+
 										'<td>'+scout.codice+'</td>'+
-										'<td>'+scout.indirizzo+'</td>'+
+										'<td>'+'<a href="https://www.google.it/maps/place/'+scout.indirizzo.replace(/ /g,"+")+"+"+scout.residenza.replace(/ /g,"+")+'" target="_blank">'+ scout.indirizzo+'</a>'+'</td>'+
 										'<td>'+scout.residenza+'</td>'+
 										'<td>'+scout.datanascita+'</td>'+
 										'<td>'+scout.sesso+'</td>'+
