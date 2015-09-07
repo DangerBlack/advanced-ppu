@@ -220,7 +220,50 @@
 						<div class="panel panel-default">
 						  <div class="panel-heading">Varie</div>
 						  <div class="panel-body">
-							<textarea id="varie">Il ragazzo è brutto!</textarea>
+							<div class="media">
+							  <div class="media-left">
+								<a href="#">
+									<img src="archive/photo/user.jpg" width=64 height=64 />
+									<p class="userName">Capi</p>
+								</a>
+							  </div>
+							  <div class="media-body">
+								<h4 class="media-heading">Vecchie note</h4>
+								<span id="varie"></span>
+							  </div>
+							</div>
+							
+							
+							<!-- <textarea id="varie">Il ragazzo è brutto!</textarea> -->
+							<div class="media">
+							  <div class="media-left">
+								<a href="#">
+									<img src="archive/photo/user.jpg" width=64 height=64 />
+									<p class="userName">Danger</p>
+								</a>
+							  </div>
+							  <div class="media-body">
+								<h4 class="media-heading">Incontro Famiglia <span class="rightText">19/05/2015</span></h4>
+								Il ragazzo mangia troppi bomboloni alla crema
+							  </div>
+							</div>
+							<div class="media">
+							  <div class="media-left">
+								<a href="#">
+									<img src="archive/photo/user.jpg" width=64 height=64 />
+									<p class="userName">Cecilia</p>
+								</a>
+							  </div>
+							  <div class="media-body">
+								<h4 class="media-heading">Discussione con ragazzo <span class="rightText">29/15/2015</span></h4>
+								La PPU ci ha permesso di aiutarlo a mangiare anche i cannoli siciliani
+							  </div>
+							</div>
+							<div>
+								<button type="button" class="btn btn-success right addCommento" data-toggle="modal" data-target="#myModal" data-whatever="@Commento">
+								  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> add
+								</button>
+							</div>
 						  </div>
 						</div>
 					</div>

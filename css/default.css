@@ -23,6 +23,7 @@ h1{
 	margin-left:5px;
 	margin-right:5px;
 	text-align:center;
+	word-break: break-all;
 }
 .spec{
 	height:120px;
@@ -47,10 +48,10 @@ h1{
 	margin-top:10px;
 	width:100%;
 }
-#varie{
+/*#varie{
 	width:99%;
 	min-height:300px;
-}
+}*/
 button.right{
 	float:right;
 	margin-bottom:2px;
@@ -104,6 +105,13 @@ iframe{
 }
 .metaCreator input{
 	width:80%;
+}
+.userName{
+	text-align:center;
+}
+.rightText{
+	float:right;
+	font-size:0.8em;
 }
 @media only screen and (max-device-width: 480px){
 }

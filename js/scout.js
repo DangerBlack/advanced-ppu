@@ -17,7 +17,7 @@ function initScout(id){
 			$("#provincia").html(s.provincia);
 			$("#nazione").html(s.nazione);
 			$("#idsquadriglie").val(s.idsquadriglie);
-			$("#varie").val(s.varie);
+			$("#varie").html(s.varie.replace(/\n/g,"<br />"));
 			$("#numbabbo").html(s.numbabbo);
 			$("#nummamma").html(s.numammma);
 			$("#numcasa").html(s.numcasa);

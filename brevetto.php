@@ -113,21 +113,6 @@
 				  <div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-						  <div class="panel-heading">
-							  Info da Wiki 
-							  <button type="button" class="btn btn-xs btn-default openwiki" aria-label="Right Align" onclick="" >
-								  <span class="glyphicon glyphicon glyphicon-new-window" aria-hidden="true"></span>
-							  </button>  
-						  </div>
-						  <div class="panel-body">
-							<iframe src="" ></iframe>
-						  </div>
-						</div>
-					</div>
-				  </div>
-				  <div class="row">
-					<div class="col-lg-12">
-						<div class="panel panel-default">
 						  <div class="panel-heading">Il Metodo</div>
 						  <div class="panel-body">
 							<article id="metodo">METODO</article>
@@ -141,6 +126,21 @@
 						  <div class="panel-heading">Specialita Collegate</div>
 						  <div class="panel-body">
 							<ul id="listaSpecialita" class="listaVuota Specialita"></ul>
+						  </div>
+						</div>
+					</div>
+				  </div>
+				  <div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+							  Info da Wiki 
+							  <button type="button" class="btn btn-xs btn-default openwiki" aria-label="Right Align" onclick="" >
+								  <span class="glyphicon glyphicon glyphicon-new-window" aria-hidden="true"></span>
+							  </button>  
+						  </div>
+						  <div class="panel-body">
+							<iframe src="" ></iframe>
 						  </div>
 						</div>
 					</div>
