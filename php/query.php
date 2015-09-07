@@ -94,7 +94,6 @@
 							$mailbabbo,
 							$mailmamma,
 							$mail,
-							$varie,
 							$photo,
 							$squadriglie_idsquadriglie
 						){
@@ -112,17 +111,18 @@
 			'provincia'=>$provincia,
 			'nazione'=>$nazione,
 			'numbabbo'=>$numbabbo,
-			'nummamma'=>$numamma,
+			'nummamma'=>$nummamma,
 			'numcasa'=>$numcasa,
 			'numcell'=>$numcell,
 			'numnonno'=>$numnonno,
 			'mailbabbo'=>$mailbabbo,
 			'mailmamma'=>$mailmamma,
 			'mail'=>$mail,
-			'varie'=>$varie,
 			'photo'=>$photo,
 			'squadriglie_idsquadriglie'=>$squadriglie_idsquadriglie
 		]);
+		if($res!=0)
+			insert3Tappe($res);
 		return $res;
 	}
 	function updateScout(
@@ -149,7 +149,7 @@
 							$squadriglie_idsquadriglie
 						){
 		$database=connect();
-		$res=$database->insert("scout",[
+		$res=$database->update("scout",[
 			'nome'=>$nome,
 			'cognome'=>$cognome,
 			'codice'=>$codice,
@@ -162,7 +162,7 @@
 			'provincia'=>$provincia,
 			'nazione'=>$nazione,
 			'numbabbo'=>$numbabbo,
-			'nummamma'=>$numamma,
+			'nummamma'=>$nummamma,
 			'numcasa'=>$numcasa,
 			'numcell'=>$numcell,
 			'numnonno'=>$numnonno,
@@ -417,6 +417,12 @@
 		]);
 		return $res;
 	}
+	
+	function insert3Tappe($scout_idscout){
+		for($i=1;$i<=3;$i++){
+			insertTappe($i,$scout_idscout,0);
+		}
+	}
 	/*Inset 3 tappe per ogni esploratore */
 	function insertTappe($tappe_idtappe,$scout_idscout,$conquistata){
 		$database=connect();
@@ -508,5 +514,16 @@
 		]);
 		return $res;
 	}
-	
+	function getSquadriglie(){
+		$database=connect();
+		$res=$database->select("squadriglie",[
+			'idsquadriglie',
+			'nome',
+			'sesso',
+			'guidone',
+			'colore1',
+			'colore2'
+		]);
+		return $res;
+	}
 ?>

@@ -1,6 +1,5 @@
 <?php
 	include('query.php');
-	$id=$_POST['id'];
 	$nome=$_POST['nome'];
 	$cognome=$_POST['cognome'];
 	$codice=$_POST['codice'];
@@ -20,10 +19,10 @@
 	$mailbabbo=$_POST['mailbabbo'];
 	$mailmamma=$_POST['mailmamma'];
 	$mail=$_POST['mail'];
+	$photo='user.jpg';
 	$squadriglie_idsquadriglie=$_POST['idsquadriglie'];
 	
-	$res=updateScout(
-				$id,
+	$res=insertScout(
 				$nome,
 				$cognome,
 				$codice,
@@ -43,11 +42,12 @@
 				$mailbabbo,
 				$mailmamma,
 				$mail,
+				$photo,
 				$squadriglie_idsquadriglie
 			);
 	
 	if($res!=0){
-		echo 202;
+		echo 200;
 	}else{
 		echo 500;
 	}

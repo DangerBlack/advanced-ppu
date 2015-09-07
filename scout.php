@@ -135,7 +135,7 @@
 									</tr>
 									<tr>
 
-										<td>Luogo di nascita:</td><td> <span id="luogo" type='text' name='luogonascita' value=''/> </td>
+										<td>Luogo di nascita:</td><td> <span id="luogonascita" type='text' name='luogonascita' value=''/> </td>
 									</tr>
 									<tr>
 
@@ -151,7 +151,7 @@
 									</tr>
 									<tr>
 										<td>Squadriglia:</td>
-										<td><select name='idsquadriglie'>
+										<td><select id='idsquadriglie'>
 													<option value='6' selected>aquile</option>
 													<option value='7'>iene</option>
 													<option value='8'>pantere</option>
@@ -219,21 +219,7 @@
 					<div class="col-lg-12">
 						<div class="panel panel-default">
 						  <div class="panel-heading">Varie</div>
-						  <div class="panel-body">
-							<div class="media">
-							  <div class="media-left">
-								<a href="#">
-									<img src="archive/photo/user.jpg" width=64 height=64 />
-									<p class="userName">Capi</p>
-								</a>
-							  </div>
-							  <div class="media-body">
-								<h4 class="media-heading">Vecchie note</h4>
-								<span id="note"></span>
-							  </div>
-							</div>
-							
-							
+						  <div class="panel-body">		
 							<!-- <textarea id="varie">Il ragazzo è brutto!</textarea> -->
 							<div class="media">
 							  <div class="media-left">
@@ -261,7 +247,7 @@
 							</div>
 							<div>
 								<button type="button" class="btn btn-success right addCommento" data-toggle="modal" data-target="#myModal" data-whatever="@Commento">
-								  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> add
+								  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> post
 								</button>
 							</div>
 						  </div>

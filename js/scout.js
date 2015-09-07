@@ -17,7 +17,7 @@ function initScout(id){
 			$("#provincia").html(s.provincia);
 			$("#nazione").html(s.nazione);
 			$("#idsquadriglie").val(s.idsquadriglie);
-			$("#note").html(s.varie.replace(/\n/g,"<br />"));
+			//$("#note").html(s.varie.replace(/\n/g,"<br />"));
 			$("#numbabbo").html(s.numbabbo);
 			$("#nummamma").html(s.numammma);
 			$("#numcasa").html(s.numcasa);
@@ -94,8 +94,7 @@ function eventScout(id){
 	$(".editInfo").click(function(){
 		$(".buttonField").show();
 		$(".editInfo").hide();
-		var field=["#nome","#cognome","#codice","#indirizzo","#datanascita","#residenza","#sesso","#luogo","#cap","#provincia","#nazione","#numbabbo","#nummamma","#numcasa","#numcell","#numnonno","#mailbabbo","#mailmamma","#mail"];
-		
+		var field=["#nome","#cognome","#codice","#indirizzo","#datanascita","#residenza","#sesso","#luogonascita","#cap","#provincia","#nazione","#numbabbo","#nummamma","#numcasa","#numcell","#numnonno","#mailbabbo","#mailmamma","#mail"];
 		for(var i=0;i<field.length;i++){
 			$(field[i]).replaceWith(function(){
 				var val=$(this).text();
@@ -108,7 +107,7 @@ function eventScout(id){
 		window.open("sentiero.php?id="+id,"self");
 	});
 	$("#confirmChange").click(function(){
-		var field=["#nome","#cognome","#codice","#indirizzo","#datanascita","#residenza","#sesso","#luogo","#cap","#provincia","#nazione","#numbabbo","#nummamma","#numcasa","#numcell","#numnonno","#mailbabbo","#mailmamma","#mail"];	
+		var field=["#nome","#cognome","#codice","#indirizzo","#datanascita","#residenza","#sesso","#luogonascita","#cap","#provincia","#nazione","#numbabbo","#nummamma","#numcasa","#numcell","#numnonno","#mailbabbo","#mailmamma","#mail"];
 		var dati={};
 		dati['id']=id;
 		for(var i=0;i<field.length;i++){
@@ -120,7 +119,7 @@ function eventScout(id){
 			if(data==202){
 				$(".buttonField").hide();
 				$(".editInfo").show();
-				var field=["#nome","#cognome","#codice","#indirizzo","#datanascita","#residenza","#sesso","#luogo","#cap","#provincia","#nazione","#numbabbo","#nummamma","#numcasa","#numcell","#numnonno","#mailbabbo","#mailmamma","#mail"];
+				var field=["#nome","#cognome","#codice","#indirizzo","#datanascita","#residenza","#sesso","#luogonascita","#cap","#provincia","#nazione","#numbabbo","#nummamma","#numcasa","#numcell","#numnonno","#mailbabbo","#mailmamma","#mail"];
 				for(var i=0;i<field.length;i++)
 					$(field[i]).replaceWith(function(){
 						var val=$(this).val();
@@ -133,7 +132,7 @@ function eventScout(id){
 	$("#closeChange").click(function(){
 		$(".buttonField").hide();
 		$(".editInfo").show();
-		var field=["#nome","#cognome","#codice","#indirizzo","#datanascita","#residenza","#sesso","#luogo","#cap","#provincia","#nazione","#numbabbo","#nummamma","#numcasa","#numcell","#numnonno","#mailbabbo","#mailmamma","#mail"];
+		var field=["#nome","#cognome","#codice","#indirizzo","#datanascita","#residenza","#sesso","#luogonascita","#cap","#provincia","#nazione","#numbabbo","#nummamma","#numcasa","#numcell","#numnonno","#mailbabbo","#mailmamma","#mail"];
 		for(var i=0;i<field.length;i++)
 			$(field[i]).replaceWith(function(){
 				var val=$(this).val();
@@ -232,16 +231,18 @@ function commentoModal(id,modal){
 }
 
 function addNuovaSpec(id,idSpec,maestro){
-	$.post("php/addSpec.php",{"id":id,"idS":idSPec,"maestro":maestro},function(data){
+	$.post("php/addSpec.php",{"id":id,"idS":idSpec,"maestro":maestro},function(data){
 		if(data=="200"){
 			$('#myModal').modal('hide');
+			location.reload();
 		}
 	});
 }
 function addNuovoBrev(id,idBrev,maestro){
-	$.post("php/addBrev.php",{"id":id,"idC":idBrev,"maestro":maestro},function(data){
+	$.post("php/addBrev.php",{"id":id,"idB":idBrev,"maestro":maestro},function(data){
 		if(data=="200"){
 			$('#myModal').modal('hide');
+			location.reload();
 		}
 	});
 }
@@ -249,6 +250,7 @@ function addCommento(id,titolo,commento){//TODO server side
 	$.post("php/addBrev.php",{"id":id,"titolo":titolo,"commento":commento},function(data){
 		if(data=="200"){
 			$('#myModal').modal('hide');
+			location.reload();
 		}
 	});
 }

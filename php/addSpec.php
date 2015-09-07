@@ -3,5 +3,6 @@
 	$id=$_POST['id'];
 	$idSpec=$_POST['idS'];
 	$maestro=$_POST['maestro'];
-	echo addSpecialita($id,$idSpec,$maestro);
+	addSpecialita($id,$idSpec,$maestro);
+	echo 200;
 ?>
