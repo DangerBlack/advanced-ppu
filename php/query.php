@@ -352,6 +352,18 @@
 		]);
 		return $res;
 	}
+	function getSpecialitaListFilter($filter){
+		$database=connect();
+		$res=$database->select("specialita",[
+			'idspecialita(id)',
+			'nome',
+			'immagine',
+			'esempi'
+		],[
+			"idspecialita[=]"=>$filter
+		]);
+		return $res;
+	}
 	function getBrevettiList(){
 		$database=connect();
 		$res=$database->select("brevetti",[
@@ -466,4 +478,6 @@
 		]);
 		return $res;
 	}
+	
+	
 ?>

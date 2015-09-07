@@ -73,7 +73,7 @@ function initScout(id){
 					}
 				}
 				if(brev.conquistata!=0)
-					$("#listaBrevetti").append('<li class="brev" value="'+brev.idbrevetto+'"><a href="#" data-toggle="tooltip" data-placement="bottom"'+
+					$("#listaBrevetti").append('<li class="brev" value="'+brev.idbrevetti+'"><a href="#" data-toggle="tooltip" data-placement="bottom"'+
 													   'title="" data-html="true" data-original-title="'+concat+'"'+
 													   'class="info-tooltip">'+
 													'<img src="archive/'+brev.immagine+'" />'+
@@ -81,7 +81,7 @@ function initScout(id){
 													'</a>'+
 												'</li>');
 				else
-					$("#brevInConquista").append('<li class="brev" value="'+brev.idbrevetto+'"><a href="#" data-toggle="tooltip" data-placement="bottom"'+
+					$("#brevInConquista").append('<li class="brev" value="'+brev.idbrevetti+'"><a href="#" data-toggle="tooltip" data-placement="bottom"'+
 													   'title="" data-html="true" data-original-title="'+concat+'"'+
 													   'class="info-tooltip">'+
 													'<img src="archive/'+brev.immagine+'" />'+
@@ -147,6 +147,11 @@ function eventScout(id){
 		//var id=$(this).parent().parent().attr("value");
 		var idSpec=$(this).attr("value");
 		window.open('specialita.php?id='+id+'&idS='+idSpec,"_self");
+	});
+	$('.brev').click(function(){
+		//var id=$(this).parent().parent().attr("value");
+		var idBrev=$(this).attr("value");
+		window.open('brevetto.php?id='+id+'&idB='+idBrev,"_self");
 	});
 	$(".spec").children('a').tooltip();
 	$(".brev").children('a').tooltip();

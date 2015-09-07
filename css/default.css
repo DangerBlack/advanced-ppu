@@ -24,7 +24,14 @@ h1{
 	margin-right:5px;
 	text-align:center;
 }
+.spec{
+	height:120px;
+	min-width:80px;
+}
 .listaVuota li a p{
+	width:80px;
+}
+.listaVuota li p{
 	width:80px;
 }
 .Specialita img{

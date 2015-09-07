@@ -8,7 +8,7 @@
 <meta name ="copyright" content="2015" />
 <meta name="keywords" content="Progressione Personale Unitaria" />
 
-<title>A-PPU - specialità</title>
+<title>A-PPU - brevetto</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
@@ -21,16 +21,16 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/datatables.min.js"></script>
 <script type="text/javascript"  src="js/default.js"></script>
-<script type="text/javascript"  src="js/specialita.js"></script>
+<script type="text/javascript"  src="js/brevetto.js"></script>
 
  
  <script type="text/javascript" > 
  $(document).ready(function(){
 				<?php
 					echo 'var id="'.$_GET['id'].'";';
-					echo 'var idSpec="'.$_GET['idS'].'";';
+					echo 'var idBrev="'.$_GET['idB'].'";';
 				?>
-				initSpecialita(id,idSpec);
+				initBrevetto(id,idBrev);
 			});
 </script>
 <style>
@@ -83,7 +83,7 @@
 					</div>
 					<div class="col-lg-8 infoSpec">
 						<p><label>Prove di:</label> <b class="name"></b></p>
-						<p><label>Specialita:</label> <b class="specialita"></b></p>
+						<p><label>Brevetto:</label> <b class="brevetto"></b></p>
 						<p><label>Maestro:</label> <input id="maestro" type="text" placeholder="maestro" /></p>
 						<p><label>Giorno:</label> <input id="data" type="text" placeholder="08-08-2015" /></p>
 						<p><label>Conquistata:</label> <input id="conquistata" type="checkbox" /></p>
@@ -93,7 +93,7 @@
 					  <div class="panel panel-default">
 						  <div class="panel-heading">Impegni <button type="button" class="btn btn-success btn-xs right" data-toggle="modal" data-target="#myModal" data-whatever="@impegno"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Add</button></div>
 						  <div class="panel-body">
-							<ul id="listaImpegniSpec">
+							<ul id="listaImpegniBrev">
 								<li>Fare l'attore</li>
 								<li>Attorare di più!</li>
 							</ul>
@@ -130,7 +130,17 @@
 						<div class="panel panel-default">
 						  <div class="panel-heading">Il Metodo</div>
 						  <div class="panel-body">
-							<article id="metodo"></article>
+							<article id="metodo">METODO</article>
+						  </div>
+						</div>
+					</div>
+				  </div>
+				  <div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+						  <div class="panel-heading">Specialita Collegate</div>
+						  <div class="panel-body">
+							<ul id="listaSpecialita" class="listaVuota Specialita"></ul>
 						  </div>
 						</div>
 					</div>

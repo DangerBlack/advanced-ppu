@@ -3,10 +3,10 @@
 
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<meta name="author" content="Daniele Baschieri" />
-<meta name="description" content="Un semplice canzoniere da viaggio per android. Pratico per le route o per tutti gli Scout smemorati." />
-<meta name ="copyright" content="2014" />
-<meta name="keywords" content="CantiScout,canzoniere,canti,canzoni,bans,ballate,cantare,cantiamo,insieme,gioia,scouting,boys,canta,cammina,camminiamo,route,hike,strada,coraggio" />
+<meta name="author" content="Daniele Baschieri,Nicola Corti" />
+<meta name="description" content="Un semplice programma per la gestione della progressione personale in Reparto agesci.." />
+<meta name ="copyright" content="2015" />
+<meta name="keywords" content="Progressione Personale Unitaria" />
 
 <title>A-PPU</title>
 
