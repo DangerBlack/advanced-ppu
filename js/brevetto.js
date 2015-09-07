@@ -43,6 +43,49 @@ function initBrevetto(id,idBrev){
 											  '</li>');
 			});
 		});
-		//eventiSpecialita(id,idSpec);
+		eventiBrevetti(id,idBrev);
 	});
+}
+
+
+function eventiBrevetti(idScout,idBrev){
+	$('#myModal').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget);
+	  var idTappa = button.data('whatever');
+	  var modal = $(this);
+	  modal.find('.modal-title').html("Nuovo Brevetto");
+	  modal.find('.modal-body').html('<div class="metaCreator">'+
+									 '<label>Impegno: </label><input id="impegno" type="text" placeholder="obiettivo pratico" /><br />'+
+									 '</div>');
+	  $("#send").click(function(){
+		  var impegno=$("#impegno").val();
+		  addNuovoImpegnoBrevetto(idScout,idBrev,impegno);
+	  }); 
+	});
+	$(".confirmImpegno").click(function(){
+		var id=$(this).val();
+		var completato=$(this).prop("checked");
+		$.post('php/confermaImpegnoBrevetto.php',{'id':id,"completato":completato},function(data){//TODO server side
+			if(data==202){
+				console.log("Impegno completato");
+			}
+		});
+	});
+	$(".deleteImpegno").click(function(){//TODO server side
+		var id=$(this).val();
+		var completato=$(this).prop("checked");
+		$.post('php/deleteImpegnoBrevetto.php',{'id':id},function(data){
+			if(data==410){
+				console.log("Impegno cancellato");
+			}
+		});
+	});		
+}
+function addNuovoImpegnoBrevetto(id,idB,impegno){//TODO server side
+	$.post('php/addImpegnoBrevetto.php',{'id':id,'idB':idB,"impegno":impegno},function(data){
+			if(data==202){
+				console.log("Impegno completato");
+				window.reload();
+			}
+		});
 }

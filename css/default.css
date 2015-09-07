@@ -48,10 +48,10 @@ h1{
 	margin-top:10px;
 	width:100%;
 }
-/*#varie{
+#varie{
 	width:99%;
 	min-height:300px;
-}*/
+}
 button.right{
 	float:right;
 	margin-bottom:2px;
@@ -67,7 +67,9 @@ button.right{
 	font-style:italic;
 	min-width:150px;
 }
-
+#commento{
+	width:100%;
+}
 .info-tooltip + .tooltip > .tooltip-inner {
 	border:solid;
 	border-width:1px;

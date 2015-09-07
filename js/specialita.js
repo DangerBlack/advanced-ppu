@@ -41,11 +41,6 @@ function eventiSpecialita(idScout,idSpec){
 	  var button = $(event.relatedTarget);
 	  var idTappa = button.data('whatever');
 	  var modal = $(this);
-	  var today = new Date();
-	  var date=today.toISOString().slice(0, 10);
-	  var fine= today.getFullYear()+"-08-01";
-	  if(today.getMonth()>=8)
-		fine= (today.getFullYear()+1)+"-08-01";
 	  modal.find('.modal-title').html("Nuovo Impegno");
 	  modal.find('.modal-body').html('<div class="metaCreator">'+
 									 '<label>Impegno: </label><input id="impegno" type="text" placeholder="obiettivo pratico" /><br />'+

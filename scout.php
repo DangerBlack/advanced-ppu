@@ -229,7 +229,7 @@
 							  </div>
 							  <div class="media-body">
 								<h4 class="media-heading">Vecchie note</h4>
-								<span id="varie"></span>
+								<span id="note"></span>
 							  </div>
 							</div>
 							

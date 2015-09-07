@@ -162,42 +162,72 @@ function eventScout(id){
 	  var modal = $(this);
 	  //alert(recipient);
 	  if(recipient=="@spec"){
-		  modal.find('.modal-title').html("Seleziona la Specialità da aggiungere");
-		  $.get("php/getSpecialita.php",function(data){
-			   var lista='<label>Specialità: </label> <select id="specScelta">';
-			   var js=JSON.parse(data);
-			   $.each(js,function(e,spec){
-				   lista+='<option value="'+spec.id+'">'+spec.nome+'</option>';
-			   });
-			   lista+='</select>';
-			   modal.find('.modal-body').html(lista);
-			   modal.find('.modal-body').append('<p class="space"><label>Maestro: </label> <input id="maestro" type="text" placeholder="Maestro" /></p>');
-		  });
-		  $("#send").click(function(){
-			  var maestro=$("#maestro").val();
-			  var idSpec=$("#specScelta").val();
-			  addNuovaSpec(id,idSpec,maestro);
-		  });
-	   }
-	   if(recipient=="@brev"){
-		  modal.find('.modal-title').html("Seleziona il Brevetto da aggiungere");
-		  $.get("php/getBrevetti.php",function(data){
-			   var lista='<label>Brevetto: </label> <select id="brevScelto">';
-			   var js=JSON.parse(data);
-			   $.each(js,function(e,brev){
-				   lista+='<option value="'+brev.id+'">'+brev.nome+'</option>';
-			   });
-			   lista+='</select>';
-			   modal.find('.modal-body').html(lista);
-			   modal.find('.modal-body').append('<p class="space"><label>Maestro: </label> <input id="maestro" type="text" placeholder="Maestro" /></p>');
-		  });
-		  $("#send").click(function(){
-			  var maestro=$("#maestro").val();
-			  var idBrev=$("#brevScelto").val();
-			  addNuovoBrev(id,idBrev,maestro);
-		  });
-	   }
-	   
+		specialitaModal(id,modal);
+	  }
+	  if(recipient=="@brev"){
+		brevettoModal(id,modal);
+	  }
+	  if(recipient=="@Commento"){
+		commentoModal(id,modal);
+	  }
+	});
+}
+
+
+function specialitaModal(id,modal){
+	  modal.find('.modal-title').html("Seleziona la Specialità da aggiungere");
+	  $.get("php/getSpecialita.php",function(data){
+		   var lista='<label>Specialità: </label> <select id="specScelta">';
+		   var js=JSON.parse(data);
+		   $.each(js,function(e,spec){
+			   lista+='<option value="'+spec.id+'">'+spec.nome+'</option>';
+		   });
+		   lista+='</select>';
+		   modal.find('.modal-body').html(lista);
+		   modal.find('.modal-body').append('<p class="space"><label>Maestro: </label> <input id="maestro" type="text" placeholder="Maestro" /></p>');
+	  });
+	  $("#send").click(function(){
+		  var maestro=$("#maestro").val();
+		  var idSpec=$("#specScelta").val();
+		  addNuovaSpec(id,idSpec,maestro);
+	  });
+}
+function brevettoModal(id,modal){
+	  modal.find('.modal-title').html("Seleziona il Brevetto da aggiungere");
+	  $.get("php/getBrevetti.php",function(data){
+		   var lista='<label>Brevetto: </label> <select id="brevScelto">';
+		   var js=JSON.parse(data);
+		   $.each(js,function(e,brev){
+			   lista+='<option value="'+brev.id+'">'+brev.nome+'</option>';
+		   });
+		   lista+='</select>';
+		   modal.find('.modal-body').html(lista);
+		   modal.find('.modal-body').append('<p class="space"><label>Maestro: </label> <input id="maestro" type="text" placeholder="Maestro" /></p>');
+	  });
+	  $("#send").click(function(){
+		  var maestro=$("#maestro").val();
+		  var idBrev=$("#brevScelto").val();
+		  addNuovoBrev(id,idBrev,maestro);
+	  });
+}
+function commentoModal(id,modal){
+	modal.find('.modal-title').html("Scrivi un commento");
+	modal.find('.modal-body').html('<p class="space"><label>Titolo: </label> <input id="titolo" type="text" placeholder="Chiacchierata" /></p>'+
+									'<label>Corpo: </label><br /> <textarea id="commento" type="text" placeholder="-testo-" ></textarea><span class="rightText"><span id="counter">0</span><span>/500</span></span>');
+	
+	$("#commento").keypress(function(){
+		var l=$(this).val().length;
+		if(l>500){
+			$("#counter").css("color","red");
+		}else{
+			$("#counter").css("color","black");
+		}
+		$("#counter").html(l);
+	});
+	$("#send").click(function(){
+	  var commento=$("#commento").val();
+	  var titolo=$("#titolo").val();
+	  addCommento(id,titolo,commento);
 	});
 }
 
@@ -210,6 +240,13 @@ function addNuovaSpec(id,idSpec,maestro){
 }
 function addNuovoBrev(id,idBrev,maestro){
 	$.post("php/addBrev.php",{"id":id,"idC":idBrev,"maestro":maestro},function(data){
+		if(data=="200"){
+			$('#myModal').modal('hide');
+		}
+	});
+}
+function addCommento(id,titolo,commento){//TODO server side
+	$.post("php/addBrev.php",{"id":id,"titolo":titolo,"commento":commento},function(data){
 		if(data=="200"){
 			$('#myModal').modal('hide');
 		}
