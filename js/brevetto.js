@@ -15,7 +15,6 @@ function initBrevetto(id,idBrev){
 				$('#listaImpegniBrev').html('');
 				var count=0;
 				var concat='';
-				brev['impegni']=[];
 				for(var i=0;i<brev['impegni'].length;i++){
 					count++;
 					var status="";

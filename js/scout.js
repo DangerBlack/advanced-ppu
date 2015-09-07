@@ -17,7 +17,7 @@ function initScout(id){
 			$("#provincia").html(s.provincia);
 			$("#nazione").html(s.nazione);
 			$("#idsquadriglie").val(s.idsquadriglie);
-			$("#varie").html(s.varie.replace(/\n/g,"<br />"));
+			$("#note").html(s.varie.replace(/\n/g,"<br />"));
 			$("#numbabbo").html(s.numbabbo);
 			$("#nummamma").html(s.numammma);
 			$("#numcasa").html(s.numcasa);
@@ -66,11 +66,9 @@ function initScout(id){
 			$.each(s.brevetti,function(e,brev){
 				var count=0;
 				var concat='';
-				for(var i=1;i<=6;i++){
-					if((brev['prova'+i] != "")&&(brev['prova'+i]!=null)){
-						count++;
-						concat+=brev['prova'+i]+'<br />';
-					}
+				for(var i=0;i<brev['impegni'].length;i++){
+					count++;
+					concat+=brev['impegni'][i].impegno +'<br />';					
 				}
 				if(brev.conquistata!=0)
 					$("#listaBrevetti").append('<li class="brev" value="'+brev.idbrevetti+'"><a href="#" data-toggle="tooltip" data-placement="bottom"'+

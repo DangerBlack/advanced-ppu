@@ -297,17 +297,29 @@
 			'brevettiscout.maestro',
 			'brevettiscout.data',
 			'brevettiscout.conquistata',
-			'brevettiscout.prova1',
-			'brevettiscout.prova2',
-			'brevettiscout.prova3',
-			'brevettiscout.prova4',
-			'brevettiscout.prova5',
-			'brevettiscout.prova6',
 			'brevettiscout.varie'
 		],
 		[
 			'scout_idscout[=]'=>$idscout
 		]);
+		
+		foreach($res[0]['brevetti'] as &$r){
+			$r['impegni']=$database->select("brevettiimpegni",
+			[
+				'id',
+				'impegno',
+				'data',
+				'completato'
+			],
+			[
+				'AND'=>[
+					'scout_idscout[=]'=>$idscout,
+					'brevetti_idbrevetti[=]'=>$r['idbrevetti'],
+				]
+			]);
+		}
+		
+		
 		$res[0]['tappe']=$database->select("tappescout",
 		[
 			"[>]tappe" => ["tappe_idtappe" => "idtappe"],
@@ -478,6 +490,23 @@
 		]);
 		return $res;
 	}
-	
+	function insertImpegnoBrevetto($scout_idscout,$brevetti_idbrevetti,$impegno){
+		$database=connect();
+		$res=$database->insert("brevettiimpegni",[
+			'scout_idscout'=>$scout_idscout,
+			'brevetti_idbrevetti'=>$brevetti_idbrevetti,
+			'impegno'=>$impegno
+		]);
+		return $res;
+	}
+	function setImpegnoBrevettoCompletato($id,$completato){
+		$database=connect();
+		$res=$database->update("brevettiimpegni",[
+			'completato'=>$completato
+		],[
+			'id[=]'=>$id
+		]);
+		return $res;
+	}
 	
 ?>
