@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generato il: Set 06, 2015 alle 17:32
+-- Generato il: Set 07, 2015 alle 12:16
 -- Versione del server: 5.5.44-0ubuntu0.14.04.1
 -- Versione PHP: 5.5.9-1ubuntu4.11
 
@@ -37,6 +37,22 @@ CREATE TABLE IF NOT EXISTS `brevetti` (
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `brevettiimpegni`
+--
+
+CREATE TABLE IF NOT EXISTS `brevettiimpegni` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `scout_idscout` int(11) NOT NULL,
+  `brevetti_idbrevetti` int(11) NOT NULL,
+  `impegno` varchar(500) NOT NULL,
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `completato` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `brevettiscout`
 --
 
@@ -58,6 +74,21 @@ CREATE TABLE IF NOT EXISTS `brevettiscout` (
   KEY `fk_brevetti_has_scout_scout1_idx` (`scout_idscout`),
   KEY `fk_brevetti_has_scout_brevetti1_idx` (`brevetti_idbrevetti`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `commenti`
+--
+
+CREATE TABLE IF NOT EXISTS `commenti` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `scout_idscout` int(11) NOT NULL,
+  `idutenti` int(11) NOT NULL,
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `testo` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -209,6 +240,22 @@ CREATE TABLE IF NOT EXISTS `specialita` (
   `esempi` text,
   PRIMARY KEY (`idspecialita`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=151 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `specialitaimpegni`
+--
+
+CREATE TABLE IF NOT EXISTS `specialitaimpegni` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `scout_idscout` int(11) NOT NULL,
+  `specialita_idspecialita` int(11) NOT NULL,
+  `impegno` varchar(200) NOT NULL,
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `completato` int(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=82 ;
 
 -- --------------------------------------------------------
 
