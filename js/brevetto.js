@@ -83,7 +83,7 @@ function eventiBrevetti(idScout,idBrev){
 }
 function addNuovoImpegnoBrevetto(id,idB,impegno){//TODO server side
 	$.post('php/addImpegnoBrevetto.php',{'id':id,'idB':idB,"impegno":impegno},function(data){
-			if(data==202){
+			if(data==201){
 				console.log("Impegno completato");
 				window.reload();
 			}

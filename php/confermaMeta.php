@@ -2,7 +2,7 @@
 	include('query.php');
 	$id=$_POST['id'];
 	$conferma=$_POST['conferma'];
-	if($conferma){
+	if($conferma=="true"){
 		$conferma=1;
 	}else{
 		$conferma=0;

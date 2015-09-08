@@ -4,5 +4,5 @@
 	$idSpec=$_POST['idS'];
 	$impegno=$_POST['impegno'];
 	insertImpegno($id,$idSpec,$impegno);
-	echo 200;
+	echo 201;
 ?>

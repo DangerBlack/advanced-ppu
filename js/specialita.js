@@ -23,7 +23,7 @@ function initSpecialita(id,idSpec){
 					$('#listaImpegniSpec').append('<li>'+
 													'<input type="checkbox" value="'+spec['impegni'][i].id+'" class="confirmImpegno" '+status+'/> '+
 													spec['impegni'][i].impegno+
-													'<button type="button" class="btn btn-danger btn-xs right deleteImpegno"><span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span></button>'+
+													'<button type="button" class="btn btn-danger btn-xs right deleteImpegno" value="'+spec['impegni'][i].id+'" ><span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span></button>'+
 												  '</li>');;					
 				}
 				
@@ -54,26 +54,29 @@ function eventiSpecialita(idScout,idSpec){
 		var id=$(this).val();
 		var completato=$(this).prop("checked");
 		$.post('php/confermaImpegno.php',{'id':id,"completato":completato},function(data){
-			if(data==202){
+			if(data==201){
 				console.log("Impegno completato");
+				
 			}
 		});
 	});
-	$(".deleteImpegno").click(function(){//TODO
+	$(".deleteImpegno").click(function(){
+		var impegno=$(this).parent();
 		var id=$(this).val();
 		var completato=$(this).prop("checked");
 		$.post('php/deleteImpegno.php',{'id':id},function(data){
 			if(data==410){
-				console.log("Impegno cancellato");
+				console.log("Impegno cancellato");	
+				impegno.hide();			
 			}
 		});
 	});		
 }
 function addNuovoImpegno(id,idS,impegno){
 	$.post('php/addImpegno.php',{'id':id,'idS':idS,"impegno":impegno},function(data){
-			if(data==202){
+			if(data==201){
 				console.log("Impegno completato");
-				window.reload();
+				location.reload();
 			}
 		});
 }

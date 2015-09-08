@@ -434,11 +434,12 @@
 		return $res;
 	}
 	/*insert meta per una specifica tappa */
-	function insertMete($idtappescout,$datainizio,$meta,$impegno){
+	function insertMete($idtappescout,$datainizio,$meta,$impegno,$dataobiettivo){
 		$database=connect();
 		$res=$database->insert("metescout",[
 			'idtappescout'=>$idtappescout,
 			'datainizio'=>$datainizio,
+			'dataobiettivo'=>$dataobiettivo,
 			'meta'=>$meta,
 			'impegno'=>$impegno
 		]);
@@ -525,5 +526,21 @@
 			'colore2'
 		]);
 		return $res;
+	}
+	function deleteMeta($id){
+		$database=connect();
+		$res=$database->delete("metescout",[
+			'id[=]'=>$id
+		]);
+		return $res;
+		
+	}
+	function deleteImpegno($id){
+		$database=connect();
+		$res=$database->delete("specialitaimpegni",[
+			'id[=]'=>$id
+		]);
+		return $res;
+		
 	}
 ?>

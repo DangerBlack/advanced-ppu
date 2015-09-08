@@ -15,6 +15,9 @@ function initSentiero(id){
 			$("#conquistata"+tnome).attr('value',s.tappe[k].id);
 			$("#data"+tnome).val(s.tappe[k].dataconquistata);
 			$(".add"+tnome).attr("data-whatever",s.tappe[k].id);
+			if(trueAs1(s.tappe[k].conquistata)){
+				$(".add"+tnome).hide();
+			}
 			for(var j=0;j<s.tappe[k].mete.length;j++){
 				var m=s.tappe[k].mete[j];
 				$("#tabellaMete"+tnome).find('.mete').append('<tr value="'+m.id+'">'+
@@ -36,8 +39,9 @@ function initSentiero(id){
 }
 function deleteMeta(id){//TODO
 	$.post("php/deleteMeta.php",{"id":id},function(data){
-		if(data==202){
-			alert("rimossa");
+		if(data==403){
+			//alert("rimossa");
+			$("tr[value="+id+"]").hide();
 		}
 	});
 }
@@ -99,10 +103,10 @@ function eventiSentiero(id){
 			"info":     false
 		});
 }
-function addNuovaMeta(idTappa,meta,impegno,datainizio,datafine){
-	$.post("addNuovaMeta.php",{'idtappa':idTappa,"meta":meta,"impegno":impegno,"datainizio":datainizio,"datafine":datafine},function(data){
+function addNuovaMeta(idTappa,meta,impegno,datainizio,datafine){//TODO LATO SERVER
+	$.post("php/addNuovaMeta.php",{'idtappa':idTappa,"meta":meta,"impegno":impegno,"datainizio":datainizio,"datafine":datafine},function(data){
 		if(data==200){
-			
+			location.reload();
 		}
 	});
 }

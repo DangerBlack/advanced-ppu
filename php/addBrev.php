@@ -4,5 +4,5 @@
 	$idBrev=$_POST['idB'];
 	$maestro=$_POST['maestro'];
 	addBrevetti($id,$idBrev,$maestro);
-	echo 200;
+	echo 201;
 ?>
