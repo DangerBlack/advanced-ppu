@@ -515,6 +515,36 @@
 		]);
 		return $res;
 	}
+	function setSpecialitaRaggiunta($scout_idscout,$specialita_idspecialita,$conquistata){
+		if($conquistata==1){
+			$today = date('Y-m-d');
+		}else{
+			$today =null;
+		}
+		$database=connect();
+		$res=$database->update("specialitascout",[
+			'conquistata'=>$conquistata,
+			'data'=>$today
+		],[
+			'AND'=>[
+					'scout_idscout[=]'=>$scout_idscout,
+					'specialita_idspecialita[=]'=>$specialita_idspecialita,
+			]
+		]);
+		return $res;
+	}
+	function updateVarieSpecialita($scout_idscout,$specialita_idspecialita,$varie){
+		$database=connect();
+		$res=$database->update("specialitascout",[
+			'varie'=>$varie,
+		],[
+			'AND'=>[
+					'scout_idscout[=]'=>$scout_idscout,
+					'specialita_idspecialita[=]'=>$specialita_idspecialita,
+			]
+		]);
+		return $res;
+	}
 	function getSquadriglie(){
 		$database=connect();
 		$res=$database->select("squadriglie",[

@@ -54,9 +54,8 @@ function eventiSpecialita(idScout,idSpec){
 		var id=$(this).val();
 		var completato=$(this).prop("checked");
 		$.post('php/confermaImpegno.php',{'id':id,"completato":completato},function(data){
-			if(data==201){
-				console.log("Impegno completato");
-				
+			if(data==202){
+				console.log("Impegno completato");				
 			}
 		});
 	});
@@ -68,6 +67,24 @@ function eventiSpecialita(idScout,idSpec){
 			if(data==410){
 				console.log("Impegno cancellato");	
 				impegno.hide();			
+			}
+		});
+	});
+	$("#conquistata").click(function(){
+		var conquistata=$(this).prop("checked");
+		$.post('php/confermaSpecialita.php',{'idSpec':idSpec,'idScout':idScout,"conquistata":conquistata},function(data){
+			if(data==202){
+				console.log("Impegno completato");
+				
+			}
+		});
+	});
+	$(".updateVarie").click(function(){
+		var varie=$("#varie").val();
+		console.log(varie);
+		$.post('php/updateVarieSpecialita.php',{'idSpec':idSpec,'idScout':idScout,"varie":varie},function(data){
+			if(data==202){
+				console.log("Varie aggiornate");				
 			}
 		});
 	});		

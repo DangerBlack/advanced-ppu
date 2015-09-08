@@ -104,7 +104,11 @@
 						<div class="panel panel-default">
 						  <div class="panel-heading">Varie</div>
 						  <div class="panel-body">
-							<textarea id="varie">Il ragazzo è brutto!</textarea>
+							<textarea id="varie">Il ragazzo è brutto!</textarea><br />
+							<button type="button" class="btn btn-success btn-xs right updateVarie">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								update
+							</button>
 						  </div>
 						</div>
 				   </div>
