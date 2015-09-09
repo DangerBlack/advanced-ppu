@@ -7,6 +7,7 @@
 <meta name="description" content="Un semplice programma per la gestione della progressione personale in Reparto agesci.." />
 <meta name ="copyright" content="2015" />
 <meta name="keywords" content="Progressione Personale Unitaria" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>A-PPU - specialità</title>
 
