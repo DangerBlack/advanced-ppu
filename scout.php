@@ -218,8 +218,8 @@
 					<hr />
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-						  <div class="panel-heading">Varie</div>
-						  <div class="panel-body">		
+						  <div class="panel-heading">Varie <button type="button" class="btn btn-success btn-xs right addComment" data-toggle="modal" data-target="#myModal" data-whatever="@Commento"><span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Post</button></div>
+						  <div class="panel-body" id="commenti">		
 							<!-- <textarea id="varie">Il ragazzo è brutto!</textarea> -->
 							<div class="media">
 							  <div class="media-left">

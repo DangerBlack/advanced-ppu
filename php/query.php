@@ -351,6 +351,9 @@
 				'idtappescout[=]'=>$r['id']
 			]);
 		}
+		
+		$res[0]['commenti']=selectCommenti($idscout);
+		
 		return $res;
 	}
 	
@@ -610,5 +613,31 @@
 		]);
 		return $res;
 		
+	}
+	function selectCommenti($scout_idscout){
+		$database=connect();
+		$res=$database->select("commenti",[
+			'[>]utenti'=>['idutenti'=>'id']
+		],[
+			'commenti.id',
+			'commenti.idutenti',
+			'utenti.utente(username)',
+			'utenti.photo',
+			'commenti.data',
+			'commenti.titolo',
+			'commenti.testo'
+		],[
+			'commenti.scout_idscout[=]'=>$scout_idscout
+		]);
+		return $res;
+	}
+	function insertCommento($idutenti,$scout_idscout,$titolo,$testo){
+		$database=connect();
+		$res=$database->insert("commenti",[
+			'idutenti'=>$idutenti,
+			'scout_idscout'=>$scout_idscout,
+			'titolo'=>$titolo,
+			'testo'=>$testo
+		]);
 	}
 ?>

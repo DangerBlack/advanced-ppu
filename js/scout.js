@@ -87,6 +87,24 @@ function initScout(id){
 													'</a>'+
 												'</li>');
 			});
+			
+			$("#commenti").html('');
+			$.each(s.commenti,function(e,commento){
+				$("#commenti").append(
+							'<div class="media">'+
+							  '<div class="media-left">'+
+								'<a href="#">'+
+									'<img src="archive/photo/'+commento.photo+'" width=64 height=64 />'+
+									'<p class="userName">'+commento.username+'</p>'+
+								'</a>'+
+							  '</div>'+
+							  '<div class="media-body">'+
+								'<h4 class="media-heading">'+commento.titolo+' <span class="rightText">'+commento.data+'</span></h4>'+
+								commento.testo+
+							  '</div>'+
+							'</div>'
+				);
+			});
 			eventScout(id);
 	});
 }
@@ -247,7 +265,7 @@ function addNuovoBrev(id,idBrev,maestro){
 	});
 }
 function addCommento(id,titolo,commento){//TODO server side
-	$.post("php/addBrev.php",{"id":id,"titolo":titolo,"commento":commento},function(data){
+	$.post("php/addCommento.php",{"id":id,"titolo":titolo,"commento":commento},function(data){
 		if(data=="200"){
 			$('#myModal').modal('hide');
 			location.reload();
