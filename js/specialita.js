@@ -62,7 +62,6 @@ function eventiSpecialita(idScout,idSpec){
 	$(".deleteImpegno").click(function(){
 		var impegno=$(this).parent();
 		var id=$(this).val();
-		var completato=$(this).prop("checked");
 		$.post('php/deleteImpegno.php',{'id':id},function(data){
 			if(data==410){
 				console.log("Impegno cancellato");	

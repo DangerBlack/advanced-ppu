@@ -24,7 +24,7 @@ function initBrevetto(id,idBrev){
 					$('#listaImpegniBrev').append('<li>'+
 													'<input type="checkbox" value="'+brev['impegni'][i].id+'" class="confirmImpegno" '+status+'/> '+
 													brev['impegni'][i].impegno+
-													'<button type="button" class="btn btn-danger btn-xs right deleteImpegno"><span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span></button>'+
+													'<button type="button" class="btn btn-danger btn-xs right deleteImpegno" value="'+brev['impegni'][i].id+'"><span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span></button>'+
 												  '</li>');;					
 				}
 				
@@ -71,21 +71,40 @@ function eventiBrevetti(idScout,idBrev){
 			}
 		});
 	});
-	$(".deleteImpegno").click(function(){//TODO server side
+	$(".deleteImpegno").click(function(){
+		var impegno=$(this).parent();
 		var id=$(this).val();
-		var completato=$(this).prop("checked");
 		$.post('php/deleteImpegnoBrevetto.php',{'id':id},function(data){
 			if(data==410){
 				console.log("Impegno cancellato");
+				impegno.hide();	
 			}
 		});
-	});		
+	});
+	$("#conquistata").click(function(){
+		var conquistata=$(this).prop("checked");
+		$.post('php/confermaBrevetto.php',{'idBrev':idBrev,'idScout':idScout,"conquistata":conquistata},function(data){
+			if(data==202){
+				console.log("Brevetto conquistato");
+				
+			}
+		});
+	});
+	$(".updateVarie").click(function(){
+		var varie=$("#varie").val();
+		console.log(varie);
+		$.post('php/updateVarieBrevetto.php',{'idBrev':idBrev,'idScout':idScout,"varie":varie},function(data){
+			if(data==202){
+				console.log("Varie aggiornate");				
+			}
+		});
+	});			
 }
-function addNuovoImpegnoBrevetto(id,idB,impegno){//TODO server side
+function addNuovoImpegnoBrevetto(id,idB,impegno){
 	$.post('php/addImpegnoBrevetto.php',{'id':id,'idB':idB,"impegno":impegno},function(data){
 			if(data==201){
 				console.log("Impegno completato");
-				window.reload();
+				location.reload();
 			}
 		});
 }

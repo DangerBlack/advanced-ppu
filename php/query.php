@@ -533,6 +533,24 @@
 		]);
 		return $res;
 	}
+	function setBrevettoRaggiunto($scout_idscout,$brevetti_idbrevetti,$conquistata){
+		if($conquistata==1){
+			$today = date('Y-m-d');
+		}else{
+			$today =null;
+		}
+		$database=connect();
+		$res=$database->update("brevettiscout",[
+			'conquistata'=>$conquistata,
+			'data'=>$today
+		],[
+			'AND'=>[
+					'scout_idscout[=]'=>$scout_idscout,
+					'brevetti_idbrevetti[=]'=>$brevetti_idbrevetti,
+			]
+		]);
+		return $res;
+	}
 	function updateVarieSpecialita($scout_idscout,$specialita_idspecialita,$varie){
 		$database=connect();
 		$res=$database->update("specialitascout",[
@@ -541,6 +559,18 @@
 			'AND'=>[
 					'scout_idscout[=]'=>$scout_idscout,
 					'specialita_idspecialita[=]'=>$specialita_idspecialita,
+			]
+		]);
+		return $res;
+	}
+	function updateVarieBrevetto($scout_idscout,$brevetti_idbrevetti,$varie){
+		$database=connect();
+		$res=$database->update("brevettiscout",[
+			'varie'=>$varie,
+		],[
+			'AND'=>[
+					'scout_idscout[=]'=>$scout_idscout,
+					'brevetti_idbrevetti[=]'=>$brevetti_idbrevetti,
 			]
 		]);
 		return $res;
@@ -568,6 +598,14 @@
 	function deleteImpegno($id){
 		$database=connect();
 		$res=$database->delete("specialitaimpegni",[
+			'id[=]'=>$id
+		]);
+		return $res;
+		
+	}
+	function deleteImpegnoBrevetto($id){
+		$database=connect();
+		$res=$database->delete("brevettiimpegni",[
 			'id[=]'=>$id
 		]);
 		return $res;
