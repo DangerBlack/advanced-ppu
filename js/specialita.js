@@ -9,8 +9,9 @@ function initSpecialita(id,idSpec){
 				$(".specialita").html(spec.nome);
 				$(".photo").attr("src","archive/"+spec.immagine);
 				$("#maestro").val(spec.maestro);
-				$("#data").val(spec.data);
+				$("#data").val(toHRData(spec.data));
 				$("#conquistata").prop('checked',trueAs1(spec.conquistata));
+				$('#listaImpegniSpec').html('');
 				$('#listaImpegniSpec').html('');
 				var count=0;
 				var concat='';
@@ -29,7 +30,7 @@ function initSpecialita(id,idSpec){
 				
 				$("#varie").val(spec.varie);
 				$("#metodo").html(spec.metodo);
-				$('iframe').attr('src','http://it.scoutwiki.org/'+specName+'_%28Specialit%C3%A0_E/G%29');
+				//$('iframe').attr('src','http://it.scoutwiki.org/'+specName+'_%28Specialit%C3%A0_E/G%29');
 				$('.openwiki').attr('onclick','window.open("http://it.scoutwiki.org/'+specName+'_%28Specialit%C3%A0_E/G%29","_blank")');
 			}
 		});
@@ -86,13 +87,74 @@ function eventiSpecialita(idScout,idSpec){
 				console.log("Varie aggiornate");				
 			}
 		});
-	});		
+	});
+	
+	
+	$.get("php/getScoutNameList.php",function(data){
+		var js=JSON.parse(data);
+		
+		var nomi=[];
+		for(var i=0;i<js.length;i++){
+			nomi.push(js[i].nome+" "+js[i].cognome);
+		}
+		$(".typeahead").autoComplete({
+			minChars: 2,
+			source: function(term, suggest){
+				term = term.toLowerCase();
+				var matches = [];
+				for (i=0; i<nomi.length; i++)
+					if (~nomi[i].toLowerCase().indexOf(term)) matches.push(nomi[i]);
+				suggest(matches);
+			}
+		});
+	});
+	$(".typeahead").change(function(){
+		var maestro=$(this).val();
+		console.log(maestro);
+		$.post('php/updateMaestroSpecialita.php',{'idScout':idScout,'idSpec':idSpec,'maestro':maestro},function(data){
+			if(data==202){
+				console.log("aggiornato");
+			}
+		});
+	});
+	
+	var checkout=$('#data').datepicker({
+		format: 'dd/mm/yyyy',
+		startDate: '-3d'
+	}).on('change.dp',changeDate).on('changeDate',changeDate);
+	
+	function changeDate(){
+		var data=$(this).val();
+		data=toDBData(data);
+		$.post('php/updateDataSpecialita.php',{'idScout':idScout,'idSpec':idSpec,'data':data},function(data){
+			if(data==202){
+				console.log("aggiornato");
+				checkout.hide();
+			}
+		});
+	}
+	$("#deleteSpecialita").click(function(){
+		deleteSpecialita(idScout,idSpec);
+	});
+	
+}
+function deleteSpecialita(idScout,idSpec){
+	var risp = prompt("Vuoi cancellare questa Specialita?\nIl processo è irreversibile!!!\nPer favore digita Si", "No");
+	if ((risp == "si")||(risp == "Si")) {
+		console.log(idScout,idSpec);
+		$.post('php/deleteSpecialita.php',{'idScout':idScout,'idSpec':idSpec},function(data){
+			if(data==410){
+				console.log("ERASED 4EVA! ");
+				location.href="scout.php?id="+idScout;
+			}
+		});
+	}	
 }
 function addNuovoImpegno(id,idS,impegno){
 	$.post('php/addImpegno.php',{'id':id,'idS':idS,"impegno":impegno},function(data){
-			if(data==201){
-				console.log("Impegno completato");
-				location.reload();
-			}
-		});
+		if(data==201){
+			console.log("Impegno completato");
+			location.reload();
+		}
+	});
 }

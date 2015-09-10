@@ -221,7 +221,28 @@
 	function getPassedScouts(){
 		return getScoutsList(1);
 	}
-	
+	function getCurrentScoutsName(){
+		$database=connect();
+		$res=$database->select("scout",[
+			'nome',
+			'cognome'
+		],
+		[
+			'status[=]'=>0,
+			"ORDER" => ["cognome","nome"]
+		]);
+		return $res;
+	}
+	function setStatusScout($idscout,$status){
+		$database=connect();
+		$res=$database->update("scout",[
+			'status'=>$status
+		],
+		[
+			'idscout[=]'=>$idscout
+		]);
+		return $res;
+	}
 	function getScout($idscout){
 		$database=connect();
 		$res=$database->select("scout",
@@ -639,5 +660,99 @@
 			'titolo'=>$titolo,
 			'testo'=>$testo
 		]);
+	}
+	function updateMaestroSpecialita($scout_idscout,$specialita_idspecialita,$maestro){
+		$database=connect();
+		$res=$database->update("specialitascout",[
+			'maestro'=>$maestro,
+		],[
+			'AND'=>[
+					'scout_idscout[=]'=>$scout_idscout,
+					'specialita_idspecialita[=]'=>$specialita_idspecialita,
+			]
+		]);
+		return $res;
+	}
+	function updateMaestroBrevetti($scout_idscout,$brevetti_idbrevetti,$maestro){
+		$database=connect();
+		$res=$database->update("brevettiscout",[
+			'maestro'=>$maestro,
+		],[
+			'AND'=>[
+					'scout_idscout[=]'=>$scout_idscout,
+					'brevetti_idbrevetti[=]'=>$brevetti_idbrevetti,
+			]
+		]);
+		return $res;
+	}
+	function updateDataSpecialita($scout_idscout,$specialita_idspecialita,$data){
+		$database=connect();
+		$res=$database->update("specialitascout",[
+			'data'=>$data,
+		],[
+			'AND'=>[
+					'scout_idscout[=]'=>$scout_idscout,
+					'specialita_idspecialita[=]'=>$specialita_idspecialita,
+			]
+		]);
+		return $res;
+	}
+	function updateDataBrevetti($scout_idscout,$brevetti_idbrevetti,$data){
+		$database=connect();
+		$res=$database->update("brevettiscout",[
+			'data'=>$data,
+		],[
+			'AND'=>[
+					'scout_idscout[=]'=>$scout_idscout,
+					'brevetti_idbrevetti[=]'=>$brevetti_idbrevetti,
+			]
+		]);
+		return $res;
+	}
+	function updateDataTappa($scout_idscout,$tappe_idtappe,$data){
+		$database=connect();
+		$res=$database->update("tappescout",[
+			'dataconquistata'=>$data,
+		],[
+			'AND'=>[
+					'scout_idscout[=]'=>$scout_idscout,
+					'tappe_idtappe[=]'=>$tappe_idtappe,
+			]
+		]);
+		return $res;
+	}
+	function deleteSpecialita($scout_idscout,$specialita_idspecialita){
+		$database=connect();
+		$res=$database->delete("specialitascout",[
+			'AND'=>[
+					'scout_idscout[=]'=>$scout_idscout,
+					'specialita_idspecialita[=]'=>$specialita_idspecialita,
+			]
+		]);
+		
+		$res=$database->delete("specialitaimpegni",[
+			'AND'=>[
+					'scout_idscout[=]'=>$scout_idscout,
+					'specialita_idspecialita[=]'=>$specialita_idspecialita,
+			]
+		]);
+		return $res;
+	}
+	function deleteBrevetto($scout_idscout,$brevetto_idbrevetto){
+		$database=connect();
+		$res=$database->delete("brevettiscout",[
+			'AND'=>[
+					'scout_idscout[=]'=>$scout_idscout,
+					'brevetto_idbrevetto[=]'=>$brevetto_idbrevetto,
+			]
+		]);
+		
+		$res=$database->delete("brevettiimpegni",[
+			'AND'=>[
+					'scout_idscout[=]'=>$scout_idscout,
+					'brevetto_idbrevetto[=]'=>$brevetto_idbrevetto,
+			]
+		]);
+		return $res;
 	}
 ?>

@@ -9,7 +9,7 @@ function initBrevetto(id,idBrev){
 				$(".brevetto").html(brev.nome);
 				$(".photo").attr("src","archive/"+brev.immagine);
 				$("#maestro").val(brev.maestro);
-				$("#data").val(brev.data);
+				$("#data").val(toHRData(brev.data));
 				$("#metodo").html(brev.esempi);
 				$("#conquistata").prop('checked',trueAs1(brev.conquistata));
 				$('#listaImpegniBrev').html('');
@@ -98,7 +98,65 @@ function eventiBrevetti(idScout,idBrev){
 				console.log("Varie aggiornate");				
 			}
 		});
+	});
+	$.get("php/getScoutNameList.php",function(data){
+		var js=JSON.parse(data);
+		
+		var nomi=[];
+		for(var i=0;i<js.length;i++){
+			nomi.push(js[i].nome+" "+js[i].cognome);
+		}
+		$(".typeahead").autoComplete({
+			minChars: 2,
+			source: function(term, suggest){
+				term = term.toLowerCase();
+				var matches = [];
+				for (i=0; i<nomi.length; i++)
+					if (~nomi[i].toLowerCase().indexOf(term)) matches.push(nomi[i]);
+				suggest(matches);
+			}
+		});
+	});
+	$(".typeahead").change(function(){
+		var maestro=$(this).val();
+		console.log(maestro);
+		$.post('php/updateMaestroBrevetti.php',{'idScout':idScout,'idBrev':idBrev,'maestro':maestro},function(data){
+			if(data==202){
+				console.log("aggiornato");
+			}
+		});
+	});
+	
+	var checkout=$('#data').datepicker({
+		format: 'dd/mm/yyyy',
+		startDate: '-3d'
+	}).on('change.dp',changeDate).on('changeDate',changeDate);
+	
+	function changeDate(){
+		var data=$(this).val();
+		data=toDBData(data);
+		$.post('php/updateDataBrevetti.php',{'idScout':idScout,'idBrev':idBrev,'data':data},function(data){
+			if(data==202){
+				console.log("aggiornato");
+				checkout.hide();
+			}
+		});
+	}
+	$("#deleteBrevetto").click(function(){
+		deleteBrevetto(idScout,idBrev);
 	});			
+}
+function deleteBrevetto(idScout,idBrev){
+	var risp = prompt("Vuoi cancellare questa Specialita?\nIl processo è irreversibile!!!\nPer favore digita Si", "No");
+	if ((risp == "si")||(risp == "Si")) {
+		console.log(idScout,idBrev);
+		$.post('php/deleteBrevetto.php',{'idScout':idScout,'idBrev':idBrev},function(data){
+			if(data==410){
+				console.log("ERASED 4EVA! ");
+				location.href="scout.php?id="+idScout;
+			}
+		});
+	}	
 }
 function addNuovoImpegnoBrevetto(id,idB,impegno){
 	$.post('php/addImpegnoBrevetto.php',{'id':id,'idB':idB,"impegno":impegno},function(data){

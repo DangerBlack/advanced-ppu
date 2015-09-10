@@ -9,7 +9,7 @@ function initScout(id){
 			$("#cognome").html(s.cognome);
 			$("#codice").html(s.codice);
 			$("#indirizzo").html(s.indirizzo);
-			$("#datanascita").html(s.datanascita);
+			$("#datanascita").html(toHRData(s.datanascita));
 			$("#residenza").html(s.residenza);
 			$("#sesso").html(s.sesso);
 			$("#luogo").html(s.luogonascita);
@@ -90,6 +90,8 @@ function initScout(id){
 			
 			$("#commenti").html('');
 			$.each(s.commenti,function(e,commento){
+				var post=commento.testo.replace(/\n/g,"<br />");
+				post=wrapUrlPost(post);
 				$("#commenti").append(
 							'<div class="media">'+
 							  '<div class="media-left">'+
@@ -100,7 +102,7 @@ function initScout(id){
 							  '</div>'+
 							  '<div class="media-body">'+
 								'<h4 class="media-heading">'+commento.titolo+' <span class="rightText">'+commento.data+'</span></h4>'+
-								commento.testo+
+								post+
 							  '</div>'+
 							'</div>'
 				);
@@ -131,6 +133,9 @@ function eventScout(id){
 		for(var i=0;i<field.length;i++){
 			var dato=$(field[i]).val();
 			dati[field[i].slice(1)]=dato;
+			if(i==4){//DATANASCITA
+				dati[field[i].slice(1)]=toDBData(dato);
+			}
 		}
 		dati['idsquadriglie']=$("#idsquadriglie").val();
 		$.post("php/updateScout.php",dati,function(data){
@@ -141,7 +146,7 @@ function eventScout(id){
 				for(var i=0;i<field.length;i++)
 					$(field[i]).replaceWith(function(){
 						var val=$(this).val();
-						var id=$(this).attr("id");
+						var id=$(this).attr("id");					
 						return '<span type="text" id="'+id+'" >'+val+'</span>';
 					}); 
 				}
@@ -188,9 +193,27 @@ function eventScout(id){
 		commentoModal(id,modal);
 	  }
 	});
+	
+	
+	$("#abbandonato").click(function(){
+		changeStatus(id,2,"abbandonato");
+	});
+	$("#passaggi").click(function(){
+		changeStatus(id,1,"passaggi");
+	});
 }
 
-
+function changeStatus(idScout,status,statusName){
+	var risp = prompt('Vuoi cambiare lo stato questo Ragazzo in '+statusName+'?\nIl processo è irreversibile!!!\nPer favore digita Si', "No");
+	if ((risp == "si")||(risp == "Si")) {
+		$.post('php/setStatusScout.php',{'idScout':idScout,'status':status},function(data){
+			if(data==201){
+				console.log("CHANGED 4EVA! ");
+				location.href="index.html";
+			}
+		});
+	}
+}
 function specialitaModal(id,modal){
 	  modal.find('.modal-title').html("Seleziona la Specialità da aggiungere");
 	  $.get("php/getSpecialita.php",function(data){

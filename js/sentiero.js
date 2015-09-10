@@ -13,7 +13,8 @@ function initSentiero(id){
 			var tnome=getTappFromId(parseInt(s.tappe[k].idtappe));
 			$("#conquistata"+tnome).prop('checked',trueAs1(s.tappe[k].conquistata));
 			$("#conquistata"+tnome).attr('value',s.tappe[k].id);
-			$("#data"+tnome).val(s.tappe[k].dataconquistata);
+			$("#data"+tnome).val(toHRData(s.tappe[k].dataconquistata));
+			$(".data"+tnome).text(toHRData(s.tappe[k].dataconquistata));
 			$(".add"+tnome).attr("data-whatever",s.tappe[k].id);
 			if(trueAs1(s.tappe[k].conquistata)){
 				$(".add"+tnome).hide();
@@ -102,6 +103,27 @@ function eventiSentiero(id){
 			"ordering": false,
 			"info":     false
 		});
+		
+		var checkout=$('.data').datepicker({
+			format: 'dd/mm/yyyy',
+			startDate: '-3d'
+		}).on('change.dp',changeDate).on('changeDate',changeDate);
+		
+		function changeDate(){
+			var data=$(this).val();
+			var idField=$(this).attr('id');
+			var step="";
+			step=idField.substring(4);
+			console.log(step);
+			
+			data=toDBData(data);
+			$.post('php/updateDataTappa.php',{'idScout':id,'idtappa':getIdFromTapp(step),'data':data},function(data){
+				if(data==202){
+					console.log("aggiornato");
+					checkout.hide();
+				}
+			});
+		}
 }
 function addNuovaMeta(idTappa,meta,impegno,datainizio,datafine){//TODO LATO SERVER
 	$.post("php/addNuovaMeta.php",{'idtappa':idTappa,"meta":meta,"impegno":impegno,"datainizio":datainizio,"datafine":datafine},function(data){
@@ -123,4 +145,18 @@ function getTappFromId(id){
 		break;
 	}
 	return "";
+}
+function getIdFromTapp(tapp){
+	switch(tapp){
+		case "Scoperta":
+			return 1;
+		break;
+		case "Competenza":
+			return 2;
+		break;
+		case "Responsabilita":
+			return 3;
+		break;
+	}
+	return 0;
 }

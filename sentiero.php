@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
  <link rel="stylesheet" type="text/css" href="css/default.css" />
+<link rel="stylesheet" type="text/css" href="css/datepicker.css" />
 
 
       
@@ -23,6 +24,7 @@
 <script type="text/javascript" src="js/datatables.min.js"></script>
 <script type="text/javascript"  src="js/default.js"></script>
 <script type="text/javascript"  src="js/sentiero.js"></script>
+<script type="text/javascript" src="js/bootstrap-datepicker.js" ></script>
 
  
  <script type="text/javascript" > 
@@ -87,8 +89,7 @@
 							</div>
 							<div class="col-lg-9">
 								<p><label>Conquistata: </label> <input class="confermaTappa" type="checkbox" id="conquistataScoperta" /></p>
-								<p><label>In cammino da: </label> <input type="data" id="datainzioScoperta" /></p>
-								<p><label>Conquistata il: </label> <input type="data" id="dataScoperta" /></p>
+								<p><label>Conquistata il: </label> <input class="data" type="data" id="dataScoperta" /></p>
 							</div>
 						</div>
 						<div class="row">
@@ -136,8 +137,8 @@
 							</div>
 							<div class="col-lg-9">
 								<p><label>Conquistata: </label> <input class="confermaTappa" type="checkbox" id="conquistataCompetenza" /></p>
-								<p><label>In cammino da: </label> <input type="data" id="datainzioCompetenza" /></p>
-								<p><label>Conquistata il: </label> <input type="data" id="dataCompetenza" /></p>
+								<p><label>In cammino da: </label> <span type="data" class="dataScoperta" ></span></p>
+								<p><label>Conquistata il: </label> <input class="data" type="data" id="dataCompetenza" /></p>
 							</div>
 						</div>
 						<div class="row">
@@ -185,8 +186,8 @@
 							</div>
 							<div class="col-lg-9">
 								<p><label>Conquistata: </label> <input class="confermaTappa" type="checkbox" id="conquistataResponsabilita" /></p>
-								<p><label>In cammino da: </label> <input type="data" id="datainzioResponsabilita" /></p>
-								<p><label>Conquistata il: </label> <input type="data" id="dataResponsabilita" /></p>
+								<p><label>In cammino da: </label> <span type="data" class="dataCompetenza" ></span></p>
+								<p><label>Conquistata il: </label> <input class="data" type="data" id="dataResponsabilita" /></p>
 							</div>
 						</div>
 						<div class="row">

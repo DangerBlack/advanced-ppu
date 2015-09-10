@@ -21,7 +21,7 @@ function initTabellRagazzi(){
 										'<td>'+scout.codice+'</td>'+
 										'<td>'+'<a href="https://www.google.it/maps/place/'+scout.indirizzo.replace(/ /g,"+")+"+"+scout.residenza.replace(/ /g,"+")+'" target="_blank">'+ scout.indirizzo+'</a>'+'</td>'+
 										'<td>'+scout.residenza+'</td>'+
-										'<td>'+scout.datanascita+'</td>'+
+										'<td>'+toHRData(scout.datanascita)+'</td>'+
 										'<td>'+scout.sesso+'</td>'+
 										'<td><button type="button" class="btn btn-info edit"><span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</button></td></tr>');
 		});
@@ -53,5 +53,35 @@ function addChecked(value){
 	return "";
 }
 
+function wrapUrlPost(post){
+	post=post.replace(/(https?:\/\/)?[a-z0-9.]*\.[a-z0-9#\/?=]+/gi,function(x){
+		var url=x;
+		if(url.indexOf("http")!=0){
+			url="http://"+url;
+		}
+		return '<a href="'+url+'" target="_blank" >'+x+'</a>';
+	});
+	return post;
+}
 
+function toHRData(data){
+	if(data!=null){
+		var split=data.split('-');
+		if(split.length==3)
+			return split[2]+'/'+split[1]+'/'+split[0];
+	}
+	return '';
+}
+function toDBData(data){
+	if(data!=null){
+		console.log(data);
+		var split=data.split("/");	
+		if(split.length==3){
+			data=split[2]+'-'+split[1]+'-'+split[0];
+			console.log(data);
+			return data;
+		}
+	}
+	return '';
+}
 /*Some usefull function*/

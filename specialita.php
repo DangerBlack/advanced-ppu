@@ -15,15 +15,16 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
  <link rel="stylesheet" type="text/css" href="css/default.css" />
-
-
+ <link rel="stylesheet" type="text/css" href="css/jquery.auto-complete.css" />
+<link rel="stylesheet" type="text/css" href="css/datepicker.css" />
       
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/datatables.min.js"></script>
 <script type="text/javascript"  src="js/default.js"></script>
 <script type="text/javascript"  src="js/specialita.js"></script>
-
+<script type="text/javascript"  src="js/jquery.auto-complete.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datepicker.js" ></script>
  
  <script type="text/javascript" > 
  $(document).ready(function(){
@@ -63,9 +64,9 @@
 			  <li class="dropdown">
 				  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >Utilità <span class="caret"></span></a>
 				  <ul class="dropdown-menu">
-					  <li><a href="#"><span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Modifica</a></li>
+					  <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings</a></li>
 					  <li role="separator" class="divider"></li>
-					  <li><a href="#"><span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span> Cancella</a></li>
+					  <li><a href="#" id="deleteSpecialita"><span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span> Cancella</a></li>
 				  </ul>
 			  </li>
           </ul>
@@ -85,8 +86,11 @@
 					<div class="col-lg-8 infoSpec">
 						<p><label>Prove di:</label> <b class="name"></b></p>
 						<p><label>Specialita:</label> <b class="specialita"></b></p>
-						<p><label>Maestro:</label> <input id="maestro" type="text" placeholder="maestro" /></p>
-						<p><label>Giorno:</label> <input id="data" type="text" placeholder="08-08-2015" /></p>
+						<p>
+							<label>Maestro:</label>
+							<input id="maestro" class="typeahead" type="text" placeholder="maestro" autocomplete="off"/>
+						</p>
+						<p><label>Giorno:</label> <input id="data" type="text" placeholder="08/08/2015" data-provide="datepicker" /></p>
 						<p><label>Conquistata:</label> <input id="conquistata" type="checkbox" /></p>
 					</div>
 				  </div>

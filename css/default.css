@@ -71,6 +71,9 @@ button.right{
 #commento{
 	width:100%;
 }
+.hidden{
+	display:none;
+}
 .info-tooltip + .tooltip > .tooltip-inner {
 	border:solid;
 	border-width:1px;
