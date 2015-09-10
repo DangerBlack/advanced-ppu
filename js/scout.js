@@ -273,7 +273,7 @@ function commentoModal(id,modal){
 
 function addNuovaSpec(id,idSpec,maestro){
 	$.post("php/addSpec.php",{"id":id,"idS":idSpec,"maestro":maestro},function(data){
-		if(data=="200"){
+		if(data=="201"){
 			$('#myModal').modal('hide');
 			location.reload();
 		}
@@ -281,7 +281,7 @@ function addNuovaSpec(id,idSpec,maestro){
 }
 function addNuovoBrev(id,idBrev,maestro){
 	$.post("php/addBrev.php",{"id":id,"idB":idBrev,"maestro":maestro},function(data){
-		if(data=="200"){
+		if(data=="201"){
 			$('#myModal').modal('hide');
 			location.reload();
 		}
@@ -289,7 +289,7 @@ function addNuovoBrev(id,idBrev,maestro){
 }
 function addCommento(id,titolo,commento){//TODO server side
 	$.post("php/addCommento.php",{"id":id,"titolo":titolo,"commento":commento},function(data){
-		if(data=="200"){
+		if(data=="201"){
 			$('#myModal').modal('hide');
 			location.reload();
 		}

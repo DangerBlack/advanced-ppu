@@ -1,5 +1,6 @@
 <?php
 	include('query.php');
+	
 	$mail=$_POST['mail'];
 	$pswd=$_POST['pswd'];
 	$out=insertUser($mail,$pswd);

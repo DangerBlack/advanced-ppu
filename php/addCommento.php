@@ -1,5 +1,7 @@
 <?php
 	include('query.php');
+	if(!isLogged())
+		die("Non sei loggato");
 	$idUser=getId();
 	$idScout=$_POST['id'];
 	$titolo=$_POST['titolo'];

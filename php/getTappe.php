@@ -1,5 +1,7 @@
 <?php
 	include('query.php');
+	if(!isLogged())
+		die("Non sei loggato");
 	$id=$_GET['id'];
 	$html=$_GET['html'];
 	$res=getTappe($id);

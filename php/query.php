@@ -41,7 +41,7 @@
 	}
 	function getId(){
 		$utente=$_COOKIE["utente"];
-		return getIdFromMail($utente)[0]['id'];
+		return getIdFromUtente($utente)[0]['id'];
 	}
     function getIdFromMail($mail){
 		$database=connect();

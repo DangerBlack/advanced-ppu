@@ -1,5 +1,7 @@
 <?php
 	include('query.php');
+	if(!isLogged())
+		die("Non sei loggato");
 	$id=$_POST['id'];
 	$completato=$_POST['completato'];
 	if($completato=="true"){

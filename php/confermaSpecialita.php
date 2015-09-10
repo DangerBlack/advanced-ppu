@@ -1,5 +1,7 @@
 <?php
 	include('query.php');
+	if(!isLogged())
+		die("Non sei loggato");
 	$scout_idscout=$_POST['idScout'];
 	$specialita_idspecialita=$_POST['idSpec'];
 	$conquistata=$_POST['conquistata'];

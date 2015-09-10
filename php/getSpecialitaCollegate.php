@@ -1,5 +1,7 @@
 <?php
 	include("query.php");
+	if(!isLogged())
+		die("Non sei loggato");
 	$idBrev=$_GET['idBrev'];
 	$link=array();
 	$link[17]=[69,70,75,81,105,110,112,114,125,127,128,129,131,136,140];
