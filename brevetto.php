@@ -34,6 +34,7 @@
 					echo 'var id="'.$_GET['id'].'";';
 					echo 'var idBrev="'.$_GET['idB'].'";';
 				?>
+				init();
 				initBrevetto(id,idBrev);
 			});
 </script>

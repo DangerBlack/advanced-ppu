@@ -29,7 +29,7 @@
 				<?php
 					echo 'var id="'.$_GET['id'].'";';
 				?>
-				
+				init();
 				initScout(id);
 			});
 </script>

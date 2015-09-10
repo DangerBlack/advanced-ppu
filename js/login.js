@@ -1,37 +1,15 @@
 function injectLogin(){
 	$("#login").click(function(){
-		$.post("php/login.php",{"mail":$("#email").val(),"pswd":hex_sha1($("#pswd").val())},function(data){
+		$(".error-message").hide();
+		$.post("php/login.php",{"utente":$("#utente").val(),"pswd":hex_sha1($("#pswd").val())},function(data){
 				if(data==200){
-					alert("Loggato con Successo");
 					location.replace("index.html");
 				}else{
-					$(".error").html("Attenzione! E-Mail o Password Errati");
+					$(".error-message").html("<strong><span class=\"glyphicon glyphicon-remove\"></span> Attenzione! Username o Password Errati</strong>");
+					$(".error-message").show();
 				}
 				
 			});
-	});
-	$("#register").click(function(){
-		var go=true;
-		if(!$("#tos").is(':checked')){
-			$(".error").html("Attenzione! Dovete accettare i termini di servizio");
-			$("#tosbox").show();
-			go=false;
-		}
-		if(($("#email").val()=="")||($("#pswd").val()=="")){
-			$(".error").html("Attenzione! Uno dei campi è vuoto");
-		}
-		else{
-			if(go)
-				$.post("php/register.php",{"mail":$("#email").val(),"pswd":hex_sha1($("#pswd").val())},function(data){
-						if(data==200){
-							alert("Iscritto con Successo");
-							location.replace("index.html");
-						}else{
-							$(".error").html("Attenzione! E-Mail già esistente");
-						}
-						
-					});
-		}
 	});
 }
 function injectRegister(){

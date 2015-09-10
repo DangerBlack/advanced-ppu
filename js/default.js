@@ -1,5 +1,5 @@
 function init(){
-	initTabellRagazzi();
+	isLogged();
 }
 function initTabellRagazzi(){
 	$.get("php/getScoutList.php",function(data){
@@ -37,6 +37,31 @@ function initTabellRagazzi(){
 		});
 	});
 }
+
+
+function isLogged(){
+	$.post("php/login.php",function(data){
+		if(data==200){
+			$(".dropdown-menu").append('<li role="separator" class="divider"></li>'+
+			'<li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Logout</a></li>');
+		}else{
+			location.replace("login.html");
+		}
+	});
+}
+function logout(){
+	$.post("php/logout.php",function(data){
+		if(data==200){
+			location.replace("login.html");
+		}else{
+			
+		}
+	});
+}
+
+
+
+//FUNZIONALITA AGGIUNTIVE
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }

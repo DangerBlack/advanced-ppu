@@ -1,15 +1,14 @@
 <?php
 	include('query.php');
-	@$mail=$_POST['mail'];
+	@$utente=$_POST['utente'];
 	@$pswd=$_POST['pswd'];
-	
 	if(isLogged()){
 		echo 200;
 	}
 	else
-	if(login($mail,$pswd)){
+	if(login($utente,$pswd)){
 		$expire=time()+60*60*24*30;
-		setcookie("mail", $mail, $expire);
+		setcookie("utente", $utente, $expire);
 		setcookie("pswd", $pswd, $expire);
 		echo 200;
 	}

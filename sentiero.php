@@ -33,6 +33,7 @@
 					@$id=$_GET['id'];
 					echo 'var id="'.$id.'";';
 				?>
+				init();
 				initSentiero(id);
 				
 				$("#metodoScoperta").load("php/getTappe.php?id=1&html=true");

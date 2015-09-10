@@ -32,6 +32,7 @@
 					echo 'var id="'.$_GET['id'].'";';
 					echo 'var idSpec="'.$_GET['idS'].'";';
 				?>
+				init();
 				initSpecialita(id,idSpec);
 			});
 </script>

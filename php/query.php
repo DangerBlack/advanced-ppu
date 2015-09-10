@@ -20,45 +20,54 @@
 		return $database;
 	}
     //GESTIONE UTENTI LOGIN REGISTER ETC
-    function login($mail,$pswd){
+    function login($utente,$pswd){
 		$database=connect();
-		$result=$database->has("user",[
+		$result=$database->has("utenti",[
 			"AND" => [
-				"mail" => $mail,
+				"utente" => $utente,
 				"pswd" => $pswd
 			]
 		]);
 		return $result;
 	}
     function isLogged(){		
-		$mail=$_COOKIE["mail"];
-		$pswd=$_COOKIE["pswd"];
-		if(login($mail,$pswd)){
+		@$utente=$_COOKIE["utente"];
+		@$pswd=$_COOKIE["pswd"];
+		if(login($utente,$pswd)){
 			return true;
 		}else{
 			return false;
 		}		
 	}
 	function getId(){
-		$mail=$_COOKIE["mail"];
-		return getIdFromMail($mail)[0]['id'];
+		$utente=$_COOKIE["utente"];
+		return getIdFromMail($utente)[0]['id'];
 	}
     function getIdFromMail($mail){
 		$database=connect();
-		$datas=$database->select("user",[
+		$datas=$database->select("utenti",[
 			"id"
 		],[
-			"mail[=]"=>$mail
+			"email[=]"=>$mail
+		]);
+		return $datas;
+	}
+	function getIdFromUtente($utente){
+		$database=connect();
+		$datas=$database->select("utenti",[
+			"id"
+		],[
+			"utente[=]"=>$utente
 		]);
 		return $datas;
 	}
 	function getUser($id){
 		$database=connect();
-		$res=$database->select("user",[
+		$res=$database->select("utenti",[
 			"id",
-			"mail",
+			"email",
 			"name",
-            "picture"
+            "photo"
 		],[
 			"id[=]"=>$id
 		]);
@@ -68,7 +77,7 @@
 		$database=connect();
 		$res=$database->insert("user",[
 			"name"=>$name,
-			"mail"=>$mail,
+			"email"=>$mail,
 			"pswd"=>$pswd
 		]);
 		return $res;
