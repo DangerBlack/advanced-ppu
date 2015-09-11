@@ -802,7 +802,8 @@
 			'specialitascout.maestro',
 			'specialitascout.conquistata'			
 		],[
-			'scout.status[=]'=>0
+			'scout.status[=]'=>0,
+			'ORDER'=>['sname']
 		]);
 		return $res;
 	}

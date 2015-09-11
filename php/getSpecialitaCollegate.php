@@ -1,7 +1,7 @@
 <?php
 	include("query.php");
-	if(!isLogged())
-		die("Non sei loggato");
+	//if(!isLogged())
+	//	die("Non sei loggato");
 	$idBrev=$_GET['idBrev'];
 	$link=array();
 	$link[17]=[69,70,75,81,105,110,112,114,125,127,128,129,131,136,140];
@@ -20,7 +20,14 @@
 	$link[30]=[75,80,81,73,83,94,101,102,112,114,116,125,127,128,129,130,131,134,136];
 	$link[31]=[69,81,83,93,102,112,114,100,125,127,131,136,140];
 	$link[32]=[69,89,112,114,117,127];
+	if($idBrev=='*'){
+		$res=getBrevettiList();
+		foreach($res as &$b){
+			$b['specialita']=getSpecialitaListFilter($link[$b['id']]);
+		}
+	}else{
+		$res=getSpecialitaListFilter($link[$idBrev]);
+	}
 	
-	$res=getSpecialitaListFilter($link[$idBrev]);
 	echo json_encode($res);
 ?>

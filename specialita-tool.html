@@ -75,28 +75,35 @@
 			</h1>
 		</div>
 		<div class="row">
-			
-			<table id="tabellaSpecialita" class="display" width="100%" cellspacing="0">
-				<thead>
-					<tr>
-						<th>Foto</th>
-						<th>Nome</th>
-						<th>Conquistatori</th>
-						<th>In Cammino</th>
-					</tr>
-				</thead>
-		 
-				<tfoot>
-					<tr>
-						<th>Foto</th>
-						<th>Nome</th>
-						<th>Conquistatori</th>
-						<th>In Cammino</th>
-					</tr>
-				</tfoot>
-				<tbody id="elencoSpecialita">
-				</tbody>
-			</table>
+			<ul class="nav nav-tabs">
+			  <li class="active"><a data-toggle="tab" href="#specialita" onclick="disponiPer(1)">disponi per specialità</a></li>
+			  <li><a data-toggle="tab" href="#persona" onclick="disponiPer(2)">disponi per persona</a></li>
+			  <li><a data-toggle="tab" href="#annata" onclick="disponiPer(3)">disponi per annata</a></li>
+			</ul>
+			<div class="tab-content">
+				<div id="specialita" class="tab-pane fade in active">
+					<table id="tabellaSpecialita" class="display" width="100%" cellspacing="0">
+						<thead>
+							<tr>
+								<th>Foto</th>
+								<th>Nome</th>
+								<th>Conquistatori</th>
+								<th>In Cammino</th>
+							</tr>
+						</thead>
+				 
+						<tfoot>
+							<tr>
+								<th>Foto</th>
+								<th>Nome</th>
+								<th>Conquistatori</th>
+								<th>In Cammino</th>
+							</tr>
+						</tfoot>
+						<tbody id="elencoSpecialita">
+						</tbody>
+					</table>
+				</div>
 		</div>
       </div>
 		
