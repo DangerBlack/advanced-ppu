@@ -785,4 +785,25 @@
 		]);
 		return $res;
 	}
+	function getElencoSpecialitaScout(){
+		$database=connect();
+		$res=$database->select("specialitascout",[
+			'[>]scout'=>['scout_idscout'=>'idscout'],
+			'[>]specialita'=>['specialita_idspecialita'=>'idspecialita']
+		],[
+			'scout.nome',
+			'scout.cognome',
+			'scout.idscout',
+			'scout.photo',
+			'scout.datanascita',
+			'specialita.idspecialita',
+			'specialita.nome(sname)',
+			'specialita.immagine(sphoto)',
+			'specialitascout.maestro',
+			'specialitascout.conquistata'			
+		],[
+			'scout.status[=]'=>0
+		]);
+		return $res;
+	}
 ?>
