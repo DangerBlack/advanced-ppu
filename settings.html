@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="author" content="Daniele Baschieri,Nicola Corti" />
+<meta name="description" content="Un semplice programma per la gestione della progressione personale in Reparto agesci.." />
+<meta name ="copyright" content="2015" />
+<meta name="keywords" content="Progressione Personale Unitaria" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A-PPU</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
+ <link rel="stylesheet" type="text/css" href="css/default.css" />
+
+      
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/datatables.min.js"></script>
+<script type="text/javascript"  src="js/sha1.js"></script>
+<script type="text/javascript"  src="js/default.js"></script>
+ 
+ <script type="text/javascript" > 
+ $(document).ready(function(){
+				init();
+				$(".error-message").hide();
+				
+				$.get("php/getUserInfo.php",function(data){
+					var js=JSON.parse(data);
+					$(".photo").attr("src","archive/photo/"+js[0].photo);
+					$("#user").val(js[0].utente);
+					$("#email").val(js[0].email);
+				});
+				$(".updatePswd").click(function(){
+					var pswd=hex_sha1($("#oldpswd").val());
+					var newpswd=hex_sha1($("#newpswd").val());
+					var confirmpswd=hex_sha1($("#confirmpswd").val());
+					if(newpswd!=confirmpswd){
+						$(".error-message").html('<p><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> le password non combaciano!</p>');
+						$(".error-message").show();
+					}else{
+						$.post('php/updatePswd.php',{'pswd':pswd,'newpswd':newpswd},function(data){
+							if(data!=202){
+								$(".error-message").html('<p><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> impossibile completare l\'operazione!</p>');
+								$(".error-message").show();
+							}else{
+								$(".error-message").hide();
+								$("#oldpswd").val('');
+								$("#newpswd").val('');
+								$("#confirmpswd").val('');
+								location.reload();
+							}
+						});
+					}
+				});
+				
+				$(".updateInfo").click(function(){
+					var utente=$("#user").val();
+					var email=$("#email").val();
+					if((utente=="")||(email=="")){
+						$(this).parent().find(".error-message").html('<p><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> La mail o la password non sono stati definiti!</p>');
+						$(this).parent().find(".error-message").show();
+					}else{
+						$.post('php/updateUserInfo.php',{'utente':utente,'email':email},function(data){
+							if(data!=202){
+								$(this).parent().find(".error-message").html('<p><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> impossibile completare l\'operazione!</p>');
+								$(this).parent().find(".error-message").show();
+							}else{
+								//location.reload();
+							}
+						});
+					}
+				});
+			});
+</script>
+<style>
+	
+</style>
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Advanced P.P.U.</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#about">Panoramica</a></li>
+            <li><a href="specialita-tool.html">Specialità</a></li>
+            <li class="active"><a href="extra.html">Extra</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+			  <li class="dropdown">
+				  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >Utilità <span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+				  </ul>
+			  </li>
+          </ul>
+        </div><!--/.nav-collapse -->        
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="starter-template">
+		<div class="row">
+			<h1>Settings
+			</h1>
+		</div>
+		<div class="row">
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">User Info</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-4">
+							<img class="photo" src="archive/bigphoto/DSC00045.JPG" />
+						</div>
+						<div class="col-lg-8">
+							<div class="error-message alert alert-danger" role="alert"></div>
+							<label>Username</label>
+							<input id="user" type="text" value="" class="form-control"/>
+							<label>E-mail</label>
+							<input id="email" type="email" value="" class="form-control"/>		
+							<button class="btn btn-info right space updateInfo" type="button">
+								<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+								Change
+							</button>					
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-default">
+			  <div class="panel-heading">Password Manager</div>
+			  <div class="panel-body">
+				<div class="error-message alert alert-danger" role="alert"></div>
+				<label>Old password</label>
+				<input id="oldpswd" type="password" value="" class="form-control"/>
+				<label>New password</label>
+				<input id="newpswd" type="password" value="" class="form-control"/>
+				<label>Confirm password</label>
+				<input id="confirmpswd" type="password" value="" class="form-control"/>
+				<button class="btn btn-info right space updatePswd" type="button">
+					<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+					Change
+				</button>
+			  </div>
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">User Manager</div>
+				<div class="panel-body">
+				<div class="error-message alert alert-danger" role="alert"></div>
+				<button class="btn btn-success right space addUser" type="button">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					Add
+				</button>
+				</div>
+			</div>
+		</div>
+      </div>
+		
+    </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="send" type="button" class="btn btn-primary">Send</button>
+      </div>
+    </div>
+  </div>
+</div>	
+</body>
+
+</html>

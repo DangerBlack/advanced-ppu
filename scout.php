@@ -49,7 +49,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html">Advanced P.P.U</a>
+          <a class="navbar-brand" href="index.html">Advanced P.P.U.</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -62,7 +62,7 @@
 			  <li class="dropdown">
 				  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >Utilità <span class="caret"></span></a>
 				  <ul class="dropdown-menu">
-					  <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings</a></li>
+					  <li><a href="settings.html"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings</a></li>
 					  <li role="separator" class="divider"></li>
 					  <li><a href="#" id="abbandonato"><span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span> Abbandonato</a></li>
 					  <li><a href="#" id="passaggi"><span class="glyphicon glyphicon glyphicon-road" aria-hidden="true"></span> Passaggi</a></li>

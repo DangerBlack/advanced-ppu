@@ -140,7 +140,7 @@ function eventScout(id){
 		}
 	});
 	$(".editSentiero").click(function(){
-		window.open("sentiero.php?id="+id,"self");
+		location.href="sentiero.php?id="+id;
 	});
 	$("#confirmChange").click(function(){
 		var field=["#nome","#cognome","#codice","#indirizzo","#datanascita","#residenza","#sesso","#luogonascita","#cap","#provincia","#nazione","#numbabbo","#nummamma","#numcasa","#numcell","#numnonno","#mailbabbo","#mailmamma","#mail"];

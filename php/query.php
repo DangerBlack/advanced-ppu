@@ -66,23 +66,32 @@
 		$res=$database->select("utenti",[
 			"id",
 			"email",
-			"name",
+			"utente",
             "photo"
 		],[
 			"id[=]"=>$id
 		]);
 		return $res;
 	}
-	function insertUser($name,$mail,$pswd){
+	function insertUser($utente,$mail,$pswd){
 		$database=connect();
-		$res=$database->insert("user",[
-			"name"=>$name,
+		$res=$database->insert("utenti",[
+			"utente"=>$utente,
 			"email"=>$mail,
 			"pswd"=>$pswd
 		]);
 		return $res;
 	}
-	
+	function updateUserInfo($id,$utente,$email){		
+		$database=connect();
+		$res=$database->update("utenti",[
+			"utente"=>$utente,
+			"email"=>$email
+		],[
+			"id[=]"=>$id
+		]);
+		return $res;
+	}
 	function insertScout(
 							$nome,
 							$cognome,
@@ -778,14 +787,14 @@
 		$res=$database->delete("brevettiscout",[
 			'AND'=>[
 					'scout_idscout[=]'=>$scout_idscout,
-					'brevetto_idbrevetto[=]'=>$brevetto_idbrevetto,
+					'brevetti_idbrevetti[=]'=>$brevetto_idbrevetto,
 			]
 		]);
 		
 		$res=$database->delete("brevettiimpegni",[
 			'AND'=>[
 					'scout_idscout[=]'=>$scout_idscout,
-					'brevetto_idbrevetto[=]'=>$brevetto_idbrevetto,
+					'brevetti_idbrevetti[=]'=>$brevetto_idbrevetto,
 			]
 		]);
 		return $res;
@@ -834,4 +843,18 @@
 		]);
 		return $res;
 	}
+	function updatePswd($id,$pswd,$newpswd){
+		$database=connect();
+		$res=$database->update("utenti",
+		[
+			'pswd'=>$newpswd
+		],[
+			'AND'=>[
+					'id[=]'=>$id,
+					'pswd[=]'=>$pswd,
+			]
+		]);
+		return $res;
+	}
+	
 ?>
