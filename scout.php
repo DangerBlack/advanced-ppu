@@ -84,7 +84,7 @@
 					</div>
 					<div class="col-lg-8">
 						<p>Scheda di: <b class="name"></b></p>
-						<p>Squadriglia: <b class="sqadriglia"></b></p>
+						<p>Squadriglia: <b class="squadriglia"></b></p>
 						<img class="photoSq"  /><br />
 						<p><a href="">modifica avatar</a></p>
 					</div>

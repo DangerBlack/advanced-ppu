@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generato il: Set 07, 2015 alle 12:16
+-- Generato il: Set 11, 2015 alle 15:29
 -- Versione del server: 5.5.44-0ubuntu0.14.04.1
 -- Versione PHP: 5.5.9-1ubuntu4.11
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `brevettiimpegni` (
   `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `completato` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 -- --------------------------------------------------------
 
@@ -86,9 +86,10 @@ CREATE TABLE IF NOT EXISTS `commenti` (
   `scout_idscout` int(11) NOT NULL,
   `idutenti` int(11) NOT NULL,
   `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `titolo` varchar(100) NOT NULL,
   `testo` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
@@ -155,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `metescout` (
   `meta` varchar(250) DEFAULT NULL,
   `impegno` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 -- --------------------------------------------------------
 
@@ -190,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `scout` (
   `status` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idscout`),
   KEY `fk_scout_squadriglie_idx` (`squadriglie_idsquadriglie`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=73 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
 
 -- --------------------------------------------------------
 
@@ -255,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `specialitaimpegni` (
   `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `completato` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=82 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=84 ;
 
 -- --------------------------------------------------------
 
@@ -293,9 +294,11 @@ CREATE TABLE IF NOT EXISTS `squadriglie` (
   `nome` varchar(45) NOT NULL,
   `sesso` char(1) NOT NULL,
   `guidone` varchar(45) DEFAULT NULL,
+  `colore1` varchar(6) NOT NULL DEFAULT 'FFFFFF',
+  `colore2` varchar(6) NOT NULL DEFAULT 'FFFFFF',
   PRIMARY KEY (`idsquadriglie`),
   UNIQUE KEY `nome_UNIQUE` (`nome`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
@@ -324,7 +327,7 @@ CREATE TABLE IF NOT EXISTS `tappescout` (
   `dataconquistata` date DEFAULT NULL,
   `conquistata` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=97 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
 
 -- --------------------------------------------------------
 
@@ -335,7 +338,9 @@ CREATE TABLE IF NOT EXISTS `tappescout` (
 CREATE TABLE IF NOT EXISTS `utenti` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `utente` text NOT NULL,
-  `password` text NOT NULL,
+  `email` varchar(300) DEFAULT NULL,
+  `pswd` text NOT NULL,
+  `photo` varchar(200) NOT NULL DEFAULT 'user.jpg',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 

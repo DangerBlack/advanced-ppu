@@ -5,6 +5,9 @@ function initScout(id){
 		var s=js[0];
 			$(".name").html(s.nome+" "+s.cognome);
 			$(".photo").attr("src","archive/bigphoto/"+s.photo);
+			$(".squadriglia").html('<span>'+s.nomeSq+'</span><br /><span class="colorbox primary" style="background-color:#'+s.colore1+'"></span>'+
+									'<span class="colorbox secondary" style="background-color:#'+s.colore2+'"></span>');
+			
 			$("#nome").html(s.nome);
 			$("#cognome").html(s.cognome);
 			$("#codice").html(s.codice);
