@@ -807,4 +807,26 @@
 		]);
 		return $res;
 	}
+	function insertSquadriglia($nome,$sesso,$colore1,$colore2){
+		$database=connect();
+		$res=$database->insert("squadriglie",[
+			'nome'=>$nome,
+			'sesso'=>$sesso,
+			'colore1'=>$colore1,
+			'colore2'=>$colore2
+		]);
+		return $res;
+	}
+	function updateSquadriglia($idsquadriglie,$nome,$sesso,$colore1,$colore2){
+		$database=connect();
+		$res=$database->update("squadriglie",[
+			'nome'=>$nome,
+			'sesso'=>$sesso,
+			'colore1'=>$colore1,
+			'colore2'=>$colore2
+		],[
+			'idsquadriglie[=]'=>$idsquadriglie
+		]);
+		return $res;
+	}
 ?>
