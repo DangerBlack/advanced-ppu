@@ -21,13 +21,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/datatables.min.js"></script>
 <script type="text/javascript"  src="js/default.js"></script>
-<script type="text/javascript"  src="js/specialita-tool.js"></script>
+
 
  
  <script type="text/javascript" > 
  $(document).ready(function(){
 				init();
-				initSpecialitaTool();
+				initTabellRagazzi();
 			});
 </script>
 <style>
@@ -52,8 +52,8 @@
           <ul class="nav navbar-nav">
             <li><a href="index.html">Home</a></li>
             <li><a href="#about">Panoramica</a></li>
-            <li class="active"><a href="#">Specialità</a></li>
-            <li><a href="extra.html">Extra</a></li>
+            <li><a href="specialita-tool.html">Specialità</a></li>
+            <li class="active"><a href="#">Extra</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
 			  <li class="dropdown">
@@ -71,39 +71,66 @@
 
       <div class="starter-template">
 		<div class="row">
-			<h1>Elenco Specialità
+			<h1>Extra
 			</h1>
 		</div>
 		<div class="row">
-			<ul class="nav nav-tabs">
-			  <li class="active"><a data-toggle="tab" href="#specialita" onclick="disponiPer(1)">disponi per specialità</a></li>
-			  <li><a data-toggle="tab" href="#persona" onclick="disponiPer(2)">disponi per persona</a></li>
-			  <li><a data-toggle="tab" href="#annata" onclick="disponiPer(3)">disponi per annata</a></li>
-			</ul>
-			<div class="tab-content">
-				<div id="specialita" class="tab-pane fade in active">
-					<table id="tabellaSpecialita" class="display" width="100%" cellspacing="0">
-						<thead>
-							<tr>
-								<th>Foto</th>
-								<th>Nome</th>
-								<th>Conquistatori</th>
-								<th>In Cammino</th>
-							</tr>
-						</thead>
-				 
-						<tfoot>
-							<tr>
-								<th>Foto</th>
-								<th>Nome</th>
-								<th>Conquistatori</th>
-								<th>In Cammino</th>
-							</tr>
-						</tfoot>
-						<tbody id="elencoSpecialita">
-						</tbody>
-					</table>
-				</div>
+			
+			
+			<div class="panel panel-default">
+			  <div class="panel-heading">Importare i Compleanni su google Calendar</div>
+			  <div class="panel-body">
+				<p>
+					Per poter importare i compleanni dei ragazzi nel vostro calendario personale assicuratevi 
+					che quest'ultimo gestica i file <i>.ics</i>, di seguito la guida per importarli su google calendar.
+				</p>
+				<ol>
+					<li>Scaricare il calendario a questo link: <a href="php/compleanni.php">calendario.ics</a></li>
+					<li>Apire il vostro programma come (google calendar) <a href="https://www.google.com/calendar">Calendario</a></li>
+					<li>Cliccate su Altri Calendari</li>
+					<li>Importa Calendario</li>
+					<li>Sfoglia</li>
+					<li>Selezionate il file precedentemente salvato</li>
+					<li>Complimenti avete il calendario di tutti i vostri ragazzi</li>
+				</ol>
+			  </div>
+			</div>
+			<div class="panel panel-default">
+			  <div class="panel-heading">Squadriglie</div>
+			  <div class="panel-body">
+				<p>In questo paragarafo sarà possibile editare le squadriglie o aggiungerne di nuove.</p>
+			  </div>
+			</div>
+			<div class="panel panel-default">
+			  <div class="panel-heading">Crediti</div>
+			  <div class="panel-body">
+				<p>Idea e funzionalità di base: <i>Nicola Corti</i></p>
+				<p>Sviluppo e interfaccia e funzionalità aggiuntive di: <i>Daniele Baschieri</i></p>
+			  </div>
+			</div>
+			<div class="panel panel-default">
+			  <div class="panel-heading">Licenza</div>
+			  <div class="panel-body">
+				<p>Questo programma è stato distribuito con licenza GPL v3 o superiore. <img src="archive/logo/GPLv3_Logo.png" width=100/></p>
+				<p>
+					Advanced P.P.U. is free software: you can redistribute it and/or modify<br />
+					it under the terms of the GNU General Public License as published by<br />
+					the Free Software Foundation, either version 3 of the License, or<br />
+					(at your option) any later version.
+				</p>
+				<p>
+					This program is distributed in the hope that it will be useful,<br />
+					but WITHOUT ANY WARRANTY; without even the implied warranty of<br />
+					MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the<br />
+					GNU General Public License for more details.
+				</p>
+				<p>
+					You should have received a copy of the GNU General Public License<br />
+					along with this program.  If not, see <a href="http://www.gnu.org/licenses">http://www.gnu.org/licenses</a>.
+				</p>
+				</p>
+			  </div>
+			</div>
 		</div>
       </div>
 		

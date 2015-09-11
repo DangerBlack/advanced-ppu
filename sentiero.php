@@ -64,7 +64,7 @@
             <li class="active"><a href="index.html">Home</a></li>
             <li><a href="#about">Panoramica</a></li>
             <li><a href="specialita-tool.html">Specialità</a></li>
-            <li><a href="#contact">Extra</a></li>
+            <li><a href="extra.html">Extra</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
