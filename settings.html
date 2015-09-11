@@ -38,15 +38,15 @@
 					var newpswd=hex_sha1($("#newpswd").val());
 					var confirmpswd=hex_sha1($("#confirmpswd").val());
 					if(newpswd!=confirmpswd){
-						$(".error-message").html('<p><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> le password non combaciano!</p>');
-						$(".error-message").show();
+						$(this).parent().find(".error-message").html('<p><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> le password non combaciano!</p>');
+						$(this).parent().find(".error-message").show();
 					}else{
 						$.post('php/updatePswd.php',{'pswd':pswd,'newpswd':newpswd},function(data){
 							if(data!=202){
-								$(".error-message").html('<p><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> impossibile completare l\'operazione!</p>');
-								$(".error-message").show();
+								$(this).parent().find(".error-message").html('<p><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> impossibile completare l\'operazione!</p>');
+								$(this).parent().find(".error-message").show();
 							}else{
-								$(".error-message").hide();
+								$(this).parent().find(".error-message").hide();
 								$("#oldpswd").val('');
 								$("#newpswd").val('');
 								$("#confirmpswd").val('');
@@ -73,6 +73,35 @@
 						});
 					}
 				});
+				
+				$('#myModal').on('show.bs.modal', function (event) {
+					  var button = $(event.relatedTarget) // Button that triggered the modal
+					  var recipient = button.data('whatever') // Extract info from data-* attributes
+					  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+					  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+					  var modal = $(this);
+					  //alert(recipient);
+					  if(recipient=="@addUser"){
+						modal.find('.modal-title').html("Aggiungi un Utente");
+						modal.find('.modal-body').html('<p class="space"><label>Username: </label> <input id="form-utente" class="form-control" type="text" placeholder="Robert Baden-Powell" /></p>'+
+														'<p class="space"><label>Email: </label> <input id="form-email" class="form-control" type="text" placeholder="robert.bp@gilwell.uk" /></p>'+
+														'<p class="space"><label>Password: </label> <input id="form-pswd" class="form-control" type="text" placeholder="password" /></p>');
+				
+						$("#send").click(function(){
+						  var utente=$("#form-utente").val();
+						  var email=$("#form-email").val();
+						  var pswd=$("#form-pswd").val();
+						  addUser(utente,email,pswd);
+						});
+					  }
+				});
+				function addUSer(utente,email,pswd){
+					$.post("php/addUser.php",{"utente":utente,"email":email,"pswd":hex_sha1(pswd)},function(data){
+						if(data==201){
+							alert("Utente creato con successo");
+						}
+					});
+				}
 			});
 </script>
 <style>
@@ -91,14 +120,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Advanced P.P.U.</a>
+          <a class="navbar-brand" href="index.html">Advanced P.P.U.</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="index.html">Home</a></li>
             <li><a href="#about">Panoramica</a></li>
             <li><a href="specialita-tool.html">Specialità</a></li>
-            <li class="active"><a href="extra.html">Extra</a></li>
+            <li><a href="extra.html">Extra</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
 			  <li class="dropdown">
@@ -163,7 +192,7 @@
 				<div class="panel-heading">User Manager</div>
 				<div class="panel-body">
 				<div class="error-message alert alert-danger" role="alert"></div>
-				<button class="btn btn-success right space addUser" type="button">
+				<button class="btn btn-success right space addUser" type="button" data-toggle="modal" data-target="#myModal" data-whatever="@addUser">
 					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 					Add
 				</button>
