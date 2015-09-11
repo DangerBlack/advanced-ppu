@@ -659,6 +659,13 @@
 		],[
 			'commenti.scout_idscout[=]'=>$scout_idscout
 		]);
+		$id=getId();
+		foreach($res as &$r){
+			if($r['idutenti']==$id)
+				$r['owner']=True;
+			else
+				$r['owner']=False;
+		}
 		return $res;
 	}
 	function insertCommento($idutenti,$scout_idscout,$titolo,$testo){
@@ -669,6 +676,20 @@
 			'titolo'=>$titolo,
 			'testo'=>$testo
 		]);
+	}
+	function updateCommento($id,$idutenti,$scout_idscout,$titolo,$testo){
+		$database=connect();
+		$res=$database->update("commenti",[
+			'titolo'=>$titolo,
+			'testo'=>$testo
+		],[
+			'AND'=>[
+					'id[=]'=>$id,
+					'scout_idscout[=]'=>$scout_idscout,
+					'idutenti[=]'=>$idutenti
+			]
+		]);
+		return $res;
 	}
 	function updateMaestroSpecialita($scout_idscout,$specialita_idspecialita,$maestro){
 		$database=connect();

@@ -109,4 +109,3 @@ function toDBData(data){
 	}
 	return '';
 }
-/*Some usefull function*/

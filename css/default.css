@@ -119,6 +119,12 @@ iframe{
 	float:right;
 	font-size:0.8em;
 }
+.editCommento{
+	margin-top:5px;
+}
+#commento{
+	min-height:200px;
+}
 @media only screen and (max-device-width: 480px){
 }
 

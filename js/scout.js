@@ -92,8 +92,18 @@ function initScout(id){
 			$.each(s.commenti,function(e,commento){
 				var post=commento.testo.replace(/\n/g,"<br />");
 				post=wrapUrlPost(post);
+				
+				var edit="";
+				if(commento.owner){
+					edit='<button type="button" class="btn btn-xs btn-info right editCommento" data-toggle="modal" data-target="#myModal" data-whatever="@EditCommento-'+commento.id+'">'+
+						  '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit'+
+						'</button>';
+				}
+				var ora=commento.data.split(' ')[1].split(":");
+				var ora=ora[0]+":"+ora[1];
+				var data=ora+' '+toHRData(commento.data.split(' ')[0]);
 				$("#commenti").append(
-							'<div class="media">'+
+							'<div class="media" id="commento'+commento.id+'">'+
 							  '<div class="media-left">'+
 								'<a href="#">'+
 									'<img src="archive/photo/'+commento.photo+'" width=64 height=64 />'+
@@ -101,8 +111,11 @@ function initScout(id){
 								'</a>'+
 							  '</div>'+
 							  '<div class="media-body">'+
-								'<h4 class="media-heading">'+commento.titolo+' <span class="rightText">'+commento.data+'</span></h4>'+
-								post+
+								'<h4 class="media-heading"><span class="titolo">'+commento.titolo+'</span> <span class="rightText">'+data+'</span></h4>'+
+								'<article class="post">'+
+									post+
+								'</article>'+
+								edit+
 							  '</div>'+
 							'</div>'
 				);
@@ -192,6 +205,10 @@ function eventScout(id){
 	  if(recipient=="@Commento"){
 		commentoModal(id,modal);
 	  }
+	  if(recipient.indexOf("EditCommento")!=-1){
+		  var idCommento=recipient.split('-')[1];
+		  editCommentoModal(id,modal,idCommento);
+	  }
 	});
 	
 	
@@ -270,7 +287,29 @@ function commentoModal(id,modal){
 	  addCommento(id,titolo,commento);
 	});
 }
-
+function editCommentoModal(id,modal,idCommento){
+	
+	var titolo=$("#commento"+idCommento).find('.titolo').text();
+	var post=$("#commento"+idCommento).find('.post').text();
+	modal.find('.modal-title').html("Scrivi un commento");
+	modal.find('.modal-body').html('<p class="space"><label>Titolo: </label> <input id="titolo" type="text" placeholder="Chiacchierata" value="'+titolo+'"/></p>'+
+									'<label>Corpo: </label><br /> <textarea id="commento" type="text" placeholder="-testo-" >'+post+'</textarea><span class="rightText"><span id="counter">0</span><span>/500</span></span>');
+	
+	$("#commento").keypress(function(){
+		var l=$(this).val().length;
+		if(l>500){
+			$("#counter").css("color","red");
+		}else{
+			$("#counter").css("color","black");
+		}
+		$("#counter").html(l);
+	});
+	$("#send").click(function(){
+	  var commento=$("#commento").val();
+	  var titolo=$("#titolo").val();
+	  editCommento(idCommento,id,titolo,commento);
+	});
+}
 function addNuovaSpec(id,idSpec,maestro){
 	$.post("php/addSpec.php",{"id":id,"idS":idSpec,"maestro":maestro},function(data){
 		if(data=="201"){
@@ -287,9 +326,17 @@ function addNuovoBrev(id,idBrev,maestro){
 		}
 	});
 }
-function addCommento(id,titolo,commento){//TODO server side
+function addCommento(id,titolo,commento){
 	$.post("php/addCommento.php",{"id":id,"titolo":titolo,"commento":commento},function(data){
 		if(data=="201"){
+			$('#myModal').modal('hide');
+			location.reload();
+		}
+	});
+}
+function editCommento(id,idScout,titolo,commento){
+	$.post("php/editCommento.php",{"id":id,"idScout":idScout,"titolo":titolo,"commento":commento},function(data){
+		if(data=="202"){
 			$('#myModal').modal('hide');
 			location.reload();
 		}
