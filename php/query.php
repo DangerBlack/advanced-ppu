@@ -856,5 +856,14 @@
 		]);
 		return $res;
 	}
-	
+	function updateScoutImage($id_scout,$photo){
+		$database->connect();
+		$res=$database->update("scout",
+		[
+			'photo'=>$photo
+		],[
+			'id_scout[=]'=>$id_scout
+		]);
+		return $res;
+	}
 ?>

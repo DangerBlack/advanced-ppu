@@ -80,13 +80,24 @@
 			<div class="col-lg-6">
 				<div class="row">
 					<div class="col-lg-4">
+						<form id="eventi-form" enctype="multipart/form-data" method="post" name="fileinfo">
+							<span class="btn btn-default btn-file">
+								Browse <input type="file" name="file">
+							</span>
+							<input class="btn btn-xs btn-info space" type="submit">
+						</form>
 						<img class="photo" src="archive/bigphoto/DSC00045.JPG" />
+						<button type="button" class="btn btn-xs btn-info editPhoto right" aria-label="Right Align" onclick="" >
+						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> <span class="">Edit Photo</span>
+						</button> 
 					</div>
 					<div class="col-lg-8">
 						<p>Scheda di: <b class="name"></b></p>
 						<p>Squadriglia: <b class="squadriglia"></b></p>
 						<img class="photoSq"  /><br />
-						<p><a href="">modifica avatar</a></p>
+						<p>
+								
+						</p>
 					</div>
 				</div>
 				<div class="row">

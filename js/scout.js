@@ -221,6 +221,27 @@ function eventScout(id){
 	$("#passaggi").click(function(){
 		changeStatus(id,1,"passaggi");
 	});
+	
+    $(".editPhoto").click(function(){
+		$(".photo").hide();
+		$(".editPhoto").hide();
+		$('#eventi-form').show();
+	});
+	$('#eventi-form').submit( function( e ) {
+		console.log("Evento triggerato");
+			$.ajax( {
+			  url: 'php/upload.php?id='+id,
+			  type: 'POST',
+			  data: new FormData( this ),
+			  processData: false,
+			  contentType: false,
+			  succes: function(data){
+				  console.log(data);
+				  alert("time");
+				}
+			} );
+			e.preventDefault();
+		  } );
 }
 
 function changeStatus(idScout,status,statusName){
