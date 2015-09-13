@@ -62,7 +62,7 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="#about">Panoramica</a></li>
+            <li><a href="panoramica.html">Panoramica</a></li>
             <li><a href="specialita-tool.html">Specialità</a></li>
             <li><a href="extra.html">Extra</a></li>
           </ul>

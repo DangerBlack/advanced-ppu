@@ -176,6 +176,15 @@ iframe{
 	cursor: inherit;
 	display: block;
 }
+.trouble-level-1{
+	color:#DBA901;
+}
+.trouble-level-2{
+	color:#DF3A01;
+}
+.trouble-level-3{
+	color:#B40404;
+}
 @media only screen and (max-device-width: 480px){
 }
 
