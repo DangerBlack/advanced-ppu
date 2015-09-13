@@ -1,3 +1,22 @@
+/**
+	Copyright 2015 Daniele Baschieri
+	version: 1.0
+	
+	This file is part of Advanced P.P.U.
+
+    Advanced P.P.U. is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Advanced P.P.U. is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Advanced P.P.U.  If not, see <http://www.gnu.org/licenses/>.
+**/
 function initSpecialitaTool(){
 	$.get("php/getListaSpech.php",function(data){
 		var js=JSON.parse(data);

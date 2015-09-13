@@ -18,6 +18,7 @@ h1{
 	list-style-type: none;
     padding: 0px;
     margin: 0px;
+    overflow:auto;
 }
 .listaVuota li{
 	float:left;

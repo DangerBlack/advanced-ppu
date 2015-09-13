@@ -1,6 +1,6 @@
 <?php
 	include('query.php');
-	
+	/*
 	$mail=$_POST['mail'];
 	$pswd=$_POST['pswd'];
 	$out=insertUser($mail,$pswd);
@@ -33,5 +33,5 @@
 		return "200";
 	}else{
 		return "500";
-	}
+	}*/
 ?>

@@ -86,7 +86,7 @@
 							</span>
 							<input class="btn btn-xs btn-info space" type="submit">
 						</form>
-						<img class="photo" src="archive/bigphoto/DSC00045.JPG" />
+						<img class="photo" src="" />
 						<button type="button" class="btn btn-xs btn-info editPhoto right" aria-label="Right Align" onclick="" >
 						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> <span class="">Edit Photo</span>
 						</button> 
