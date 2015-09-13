@@ -30,7 +30,7 @@ function initSpecialita(id,idSpec){
 				
 				$("#varie").val(spec.varie);
 				$("#metodo").html(spec.metodo);
-				//$('iframe').attr('src','http://it.scoutwiki.org/'+specName+'_%28Specialit%C3%A0_E/G%29');
+				$('iframe').attr('src','http://it.scoutwiki.org/'+specName+'_%28Specialit%C3%A0_E/G%29');
 				$('.openwiki').attr('onclick','window.open("http://it.scoutwiki.org/'+specName+'_%28Specialit%C3%A0_E/G%29","_blank")');
 			}
 		});

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generato il: Set 11, 2015 alle 15:29
+-- Generato il: Set 13, 2015 alle 16:27
 -- Versione del server: 5.5.44-0ubuntu0.14.04.1
 -- Versione PHP: 5.5.9-1ubuntu4.11
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `brevettiimpegni` (
   `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `completato` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
@@ -63,12 +63,6 @@ CREATE TABLE IF NOT EXISTS `brevettiscout` (
   `datainizio` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `data` date DEFAULT NULL,
   `conquistata` tinyint(1) NOT NULL DEFAULT '0',
-  `prova1` varchar(200) DEFAULT NULL,
-  `prova2` varchar(200) DEFAULT NULL,
-  `prova3` varchar(200) DEFAULT NULL,
-  `prova4` varchar(200) DEFAULT NULL,
-  `prova5` varchar(200) DEFAULT NULL,
-  `prova6` varchar(200) DEFAULT NULL,
   `varie` longtext,
   PRIMARY KEY (`brevetti_idbrevetti`,`scout_idscout`),
   KEY `fk_brevetti_has_scout_scout1_idx` (`scout_idscout`),
@@ -89,57 +83,7 @@ CREATE TABLE IF NOT EXISTS `commenti` (
   `titolo` varchar(100) NOT NULL,
   `testo` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `log`
---
-
-CREATE TABLE IF NOT EXISTS `log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `data` date NOT NULL,
-  `user` varchar(20) NOT NULL,
-  `query` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1560 ;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `maestridispecialita`
---
-
-CREATE TABLE IF NOT EXISTS `maestridispecialita` (
-  `nome` varchar(10) DEFAULT NULL,
-  `cognome` varchar(10) DEFAULT NULL,
-  `idspec` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `mete`
---
-
-CREATE TABLE IF NOT EXISTS `mete` (
-  `tappe_idtappe` int(11) NOT NULL,
-  `scout_idscout` int(11) NOT NULL,
-  `capo` varchar(10) NOT NULL DEFAULT 'Nicola',
-  `data` date DEFAULT NULL,
-  `conquistata` tinyint(1) NOT NULL DEFAULT '0',
-  `meta1` varchar(200) DEFAULT NULL,
-  `meta2` varchar(200) DEFAULT NULL,
-  `meta3` varchar(200) DEFAULT NULL,
-  `meta4` varchar(200) DEFAULT NULL,
-  `meta5` varchar(200) DEFAULT NULL,
-  `meta6` varchar(200) DEFAULT NULL,
-  `varie` int(11) DEFAULT NULL,
-  PRIMARY KEY (`tappe_idtappe`,`scout_idscout`),
-  KEY `fk_tappe_has_scout_scout1_idx` (`scout_idscout`),
-  KEY `fk_tappe_has_scout_tappe1_idx` (`tappe_idtappe`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -185,7 +129,6 @@ CREATE TABLE IF NOT EXISTS `scout` (
   `mailbabbo` varchar(30) DEFAULT NULL,
   `mailmamma` varchar(30) DEFAULT NULL,
   `mail` varchar(30) DEFAULT NULL,
-  `varie` longtext,
   `photo` varchar(40) DEFAULT 'user.jpg',
   `squadriglie_idsquadriglie` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '0',
@@ -256,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `specialitaimpegni` (
   `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `completato` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=84 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=82 ;
 
 -- --------------------------------------------------------
 
@@ -271,12 +214,6 @@ CREATE TABLE IF NOT EXISTS `specialitascout` (
   `datainizio` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `data` date DEFAULT NULL,
   `conquistata` tinyint(1) NOT NULL DEFAULT '0',
-  `prova1` varchar(200) DEFAULT NULL,
-  `prova2` varchar(200) DEFAULT NULL,
-  `prova3` varchar(200) DEFAULT NULL,
-  `prova4` varchar(200) DEFAULT NULL,
-  `prova5` varchar(200) DEFAULT NULL,
-  `prova6` varchar(200) DEFAULT NULL,
   `varie` longtext,
   PRIMARY KEY (`specialita_idspecialita`,`scout_idscout`),
   KEY `fk_specialita_has_scout_scout1_idx` (`scout_idscout`),
@@ -342,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `utenti` (
   `pswd` text NOT NULL,
   `photo` varchar(200) NOT NULL DEFAULT 'user.jpg',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

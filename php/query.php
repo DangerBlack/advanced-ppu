@@ -218,7 +218,6 @@
 			'mailbabbo',
 			'mailmamma',
 			'mail',
-			'varie',
 			'photo',
 			'squadriglie_idsquadriglie'
 		],
@@ -290,7 +289,6 @@
 			'scout.mailbabbo',
 			'scout.mailmamma',
 			'scout.mail',
-			'scout.varie',
 			'scout.photo',
 			'scout.squadriglie_idsquadriglie(idsquadriglie)'
 		],
