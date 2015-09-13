@@ -103,15 +103,7 @@ INSERT INTO `specialita` (`idspecialita`, `nome`, `immagine`, `esempi`) VALUES
 (138, 'servizio liturgico', 'spec/servizioliturgico.jpg', NULL),
 (139, 'servizio missionario', 'spec/serviziomissionario.jpg', NULL),
 (140, 'topografo', 'spec/topografo.jpg', NULL),
-(141, 'velista', 'spec/velista.jpg', NULL),
-(143, '', NULL, NULL),
-(144, '', NULL, NULL),
-(145, '', NULL, NULL),
-(146, '', NULL, NULL),
-(147, '', NULL, NULL),
-(148, '', NULL, NULL),
-(149, '', NULL, NULL),
-(150, '', NULL, NULL);
+(141, 'velista', 'spec/velista.jpg', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
