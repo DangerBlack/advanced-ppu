@@ -146,7 +146,7 @@ function eventiSentiero(id){
 }
 function addNuovaMeta(idTappa,meta,impegno,datainizio,datafine){//TODO LATO SERVER
 	$.post("php/addNuovaMeta.php",{'idtappa':idTappa,"meta":meta,"impegno":impegno,"datainizio":datainizio,"datafine":datafine},function(data){
-		if(data==200){
+		if(data==201){
 			location.reload();
 		}
 	});

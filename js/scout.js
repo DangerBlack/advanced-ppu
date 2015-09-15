@@ -1,6 +1,6 @@
 /**
 	Copyright 2015 Daniele Baschieri
-	version: 1.0
+	version: 1.01
 	
 	This file is part of Advanced P.P.U.
 
@@ -254,9 +254,9 @@ function eventScout(id){
 		  data: new FormData( this ),
 		  processData: false,
 		  contentType: false,
-		  succes: function(data){
+		  success: function(data){
 			  console.log(data);
-			  alert("time");
+			  location.reload();
 			}
 		} );
 		e.preventDefault();

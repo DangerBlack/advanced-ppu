@@ -1,7 +1,7 @@
 <?php
 	/*
 		Copyright 2015 Daniele Baschieri
-		version: 1.0
+		version: 1.01
 		
 		This file is part of Advanced P.P.U.
 
@@ -874,12 +874,12 @@
 		return $res;
 	}
 	function updateScoutImage($id_scout,$photo){
-		$database->connect();
+		$database=connect();
 		$res=$database->update("scout",
 		[
 			'photo'=>$photo
 		],[
-			'id_scout[=]'=>$id_scout
+			'idscout[=]'=>$id_scout
 		]);
 		return $res;
 	}

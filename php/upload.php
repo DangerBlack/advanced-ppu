@@ -45,6 +45,7 @@
 				  $id=$_GET['id'];
 				  
 				  updateScoutImage($id,$_FILES["file"]["name"]); 
+				  echo "202";
 				}
 			  }
 			} else {

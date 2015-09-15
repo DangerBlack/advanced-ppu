@@ -1,6 +1,6 @@
 /**
 	Copyright 2015 Daniele Baschieri
-	version: 1.0
+	version: 1.01
 	
 	This file is part of Advanced P.P.U.
 
@@ -176,6 +176,9 @@ function mostraScout(scout){
 }
 
 function mostraSituazione(lista){
+	if(situazione.length==0){
+		return false;
+	}
 	console.log(situazione);
 	situazione.sort(function(a, b){return a.point-b.point});
 	
