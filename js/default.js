@@ -34,7 +34,7 @@ function initTabellRagazzi(){
 					<td>Sesso</td>
 					<td>Edita</td>*/
 			$("#elencoRagazzi").append('<tr value="'+scout.idscout+'">'+
-										'<td><img class="preview" src="archive/photo/'+scout.photo+'" /></td>'+
+										'<td><img class="preview edit" src="archive/photo/'+scout.photo+'" /></td>'+
 										'<td>'+scout.cognome+'</td>'+
 										'<td>'+scout.nome+'</td>'+
 										'<td>'+scout.codice+'</td>'+
