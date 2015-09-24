@@ -1,6 +1,6 @@
 /**
 	Copyright 2015 Daniele Baschieri
-	version: 1.0
+	version: 1.01
 	
 	This file is part of Advanced P.P.U.
 
@@ -47,6 +47,27 @@ function initNewScout(){
 			showError(valida.error);
 		}
 	});
+	
+	var checkout=$('#inDatanascita').datepicker({
+		format: 'dd/mm/yyyy',
+		startDate: '-12y'
+	}).on('change.dp',changeDate).on('changeDate',changeDate);
+	
+	function changeDate(){
+		/*var data=$(this).val();
+		var idField=$(this).attr('id');
+		var step="";
+		step=idField.substring(4);
+		console.log(step);
+		
+		data=toDBData(data);
+		$.post('php/updateDataTappa.php',{'idScout':id,'idtappa':getIdFromTapp(step),'data':data},function(data){
+			if(data==202){
+				console.log("aggiornato");
+				checkout.hide();
+			}
+		});*/
+	}
 }
 
 function showError(error){
@@ -100,8 +121,13 @@ function createNewUser(){
 	var field=["#nome","#cognome","#codice","#indirizzo","#datanascita","#residenza","#sesso","#luogonascita","#cap","#provincia","#nazione","#numbabbo","#nummamma","#numcasa","#numcell","#numnonno","#mailbabbo","#mailmamma","#mail"];
 	var dati={};
 	for(var i=0;i<field.length;i++){
-		var dato=$("#in"+capitalizeFirstLetter(field[i].slice(1))).val();
-		console.log("#in"+capitalizeFirstLetter(field[i].slice(1))+" : "+dato);
+		var dato="";
+		if(i==4){
+			dato=toDBData($("#in"+capitalizeFirstLetter(field[i].slice(1))).val());
+		}else{
+			dato=$("#in"+capitalizeFirstLetter(field[i].slice(1))).val();
+			console.log("#in"+capitalizeFirstLetter(field[i].slice(1))+" : "+dato);
+		}
 		dati[field[i].slice(1)]=dato;
 	}
 	dati['idsquadriglie']=$("#inSquadriglia").val();
