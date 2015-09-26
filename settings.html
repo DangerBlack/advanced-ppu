@@ -40,11 +40,17 @@
 <script type="text/javascript"  src="js/sha1.js"></script>
 <script type="text/javascript"  src="js/default.js"></script>
  
- <script type="text/javascript" > 
+ <script type="text/javascript" >
  $(document).ready(function(){
 				init();
 				$(".error-message").hide();
-				
+				function addUser(utente,email,pswd){
+					$.post("php/addUser.php",{"utente":utente,"email":email,"pswd":hex_sha1(pswd)},function(data){
+						if(data==201){
+							alert("Utente creato con successo");
+						}
+					});
+				}
 				$.get("php/getUserInfo.php",function(data){
 					var js=JSON.parse(data);
 					$(".photo").attr("src","archive/photo/"+js[0].photo);
@@ -113,13 +119,8 @@
 						});
 					  }
 				});
-				function addUSer(utente,email,pswd){
-					$.post("php/addUser.php",{"utente":utente,"email":email,"pswd":hex_sha1(pswd)},function(data){
-						if(data==201){
-							alert("Utente creato con successo");
-						}
-					});
-				}
+				
+				
 			});
 </script>
 <style>

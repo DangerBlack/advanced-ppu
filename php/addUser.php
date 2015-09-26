@@ -8,5 +8,5 @@
 	if(insertUser($utente,$email,$pswd)!=0)
 		echo 201;
 	else
-		503:
+		echo 503;
 ?>
