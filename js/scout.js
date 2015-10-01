@@ -38,7 +38,19 @@ function initScout(id){
 			$("#cap").html(s.cap);
 			$("#provincia").html(s.provincia);
 			$("#nazione").html(s.nazione);
-			$("#idsquadriglie").val(s.idsquadriglie);
+			$.get("php/getSquadriglie.php",function(data){
+				$("#idsquadriglie").html('');
+				var js=JSON.parse(data);
+				console.log(js.length);
+				for(var i=0;i<js.length;i++){
+					var isSelected='';
+					if(js[i].idsquadriglie==s.idsquadriglie)
+						isSelected='selected="selected"';
+					$("#idsquadriglie").append('<option '+isSelected+' value="'+js[i].idsquadriglie+'" sesso="'+js[i].sesso+'">'+js[i].nome+'</option>');
+				}
+			});
+			
+			
 			//$("#note").html(s.varie.replace(/\n/g,"<br />"));
 			$("#numbabbo").html(s.numbabbo);
 			$("#nummamma").html(s.numammma);
