@@ -34,7 +34,7 @@ function initTabellRagazzi(){
 					<td>Sesso</td>
 					<td>Edita</td>*/
 			$("#elencoRagazzi").append('<tr value="'+scout.idscout+'">'+
-										'<td><img class="preview edit" src="archive/photo/'+scout.photo+'" /></td>'+
+										'<td><img class="preview edit" src="archive/photo/'+scout.photo+'" squadriglia="'+scout.squadriglie_idsquadriglie+'" /></td>'+
 										'<td>'+scout.cognome+'</td>'+
 										'<td>'+scout.nome+'</td>'+
 										'<td>'+scout.codice+'</td>'+
@@ -83,6 +83,18 @@ function initTabellRagazzi(){
 		$(".edit").click(function(){
 			var id=$(this).parent().parent().attr("value");
 			window.open('scout.php?id='+id,"_self");
+		});
+		
+		$.get("php/getSquadriglie.php",function(data){
+			$("#inSquadriglia").html('');
+			var js=JSON.parse(data);
+			console.log(js.length);
+			for(var i=0;i<js.length;i++){
+				$("img[squadriglia="+js[i].idsquadriglie+"]").css('border-style','solid');
+				$("img[squadriglia="+js[i].idsquadriglie+"]").css('border-width','3px');
+				console.log(js[i].colore1);
+				$("img[squadriglia="+js[i].idsquadriglie+"]").css('border-color','#'+js[i].colore1+" "+'#'+js[i].colore2);
+			}
 		});
 	});
 }
