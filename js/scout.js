@@ -34,7 +34,7 @@ function initScout(id){
 			$("#datanascita").html(toHRData(s.datanascita));
 			$("#residenza").html(s.residenza);
 			$("#sesso").html(s.sesso);
-			$("#luogo").html(s.luogonascita);
+			$("#luogonascita").html(s.luogonascita);
 			$("#cap").html(s.cap);
 			$("#provincia").html(s.provincia);
 			$("#nazione").html(s.nazione);
