@@ -73,12 +73,21 @@ function initTabellRagazzi(){
 					"visible": false
 				}
 			];
+		}else{
+			//Tell DataTable that we are in europe and Date must be sorted as DD/MM/YYYY
+			column=[
+				{
+					"targets": 6,
+					"type": "date-eu"
+				},
+			]
 		}
 		$('#tabellaRagazzi').DataTable({
 					"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
 					"pageLength": -1,
 					"columnDefs":column
 				});
+		
 		
 		$(".edit").click(function(){
 			var id=$(this).parent().parent().attr("value");
