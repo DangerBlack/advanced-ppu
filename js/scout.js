@@ -1,6 +1,6 @@
 /**
 	Copyright 2015 Daniele Baschieri
-	version: 1.01
+	version: 1.02
 	
 	This file is part of Advanced P.P.U.
 
@@ -53,7 +53,7 @@ function initScout(id){
 			
 			//$("#note").html(s.varie.replace(/\n/g,"<br />"));
 			$("#numbabbo").html(s.numbabbo);
-			$("#nummamma").html(s.numammma);
+			$("#nummamma").html(s.nummamma);
 			$("#numcasa").html(s.numcasa);
 			$("#numnonno").html(s.numnonno);
 			$("#mailbabbo").html('<a href="mailto:'+s.mailbabbo+'" target="_top">'+s.mailbabbo+'</a>');
