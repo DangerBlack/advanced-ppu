@@ -87,19 +87,23 @@ Metodo.prototype.punteggioSpecialita=function(datanascita,specialita,numImpegni)
 	}
 	else{
 		if(anno-datanascita>14){
-			this.point-=1;
-			this.addTrouble(1,'Il ragazzo è al quarto anno e dovrebbe occuparsi della tappa della responsabilità e non di prendere '+specialita.nome+'!');
+			this.point-=0;
+			this.addTrouble(0,'Il ragazzo è al quarto anno e dovrebbe occuparsi della tappa della responsabilità e non di prendere '+specialita.nome+'!');
 		}
 		if(numImpegni>2){
 			this.point+=2;
 		}else{
-			this.point-=1;
-			this.addTrouble(1,"Il ragazzo ha preso troppi pochi impegni per raggiungere la specialità di "+specialita.nome);
+			if(numImpegni>0){
+				this.point-=1;
+				this.addTrouble(1,"Il ragazzo ha preso troppi pochi impegni per raggiungere la specialità di "+specialita.nome);
+			}else{
+				if(numImpegni==0){
+					this.point-=3;
+					this.addTrouble(3,"Il ragazzo non ha preso impegni per raggiungere la specialità di "+specialita.nome);
+				}	
+			}
 		}
-		if(numImpegni==0){
-			this.point-=3;
-			this.addTrouble(3,"Il ragazzo non ha preso impegni per raggiungere la specialità di "+specialita.nome);
-		}		
+			
 	}
 }
 Metodo.prototype.punteggioNoBrevetti=function(datanascita){
@@ -109,11 +113,11 @@ Metodo.prototype.punteggioNoBrevetti=function(datanascita){
 	if(anno-datanascita>15){
 		this.addTrouble(3,"Il ragazzo è al quarto anno e non ha nessun brevetto!");
 		this.point-=3;
-	}
-	if(anno-datanascita>=13){
+	}else
+	if(anno-datanascita>=14){
 		this.addTrouble(3,"Il ragazzo è al terzo anno e non è in cammino per nessun brevetto!");
 		this.point-=3;
-	}
+	}else
 	if(anno-datanascita==12){
 		this.addTrouble(1,"Il ragazzo dovrebbe cominciare a pensare al suo brevetto!");
 		this.point-=3;
