@@ -36,7 +36,7 @@
 <link rel="stylesheet" type="text/css" href="css/datepicker.css" />
 
 
-      
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/datatables.min.js"></script>
@@ -44,8 +44,8 @@
 <script type="text/javascript"  src="js/sentiero.js"></script>
 <script type="text/javascript" src="js/bootstrap-datepicker.js" ></script>
 
- 
- <script type="text/javascript" > 
+
+ <script type="text/javascript" >
  $(document).ready(function(){
 				<?php
 					@$id=$_GET['id'];
@@ -53,14 +53,14 @@
 				?>
 				init();
 				initSentiero(id);
-				
+
 				$("#metodoScoperta").load("php/getTappe.php?id=1&html=true");
 				$("#metodoCompetenza").load("php/getTappe.php?id=2&html=true");
 				$("#metodoResponsabilita").load("php/getTappe.php?id=3&html=true");
 			});
 </script>
 <style>
-	
+
 </style>
 
 </head>
@@ -96,11 +96,168 @@
 			<div class="col-lg-12">
 				<h2>Sentiero di: <span class="nome">Nome Cognome</span></h2>
 				<ul class="nav nav-tabs">
+                    <li role="presentation"><a data-toggle="tab" href="#tappaBaghera">Caccia di Baghera</a></li>
+					<li role="presentation"><a data-toggle="tab" href="#tappaBaloo">Caccia di Baloo</a></li>
+					<li role="presentation"><a data-toggle="tab" href="#tappaAkela">Caccia di Akela</a></li>
 					<li role="presentation" class="active"><a data-toggle="tab" href="#tappaScoperta">Tappa della Scoperta</a></li>
 					<li role="presentation"><a data-toggle="tab" href="#tappaCompetenza">Tappa della Competenza</a></li>
 					<li role="presentation"><a data-toggle="tab" href="#tappaResponsabilita">Tappa della Responsabilità</a></li>
 				</ul>
 				<div class="tab-content">
+                    <div id="tappaBaghera" class="tab-pane fade">
+						<div class="row">
+							<div class="col-lg-3">
+								<img src="archive/tappe/baghera.jpg" class="smallTappa" />
+							</div>
+							<div class="col-lg-9">
+								<p><label>Conquistata: </label> <input class="confermaTappa" type="checkbox" id="conquistataBaghera" /></p>
+								<p><label>Conquistata il: </label> <input class="data" type="data" id="dataBaghera" /></p>
+							</div>
+						</div>
+						<div class="row">
+							<table id="tabellaMeteBaghera" class="display" width="100%" cellspacing="0">
+								<thead>
+									<tr>
+										<th>Caccia</th>
+										<th>Impegni</th>
+										<th>data inzio</th>
+										<th>data verifrica</th>
+										<th>raggiunta</th>
+										<th>edit</th>
+									</tr>
+								</thead>
+
+								<tfoot>
+									<tr>
+										<th>Caccia</th>
+										<th>Impegni</th>
+										<th>data inzio</th>
+										<th>data verifrica</th>
+										<th>raggiunta</th>
+										<th>edit</th>
+									</tr>
+								</tfoot>
+								<tbody class="mete">
+								</tbody>
+							</table>
+						</div>
+						<div class="row">
+							<button type="button" class="btn btn-success right addBaghera" data-toggle="modal" data-target="#myModal" data-whatever="@Baghera">
+							  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> add
+							</button>
+						</div>
+						<div class="row">
+							<hr />
+							<h2>Consigli dal Metodo</h2>
+							<div id="metodoBaghera"></div>
+						</div>
+					</div>
+
+                    <div id="tappaBaloo" class="tab-pane fade">
+						<div class="row">
+							<div class="col-lg-3">
+								<img src="archive/tappe/baloo.jpg" class="smallTappa" />
+							</div>
+							<div class="col-lg-9">
+								<p><label>Conquistata: </label> <input class="confermaTappa" type="checkbox" id="conquistataBaloo" /></p>
+                                <p><label>In cammino da: </label> <span type="data" class="dataBaghera" ></span></p>
+								<p><label>Conquistata il: </label> <input class="data" type="data" id="dataBaloo" /></p>
+							</div>
+						</div>
+						<div class="row">
+							<table id="tabellaMeteBaloo" class="display" width="100%" cellspacing="0">
+								<thead>
+									<tr>
+										<th>Caccia</th>
+										<th>Impegni</th>
+										<th>data inzio</th>
+										<th>data verifrica</th>
+										<th>raggiunta</th>
+										<th>edit</th>
+									</tr>
+								</thead>
+
+								<tfoot>
+									<tr>
+										<th>Caccia</th>
+										<th>Impegni</th>
+										<th>data inzio</th>
+										<th>data verifrica</th>
+										<th>raggiunta</th>
+										<th>edit</th>
+									</tr>
+								</tfoot>
+								<tbody class="mete">
+								</tbody>
+							</table>
+						</div>
+						<div class="row">
+							<button type="button" class="btn btn-success right addBaloo" data-toggle="modal" data-target="#myModal" data-whatever="@Baloo">
+							  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> add
+							</button>
+						</div>
+						<div class="row">
+							<hr />
+							<h2>Consigli dal Metodo</h2>
+							<div id="metodoBaloo"></div>
+						</div>
+					</div>
+
+                    <div id="tappaAkela" class="tab-pane fade">
+						<div class="row">
+							<div class="col-lg-3">
+								<img src="archive/tappe/akela.jpg" class="smallTappa" />
+							</div>
+							<div class="col-lg-9">
+								<p><label>Conquistata: </label> <input class="confermaTappa" type="checkbox" id="conquistataAkela" /></p>
+                                <p><label>In cammino da: </label> <span type="data" class="dataBaloo" ></span></p>
+								<p><label>Conquistata il: </label> <input class="data" type="data" id="dataAkela" /></p>
+							</div>
+						</div>
+						<div class="row">
+							<table id="tabellaMeteAkela" class="display" width="100%" cellspacing="0">
+								<thead>
+									<tr>
+										<th>Caccia</th>
+										<th>Impegni</th>
+										<th>data inzio</th>
+										<th>data verifrica</th>
+										<th>raggiunta</th>
+										<th>edit</th>
+									</tr>
+								</thead>
+
+								<tfoot>
+									<tr>
+										<th>Caccia</th>
+										<th>Impegni</th>
+										<th>data inzio</th>
+										<th>data verifrica</th>
+										<th>raggiunta</th>
+										<th>edit</th>
+									</tr>
+								</tfoot>
+								<tbody class="mete">
+								</tbody>
+							</table>
+						</div>
+						<div class="row">
+							<button type="button" class="btn btn-success right addAkela" data-toggle="modal" data-target="#myModal" data-whatever="@Akela">
+							  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> add
+							</button>
+						</div>
+						<div class="row">
+							<hr />
+							<h2>Consigli dal Metodo</h2>
+							<div id="metodoAkela"></div>
+						</div>
+					</div>
+
+
+
+
+
+
 					<div id="tappaScoperta" class="tab-pane fade in active">
 						<div class="row">
 							<div class="col-lg-3">

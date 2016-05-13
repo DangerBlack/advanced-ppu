@@ -2,7 +2,7 @@
 	/*
 		Copyright 2015 Daniele Baschieri
 		version: 1.01
-		
+
 		This file is part of Advanced P.P.U.
 
 		Advanced P.P.U. is free software: you can redistribute it and/or modify
@@ -20,6 +20,7 @@
 	*/
     require  'medoo.min.php';
 	function connect(){
+		/*
 		$database = new medoo([
 				// required
 				'database_type' => 'mysql',
@@ -27,7 +28,7 @@
 				'server' => 'localhost',
 				'username' => 'gest_rep',//DB_USERNAME
 				'password' => 'gest_rep',//PASSWORD
-				 
+
 				// optional
 				'port' => 3306,
 				//'charset' => 'utf8',
@@ -36,6 +37,12 @@
 				PDO::ATTR_CASE => PDO::CASE_NATURAL
 			]
 		]);
+		*/
+		$database = new medoo([
+                // required
+                'database_type' => 'sqlite',
+                'database_file' => '../archive/test_appu.sqlite'
+        ]);
 		return $database;
 	}
     //GESTIONE UTENTI LOGIN REGISTER ETC
@@ -49,14 +56,14 @@
 		]);
 		return $result;
 	}
-    function isLogged(){		
+    function isLogged(){
 		@$utente=$_COOKIE["utente"];
 		@$pswd=$_COOKIE["pswd"];
 		if(login($utente,$pswd)){
 			return true;
 		}else{
 			return false;
-		}		
+		}
 	}
 	function getId(){
 		$utente=$_COOKIE["utente"];
@@ -86,11 +93,20 @@
 			"id",
 			"email",
 			"utente",
-            "photo"
+            "photo",
+			"ruolo",
+			"branca"
 		],[
 			"id[=]"=>$id
 		]);
 		return $res;
+	}
+
+	function getRuolo(){
+		$id=getId();
+		$user=getUser($id);
+		$ruolo=$user['branca'];
+		return $ruolo;
 	}
 	function insertUser($utente,$mail,$pswd){
 		$database=connect();
@@ -101,7 +117,7 @@
 		]);
 		return $res;
 	}
-	function updateUserInfo($id,$utente,$email){		
+	function updateUserInfo($id,$utente,$email){
 		$database=connect();
 		$res=$database->update("utenti",[
 			"utente"=>$utente,
@@ -156,7 +172,8 @@
 			'mailmamma'=>$mailmamma,
 			'mail'=>$mail,
 			'photo'=>$photo,
-			'squadriglie_idsquadriglie'=>$squadriglie_idsquadriglie
+			'squadriglie_idsquadriglie'=>$squadriglie_idsquadriglie,
+			'status'=>getRuolo()
 		]);
 		if($res!=0)
 			insert3Tappe($res);
@@ -213,9 +230,19 @@
 		]);
 		return $res;
 	}
-	
+
 	function getScoutsList($status){
 		$database=connect();
+		$filtro_ruolo=[
+			'status[=]'=>getRuolo(),
+			"ORDER" => ["squadriglie_idsquadriglie",'datanascita']
+		];
+		if(getRuolo()==0){
+			$filtro_ruolo=[
+				'status[<]'=>4,
+				"ORDER" => ["squadriglie_idsquadriglie",'datanascita']
+			];
+		}
 		$res=$database->select("scout",[
 			'idscout',
 			'nome',
@@ -240,33 +267,40 @@
 			'photo',
 			'squadriglie_idsquadriglie'
 		],
-		[
-			'status[=]'=>$status,
-			"ORDER" => ["squadriglie_idsquadriglie",'datanascita']
-		]);
+		$filtro_ruolo);
 		return $res;
 	}
 	/*
-	* status 1=passato
-	 * status 2=abbandonato
-	 * status 3=morto
+	* status 1=lupi
+	 * status 2=reparto
+	 * status 3=clan
+	 * status 4=partenza
+	 * status -1= abbandonato
 	*/
 	function getCurrentScouts(){
-		return getScoutsList(0);
+		return getScoutsList(getRuolo());
 	}
 	function getPassedScouts(){
 		return getScoutsList(1);
 	}
 	function getCurrentScoutsName(){
 		$database=connect();
+		$filtro_ruolo=[
+			'status[=]'=>getRuolo(),
+			"ORDER" => ["cognome","nome"]
+		];
+		if(getRuolo()==0){
+			$filtro_ruolo=[
+				'status[<]'=>4,
+				"ORDER" => ["cognome","nome"]
+			];
+		}
 		$res=$database->select("scout",[
 			'nome',
 			'cognome'
 		],
-		[
-			'status[=]'=>0,
-			"ORDER" => ["cognome","nome"]
-		]);
+			$filtro_ruolo
+		);
 		return $res;
 	}
 	function setStatusScout($idscout,$status){
@@ -309,7 +343,8 @@
 			'scout.mailmamma',
 			'scout.mail',
 			'scout.photo',
-			'scout.squadriglie_idsquadriglie(idsquadriglie)'
+			'scout.squadriglie_idsquadriglie(idsquadriglie)',
+			'status'
 		],
 		[
 			'idscout[=]'=>$idscout
@@ -345,7 +380,7 @@
 				]
 			]);
 		}
-		
+
 		$res[0]['brevetti']=$database->select("brevettiscout",
 		[
 			"[>]brevetti" => ["brevetti_idbrevetti" => "idbrevetti"],
@@ -363,7 +398,7 @@
 		[
 			'scout_idscout[=]'=>$idscout
 		]);
-		
+
 		foreach($res[0]['brevetti'] as &$r){
 			$r['impegni']=$database->select("brevettiimpegni",
 			[
@@ -379,8 +414,8 @@
 				]
 			]);
 		}
-		
-		
+
+
 		$res[0]['tappe']=$database->select("tappescout",
 		[
 			"[>]tappe" => ["tappe_idtappe" => "idtappe"],
@@ -412,12 +447,12 @@
 				'idtappescout[=]'=>$r['id']
 			]);
 		}
-		
+
 		$res[0]['commenti']=selectCommenti($idscout);
-		
+
 		return $res;
 	}
-	
+
 	function getSpecialitaList(){
 		$database=connect();
 		$res=$database->select("specialita",[
@@ -481,9 +516,9 @@
 		]);
 		return $res;
 	}
-	
+
 	function insert3Tappe($scout_idscout){
-		for($i=1;$i<=3;$i++){
+		for($i=1;$i<=6;$i++){
 			insertTappe($i,$scout_idscout,0);
 		}
 	}
@@ -522,7 +557,7 @@
 		],[
 			'id[=]'=>$id
 		]);
-		return $res;		
+		return $res;
 	}
 	function setTappaData($id,$data){
 		$database=connect();
@@ -542,7 +577,7 @@
 		]);
 		return $res;
 	}
-	
+
 	function insertImpegno($scout_idscout,$specialita_idspecialita,$impegno){
 		$database=connect();
 		$res=$database->insert("specialitaimpegni",[
@@ -657,7 +692,7 @@
 			'id[=]'=>$id
 		]);
 		return $res;
-		
+
 	}
 	function deleteImpegno($id){
 		$database=connect();
@@ -665,7 +700,7 @@
 			'id[=]'=>$id
 		]);
 		return $res;
-		
+
 	}
 	function deleteImpegnoBrevetto($id){
 		$database=connect();
@@ -673,7 +708,7 @@
 			'id[=]'=>$id
 		]);
 		return $res;
-		
+
 	}
 	function selectCommenti($scout_idscout){
 		$database=connect();
@@ -790,7 +825,7 @@
 					'specialita_idspecialita[=]'=>$specialita_idspecialita,
 			]
 		]);
-		
+
 		$res=$database->delete("specialitaimpegni",[
 			'AND'=>[
 					'scout_idscout[=]'=>$scout_idscout,
@@ -807,7 +842,7 @@
 					'brevetti_idbrevetti[=]'=>$brevetto_idbrevetto,
 			]
 		]);
-		
+
 		$res=$database->delete("brevettiimpegni",[
 			'AND'=>[
 					'scout_idscout[=]'=>$scout_idscout,
@@ -831,7 +866,7 @@
 			'specialita.nome(sname)',
 			'specialita.immagine(sphoto)',
 			'specialitascout.maestro',
-			'specialitascout.conquistata'			
+			'specialitascout.conquistata'
 		],[
 			'scout.status[=]'=>0,
 			'ORDER'=>['sname']

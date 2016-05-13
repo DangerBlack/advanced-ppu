@@ -1,7 +1,7 @@
 /**
 	Copyright 2015 Daniele Baschieri
 	version: 1.0
-	
+
 	This file is part of Advanced P.P.U.
 
     Advanced P.P.U. is free software: you can redistribute it and/or modify
@@ -86,8 +86,8 @@ function eventiSentiero(id){
 		  var datainizio=$("#datainizio").val();
 		  var datafine=$("#datafine").val();
 		  addNuovaMeta(idTappa,meta,impegno,datainizio,datafine);
-	  }); 
-	});	
+	  });
+	});
 	$(".confermaTappa").click(function(){
 			var confermata=$(this).prop('checked');
 			console.log(confermata);
@@ -105,9 +105,24 @@ function eventiSentiero(id){
 				if(202){
 					console.log("successo");
 				}
-			});			
+			});
 		});
-		 $('#tabellaMeteScoperta').DataTable( {
+		$('#tabellaMeteBaghera').DataTable( {
+		   "paging":   false,
+		   "ordering": false,
+		   "info":     false
+	    });
+		$('#tabellaMeteBaloo').DataTable( {
+			  "paging":   false,
+			  "ordering": false,
+			  "info":     false
+		});
+	  	$('#tabellaMeteAkela').DataTable( {
+			 "paging":   false,
+			 "ordering": false,
+			 "info":     false
+		 });
+		$('#tabellaMeteScoperta').DataTable( {
 			"paging":   false,
 			"ordering": false,
 			"info":     false
@@ -122,19 +137,19 @@ function eventiSentiero(id){
 			"ordering": false,
 			"info":     false
 		});
-		
+
 		var checkout=$('.data').datepicker({
 			format: 'dd/mm/yyyy',
 			startDate: '-3d'
 		}).on('change.dp',changeDate).on('changeDate',changeDate);
-		
+
 		function changeDate(){
 			var data=$(this).val();
 			var idField=$(this).attr('id');
 			var step="";
 			step=idField.substring(4);
 			console.log(step);
-			
+
 			data=toDBData(data);
 			$.post('php/updateDataTappa.php',{'idScout':id,'idtappa':getIdFromTapp(step),'data':data},function(data){
 				if(data==202){
@@ -154,12 +169,18 @@ function addNuovaMeta(idTappa,meta,impegno,datainizio,datafine){//TODO LATO SERV
 function getTappFromId(id){
 	switch(id){
 		case 1:
+			return "Baghera";
+		case 2:
+			return "Baloo";
+		case 3:
+			return "Akela";
+		case 4:
 			return "Scoperta";
 		break;
-		case 2:
+		case 5:
 			return "Competenza";
 		break;
-		case 3:
+		case 6:
 			return "Responsabilita";
 		break;
 	}
@@ -167,14 +188,22 @@ function getTappFromId(id){
 }
 function getIdFromTapp(tapp){
 	switch(tapp){
-		case "Scoperta":
+		case "Baghera":
 			return 1;
 		break;
-		case "Competenza":
+		case "Baloo":
 			return 2;
 		break;
-		case "Responsabilita":
+		case "Akela":
 			return 3;
+		case "Scoperta":
+			return 4;
+		break;
+		case "Competenza":
+			return 5;
+		break;
+		case "Responsabilita":
+			return 6;
 		break;
 	}
 	return 0;

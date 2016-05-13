@@ -1,7 +1,7 @@
 /**
 	Copyright 2015 Daniele Baschieri
 	version: 1.02
-	
+
 	This file is part of Advanced P.P.U.
 
     Advanced P.P.U. is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@ function initScout(id){
 			$(".photo").attr("src","archive/bigphoto/"+s.photo);
 			$(".squadriglia").html('<span>'+s.nomeSq+'</span><br /><span class="colorbox primary" style="background-color:#'+s.colore1+'"></span>'+
 									'<span class="colorbox secondary" style="background-color:#'+s.colore2+'"></span>');
-			
+
 			$("#nome").html(s.nome);
 			$("#cognome").html(s.cognome);
 			$("#codice").html(s.codice);
@@ -49,8 +49,8 @@ function initScout(id){
 					$("#idsquadriglie").append('<option '+isSelected+' value="'+js[i].idsquadriglie+'" sesso="'+js[i].sesso+'">'+js[i].nome+'</option>');
 				}
 			});
-			
-			
+
+
 			//$("#note").html(s.varie.replace(/\n/g,"<br />"));
 			$("#numbabbo").html(s.numbabbo);
 			$("#nummamma").html(s.nummamma);
@@ -76,7 +76,7 @@ function initScout(id){
 				var concat='';
 				for(var i=0;i<spec['impegni'].length;i++){
 					count++;
-					concat+=spec['impegni'][i].impegno +'<br />';					
+					concat+=spec['impegni'][i].impegno +'<br />';
 				}
 				if(spec.conquistata!=0)
 					$("#listaSpecialita").append('<li class="spec" value="'+spec.idspecialita+'" ><a href="#" data-toggle="tooltip" data-placement="bottom"'+
@@ -94,15 +94,15 @@ function initScout(id){
 													'<p>'+spec.nome+' <span class="badge">'+count+'</span></p>'+
 													'</a>'+
 												'</li>');
-			});	
-			$("#listaBrevetti").html('');	
+			});
+			$("#listaBrevetti").html('');
 			$("#brevInConquista").html('');
 			$.each(s.brevetti,function(e,brev){
 				var count=0;
 				var concat='';
 				for(var i=0;i<brev['impegni'].length;i++){
 					count++;
-					concat+=brev['impegni'][i].impegno +'<br />';					
+					concat+=brev['impegni'][i].impegno +'<br />';
 				}
 				if(brev.conquistata!=0)
 					$("#listaBrevetti").append('<li class="brev" value="'+brev.idbrevetti+'"><a href="#" data-toggle="tooltip" data-placement="bottom"'+
@@ -121,12 +121,12 @@ function initScout(id){
 													'</a>'+
 												'</li>');
 			});
-			
+
 			$("#commenti").html('');
 			$.each(s.commenti,function(e,commento){
 				var post=commento.testo.replace(/\n/g,"<br />");
 				post=wrapUrlPost(post);
-				
+
 				var edit="";
 				if(commento.owner){
 					edit='<button type="button" class="btn btn-xs btn-info right editCommento" data-toggle="modal" data-target="#myModal" data-whatever="@EditCommento-'+commento.id+'">'+
@@ -167,7 +167,7 @@ function eventScout(id){
 				var val=$(this).text();
 				var id=$(this).attr("id");
 				return '<input type="text" id="'+id+'" value="'+val+'" />';
-			}); 
+			});
 		}
 	});
 	$(".editSentiero").click(function(){
@@ -193,9 +193,9 @@ function eventScout(id){
 				for(var i=0;i<field.length;i++)
 					$(field[i]).replaceWith(function(){
 						var val=$(this).val();
-						var id=$(this).attr("id");					
+						var id=$(this).attr("id");
 						return '<span type="text" id="'+id+'" >'+val+'</span>';
-					}); 
+					});
 				}
 		});
 	});
@@ -208,7 +208,7 @@ function eventScout(id){
 				var val=$(this).val();
 				var id=$(this).attr("id");
 				return '<span type="text" id="'+id+'" >'+val+'</span>';
-			}); 
+			});
 	});
 	$('.spec').click(function(){
 		//var id=$(this).parent().parent().attr("value");
@@ -222,7 +222,7 @@ function eventScout(id){
 	});
 	$(".spec").children('a').tooltip();
 	$(".brev").children('a').tooltip();
-	
+
 	$('#myModal').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget) // Button that triggered the modal
 	  var recipient = button.data('whatever') // Extract info from data-* attributes
@@ -244,15 +244,15 @@ function eventScout(id){
 		  editCommentoModal(id,modal,idCommento);
 	  }
 	});
-	
-	
+
+
 	$("#abbandonato").click(function(){
-		changeStatus(id,2,"abbandonato");
+		changeStatus(id,-1,"abbandonato");
 	});
 	$("#passaggi").click(function(){
 		changeStatus(id,1,"passaggi");
 	});
-	
+
     $(".editPhoto").click(function(){
 		$(".photo").hide();
 		$(".editPhoto").hide();
@@ -326,7 +326,7 @@ function commentoModal(id,modal){
 	modal.find('.modal-title').html("Scrivi un commento");
 	modal.find('.modal-body').html('<p class="space"><label>Titolo: </label> <input id="titolo" type="text" placeholder="Chiacchierata" /></p>'+
 									'<label>Corpo: </label><br /> <textarea id="commento" type="text" placeholder="-testo-" ></textarea><span class="rightText"><span id="counter">0</span><span>/500</span></span>');
-	
+
 	$("#commento").keypress(function(){
 		var l=$(this).val().length;
 		if(l>500){
@@ -343,13 +343,13 @@ function commentoModal(id,modal){
 	});
 }
 function editCommentoModal(id,modal,idCommento){
-	
+
 	var titolo=$("#commento"+idCommento).find('.titolo').text();
 	var post=$("#commento"+idCommento).find('.post').text();
 	modal.find('.modal-title').html("Scrivi un commento");
 	modal.find('.modal-body').html('<p class="space"><label>Titolo: </label> <input id="titolo" type="text" placeholder="Chiacchierata" value="'+titolo+'"/></p>'+
 									'<label>Corpo: </label><br /> <textarea id="commento" type="text" placeholder="-testo-" >'+post+'</textarea><span class="rightText"><span id="counter">0</span><span>/500</span></span>');
-	
+
 	$("#commento").keypress(function(){
 		var l=$(this).val().length;
 		if(l>500){

@@ -4,6 +4,12 @@
 		die("Non sei loggato");
 	$idScout=$_POST['idScout'];
 	$status=$_POST['status'];
-	setStatusScout($idScout,$status);
+	if($status==-1){
+		setStatusScout($idScout,$status);
+	}else{
+		$scout=getScout($idScout);
+		$status=$scout["status"]+1;
+		setStatusScout($idScout,$status);
+	}
 	echo 201;
 ?>
