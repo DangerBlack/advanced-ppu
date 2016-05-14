@@ -23,7 +23,7 @@
 	$mail=$_POST['mail'];
 	$photo='user.jpg';
 	$squadriglie_idsquadriglie=$_POST['idsquadriglie'];
-	
+
 	$res=insertScout(
 				$nome,
 				$cognome,
@@ -47,13 +47,10 @@
 				$photo,
 				$squadriglie_idsquadriglie
 			);
-	
+
 	if($res!=0){
 		echo 200;
 	}else{
 		echo 500;
 	}
 ?>
-
-
-

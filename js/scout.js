@@ -60,7 +60,11 @@ function initScout(id){
 			$("#mailmamma").html('<a href="mailto:'+s.mailmammma+'" target="_top">'+s.mailmamma+'</a>');
 			$("#mail").html('<a href="mailto:'+s.mail+'" target="_top">'+s.mail+'</a>');
 			$("#listaImpegni").html('');
-			for(var i=0;i<s.tappe.length;i++)
+			var inizio=0;
+			if(s.status==2)
+				inizio=4;
+
+			for(var i=inizio;i<inizio+3;i++)/*TODO rimuovere magic number */
 				if(s.tappe[i].conquistata==0){
 					$(".tappa").attr("src","archive/"+s.tappe[i].immagine);
 					$("#listaImpegni").html('');
@@ -95,33 +99,37 @@ function initScout(id){
 													'</a>'+
 												'</li>');
 			});
-			$("#listaBrevetti").html('');
-			$("#brevInConquista").html('');
-			$.each(s.brevetti,function(e,brev){
-				var count=0;
-				var concat='';
-				for(var i=0;i<brev['impegni'].length;i++){
-					count++;
-					concat+=brev['impegni'][i].impegno +'<br />';
-				}
-				if(brev.conquistata!=0)
-					$("#listaBrevetti").append('<li class="brev" value="'+brev.idbrevetti+'"><a href="#" data-toggle="tooltip" data-placement="bottom"'+
-													   'title="" data-html="true" data-original-title="'+concat+'"'+
-													   'class="info-tooltip">'+
-													'<img src="archive/'+brev.immagine+'" />'+
-													'<p>'+brev.nome+' <span class="badge">'+count+'</span></p>'+
-													'</a>'+
-												'</li>');
-				else
-					$("#brevInConquista").append('<li class="brev" value="'+brev.idbrevetti+'"><a href="#" data-toggle="tooltip" data-placement="bottom"'+
-													   'title="" data-html="true" data-original-title="'+concat+'"'+
-													   'class="info-tooltip">'+
-													'<img src="archive/'+brev.immagine+'" />'+
-													'<p>'+brev.nome+' <span class="badge">'+count+'</span></p>'+
-													'</a>'+
-												'</li>');
-			});
-
+			if(s.status==2){
+				$("#listaBrevetti").html('');
+				$("#brevInConquista").html('');
+				$.each(s.brevetti,function(e,brev){
+					var count=0;
+					var concat='';
+					for(var i=0;i<brev['impegni'].length;i++){
+						count++;
+						concat+=brev['impegni'][i].impegno +'<br />';
+					}
+					if(brev.conquistata!=0)
+						$("#listaBrevetti").append('<li class="brev" value="'+brev.idbrevetti+'"><a href="#" data-toggle="tooltip" data-placement="bottom"'+
+														   'title="" data-html="true" data-original-title="'+concat+'"'+
+														   'class="info-tooltip">'+
+														'<img src="archive/'+brev.immagine+'" />'+
+														'<p>'+brev.nome+' <span class="badge">'+count+'</span></p>'+
+														'</a>'+
+													'</li>');
+					else
+						$("#brevInConquista").append('<li class="brev" value="'+brev.idbrevetti+'"><a href="#" data-toggle="tooltip" data-placement="bottom"'+
+														   'title="" data-html="true" data-original-title="'+concat+'"'+
+														   'class="info-tooltip">'+
+														'<img src="archive/'+brev.immagine+'" />'+
+														'<p>'+brev.nome+' <span class="badge">'+count+'</span></p>'+
+														'</a>'+
+													'</li>');
+				});
+			}else{
+				$("#brevInConquista").parent().parent().hide();
+				$("#listaBrevetti").parent().parent().hide();
+			}
 			$("#commenti").html('');
 			$.each(s.commenti,function(e,commento){
 				var post=commento.testo.replace(/\n/g,"<br />");

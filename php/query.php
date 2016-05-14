@@ -102,10 +102,10 @@
 		return $res;
 	}
 
-	function getRuolo(){
+	function getBranca(){
 		$id=getId();
 		$user=getUser($id);
-		$ruolo=$user['branca'];
+		$ruolo=$user[0]['branca'];
 		return $ruolo;
 	}
 	function insertUser($utente,$mail,$pswd){
@@ -151,6 +151,11 @@
 							$squadriglie_idsquadriglie
 						){
 		$database=connect();
+
+		$ruolo=getBranca();
+		$status=$ruolo;
+		if($ruolo==0)
+			$status=1;
 		$res=$database->insert("scout",[
 			'nome'=>$nome,
 			'cognome'=>$cognome,
@@ -173,7 +178,7 @@
 			'mail'=>$mail,
 			'photo'=>$photo,
 			'squadriglie_idsquadriglie'=>$squadriglie_idsquadriglie,
-			'status'=>getRuolo()
+			'status'=>$ruolo
 		]);
 		if($res!=0)
 			insert3Tappe($res);
@@ -234,10 +239,10 @@
 	function getScoutsList($status){
 		$database=connect();
 		$filtro_ruolo=[
-			'status[=]'=>getRuolo(),
+			'status[=]'=>getBranca(),
 			"ORDER" => ["squadriglie_idsquadriglie",'datanascita']
 		];
-		if(getRuolo()==0){
+		if(getBranca()==0){
 			$filtro_ruolo=[
 				'status[<]'=>4,
 				"ORDER" => ["squadriglie_idsquadriglie",'datanascita']
@@ -278,7 +283,7 @@
 	 * status -1= abbandonato
 	*/
 	function getCurrentScouts(){
-		return getScoutsList(getRuolo());
+		return getScoutsList(getBranca());
 	}
 	function getPassedScouts(){
 		return getScoutsList(1);
@@ -286,10 +291,10 @@
 	function getCurrentScoutsName(){
 		$database=connect();
 		$filtro_ruolo=[
-			'status[=]'=>getRuolo(),
+			'status[=]'=>getBranca(),
 			"ORDER" => ["cognome","nome"]
 		];
-		if(getRuolo()==0){
+		if(getBranca()==0){
 			$filtro_ruolo=[
 				'status[<]'=>4,
 				"ORDER" => ["cognome","nome"]
@@ -344,7 +349,7 @@
 			'scout.mail',
 			'scout.photo',
 			'scout.squadriglie_idsquadriglie(idsquadriglie)',
-			'status'
+			'scout.status'
 		],
 		[
 			'idscout[=]'=>$idscout
@@ -676,6 +681,10 @@
 	}
 	function getSquadriglie(){
 		$database=connect();
+		$ruolo=getBranca();
+		$filtro_ruolo=["status[=]"=>$ruolo];
+		if($ruolo==0)
+			$filtro_ruolo=["status[>]"=>0];
 		$res=$database->select("squadriglie",[
 			'idsquadriglie',
 			'nome',
@@ -683,7 +692,7 @@
 			'guidone',
 			'colore1',
 			'colore2'
-		]);
+		],$filtro_ruolo);
 		return $res;
 	}
 	function deleteMeta($id){
@@ -875,11 +884,15 @@
 	}
 	function insertSquadriglia($nome,$sesso,$colore1,$colore2){
 		$database=connect();
+		$ruolo=getBranca();
+		if($ruolo==0)
+			$ruolo=1;
 		$res=$database->insert("squadriglie",[
 			'nome'=>$nome,
 			'sesso'=>$sesso,
 			'colore1'=>$colore1,
-			'colore2'=>$colore2
+			'colore2'=>$colore2,
+			'status'=>$ruolo
 		]);
 		return $res;
 	}
