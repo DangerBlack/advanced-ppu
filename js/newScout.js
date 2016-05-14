@@ -1,7 +1,7 @@
 /**
 	Copyright 2015 Daniele Baschieri
 	version: 1.01
-	
+
 	This file is part of Advanced P.P.U.
 
     Advanced P.P.U. is free software: you can redistribute it and/or modify
@@ -26,8 +26,8 @@ function initNewScout(){
 			$("#inSquadriglia").append('<option value="'+js[i].idsquadriglie+'" sesso="'+js[i].sesso+'">'+js[i].nome+'</option>');
 		}
 	});
-	
-	
+
+
 	$(".avanti").click(function(){
 		var totStep=4;
 		var step=$(this).attr("step");
@@ -47,19 +47,19 @@ function initNewScout(){
 			showError(valida.error);
 		}
 	});
-	
+
 	var checkout=$('#inDatanascita').datepicker({
 		format: 'dd/mm/yyyy',
 		startDate: '-12y'
 	}).on('change.dp',changeDate).on('changeDate',changeDate);
-	
+
 	function changeDate(){
 		/*var data=$(this).val();
 		var idField=$(this).attr('id');
 		var step="";
 		step=idField.substring(4);
 		console.log(step);
-		
+
 		data=toDBData(data);
 		$.post('php/updateDataTappa.php',{'idScout':id,'idtappa':getIdFromTapp(step),'data':data},function(data){
 			if(data==202){
@@ -106,14 +106,14 @@ function validaCampi(step){//TODO check delle date etc etc
 		case 2:{
 			var sesso=$("#inSesso").val();
 			var sqSesso=$("option[value="+$("#inSquadriglia").val()+"]").attr("sesso");
-			if(sesso!=sqSesso){
+			if((sesso!=sqSesso)&&(sqSesso!="U")){
 				res.ok=false;
 				res.error="Il Sesso della sq, non è conforme con il sesso del ragazzo!";
 				return res;
 			}
 		}
 	}
-	
+
 	return res;
 }
 
@@ -136,5 +136,5 @@ function createNewUser(){
 			//TODO In realtà non fa nulla... gestire errori
 		}
 	});
-	console.log(dati);			
+	console.log(dati);
 }

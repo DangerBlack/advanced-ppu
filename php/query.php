@@ -460,12 +460,19 @@
 
 	function getSpecialitaList(){
 		$database=connect();
+		$filtro_ruolo=[
+			'status[=]'=>getBranca()
+		];
+		if(getBranca()==0){
+			$filtro_ruolo=[];
+		}
+
 		$res=$database->select("specialita",[
 			'idspecialita(id)',
 			'nome',
 			'immagine',
 			'esempi'
-		]);
+		],$filtro_ruolo);
 		return $res;
 	}
 	function getSpecialitaListFilter($filter){

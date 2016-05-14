@@ -1,7 +1,7 @@
 /**
 	Copyright 2015 Daniele Baschieri
 	version: 1.0
-	
+
 	This file is part of Advanced P.P.U.
 
     Advanced P.P.U. is free software: you can redistribute it and/or modify
@@ -22,13 +22,13 @@ function initSqTool(){
 		var js=JSON.parse(data);
 		for(var i=0;i<js.length;i++){
 			$("#listaSq").append('<li>'+
-									
+
 									'<span class="colorbox primary" style="background-color:#'+js[i].colore1+'"></span>'+
 									'<span class="colorbox secondary" style="background-color:#'+js[i].colore2+'"></span> '+
 									'<label class="sqname">'+js[i].nome+'</label> '+
 									'<button type="button" class="btn btn-xs btn-info" aria-label="Right Align" data-toggle="modal" data-target="#myModal" data-whatever="@EditSquadriglia-'+js[i].idsquadriglie+'">'+
 										'<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> <span class="">Edit</span>'+
-									'</button> '+ 
+									'</button> '+
 								'</li>');
 		}
 		$('#myModal').on('show.bs.modal', function (event) {
@@ -51,7 +51,7 @@ function initSqTool(){
 function addSquadriglia(modal){
 	modal.find('.modal-title').html("Aggiungi una squadriglia");
 	modal.find('.modal-body').html('<p class="space"><label>Nome: </label> <input id="sqName" type="text" placeholder="Paguri" /></p>'+
-									'<p class="space"><label>Sesso:</label><select id="sesso"><option value="M">Maschile</option><option value="F">Femminile</option></select></p>'+
+									'<p class="space"><label>Sesso:</label><select id="sesso"><option value="M">Maschile</option><option value="F">Femminile</option><option value="U">Mista</option></select></p>'+
 									'<label>Colore Primario: </label>'+
 									'<div class="input-group colore1">'+
 										'<input id="colore1" type="text" value="" class="form-control" placeholder="#FFFFF"/>'+
