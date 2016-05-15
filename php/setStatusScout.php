@@ -8,7 +8,7 @@
 		setStatusScout($idScout,$status);
 	}else{
 		$scout=getScout($idScout);
-		$status=$scout["status"]+1;
+		$status=$scout[0]["status"]+1;
 		setStatusScout($idScout,$status);
 	}
 	echo 201;

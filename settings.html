@@ -33,16 +33,18 @@
 <link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
  <link rel="stylesheet" type="text/css" href="css/default.css" />
 
-      
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/datatables.min.js"></script>
 <script type="text/javascript"  src="js/sha1.js"></script>
 <script type="text/javascript"  src="js/default.js"></script>
- 
+
  <script type="text/javascript" >
  $(document).ready(function(){
 				init();
+                var memBranca=4;
+                var memRuolo=4;
 				$(".error-message").hide();
 				function addUser(utente,email,pswd){
 					$.post("php/addUser.php",{"utente":utente,"email":email,"pswd":hex_sha1(pswd)},function(data){
@@ -51,11 +53,43 @@
 						}
 					});
 				}
+                function getBrancaSelect(ruolo,branca){
+                    var branche=["tutte","Lupetti/Coccinelle","Reparto","Clan"];
+                    if(ruolo>3){
+                        return '<option value="'+i+'" >'+branche[branca]+'</option>';
+                    }
+
+                    var s="";
+                    var selected="";
+                    for(var i=0;i<branche.length;i++){
+                        selected="";
+                        console.log("i:"+i+" branca:"+branca);
+                        if(i==branca){
+                            selected='selected';
+                            console.log("accaduto");
+                        }
+                        s=s+='<option value="'+i+'" '+selected+' >'+branche[i]+'</option>';
+                    }
+                    return s;
+                }
+                function getRuoloSelect(ruolo){
+                    var ruoli=["root","admin","capo","rover","ragazzo"];
+                    var s="";
+                    for(var i=ruolo;i<ruoli.length;i++){
+                        s=s+='<option value="'+i+'" >'+ruoli[i]+'</option>';
+                    }
+                    return s;
+                }
+
 				$.get("php/getUserInfo.php",function(data){
 					var js=JSON.parse(data);
 					$(".photo").attr("src","archive/photo/"+js[0].photo);
 					$("#user").val(js[0].utente);
 					$("#email").val(js[0].email);
+                    memBranca=js[0].branca;
+                    memRuolo=js[0].ruolo;
+                    $("#ruolo").html(getRuoloSelect(js[0].ruolo));
+                    $("#branca").html(getBrancaSelect(js[0].ruolo,js[0].branca));
 				});
 				$(".updatePswd").click(function(){
 					var pswd=hex_sha1($("#oldpswd").val());
@@ -79,7 +113,7 @@
 						});
 					}
 				});
-				
+
 				$(".updateInfo").click(function(){
 					var utente=$("#user").val();
 					var email=$("#email").val();
@@ -97,7 +131,7 @@
 						});
 					}
 				});
-				
+
 				$('#myModal').on('show.bs.modal', function (event) {
 					  var button = $(event.relatedTarget) // Button that triggered the modal
 					  var recipient = button.data('whatever') // Extract info from data-* attributes
@@ -109,8 +143,10 @@
 						modal.find('.modal-title').html("Aggiungi un Utente");
 						modal.find('.modal-body').html('<p class="space"><label>Username: </label> <input id="form-utente" class="form-control" type="text" placeholder="Robert Baden-Powell" /></p>'+
 														'<p class="space"><label>Email: </label> <input id="form-email" class="form-control" type="text" placeholder="robert.bp@gilwell.uk" /></p>'+
-														'<p class="space"><label>Password: </label> <input id="form-pswd" class="form-control" type="text" placeholder="password" /></p>');
-				
+														'<p class="space"><label>Password: </label> <input id="form-pswd" class="form-control" type="text" placeholder="password" /></p>'+
+                                                        '<p class="space"><label>Ruolo: </label><select id="form-ruolo" class="form-control">'+getRuoloSelect(memRuolo)+'</select></p>'+
+                                                        '<p class="space"><label>Branca: </label><select id="form-branca" class="form-control">'+getBrancaSelect(memRuolo,memBranca)+'</select></p>');
+
 						$("#send").click(function(){
 						  var utente=$("#form-utente").val();
 						  var email=$("#form-email").val();
@@ -119,12 +155,49 @@
 						});
 					  }
 				});
-				
-				
+                function getBrancaFromNumber(n){
+                    switch(n){
+                        case 0:
+                            return "tutte";
+                            break;
+                        case 1:
+                            return "Lupetti/Coccinelle";
+                            break;
+                        case 2:
+                            return "Reparto";
+                            break;
+                        case 3:
+                            return "Clan";
+                        break;
+                        default:
+                            return "Nessuna: "+n;
+                    }
+                }
+                $.get("php/getUserList.php",function(data){
+                    var js=JSON.parse(data);
+                    for(var i=0;i<js.length;i++){
+                        var p=js[i];
+                        $("#userList").append('<div class="media">'+
+                                                '<div class="media-left">'+
+                                                    '<a href="#">'+
+                                                      '<img class="media-object" src="archive/photo/'+p.photo+'" alt="photo">'+
+                                                    '</a>'+
+                                                '</div>'+
+                                                '<div class="media-body">'+
+                                                    '<h4 class="media-heading">'+p.utente+' <button class="btn btn-xs btn-danger"> <span class="glyphicon glyphicon-trash"></span> </button></h4>'+
+                                                    '<p>Branca: '+getBrancaFromNumber(parseInt(p.branca))+'</p>'+
+                                                    '<p><button class="btn btn-sm btn-info"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Change</button>'+
+                                                    '</p>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                           '</div>');
+                    }
+                })
+
 			});
 </script>
 <style>
-	
+
 </style>
 
 </head>
@@ -155,7 +228,7 @@
 				  </ul>
 			  </li>
           </ul>
-        </div><!--/.nav-collapse -->        
+        </div><!--/.nav-collapse -->
       </div>
     </nav>
 
@@ -167,7 +240,7 @@
 			</h1>
 		</div>
 		<div class="row">
-			
+
 			<div class="panel panel-default">
 				<div class="panel-heading">User Info</div>
 				<div class="panel-body">
@@ -180,16 +253,22 @@
 							<label>Username</label>
 							<input id="user" type="text" value="" class="form-control"/>
 							<label>E-mail</label>
-							<input id="email" type="email" value="" class="form-control"/>		
+							<input id="email" type="email" value="" class="form-control"/>
+                            <label>Ruolo</label>
+                            <select id="ruolo" class="form-control">
+                            </select>
+                            <label>Branca</label>
+							<select id="branca" class="form-control">
+                            </select>
 							<button class="btn btn-info right space updateInfo" type="button">
 								<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
 								Change
-							</button>					
+							</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="panel panel-default">
 			  <div class="panel-heading">Password Manager</div>
 			  <div class="panel-body">
@@ -206,20 +285,26 @@
 				</button>
 			  </div>
 			</div>
-			
+
 			<div class="panel panel-default">
 				<div class="panel-heading">User Manager</div>
 				<div class="panel-body">
-				<div class="error-message alert alert-danger" role="alert"></div>
-				<button class="btn btn-success right space addUser" type="button" data-toggle="modal" data-target="#myModal" data-whatever="@addUser">
-					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-					Add
-				</button>
+                    <div class="row">
+                        <div id="userList" class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+            				<div class="error-message alert alert-danger" role="alert"></div>
+            				<button class="btn btn-success right space addUser" type="button" data-toggle="modal" data-target="#myModal" data-whatever="@addUser">
+            					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            					Add
+            				</button>
+                        </div>
+                    </div>
 				</div>
 			</div>
 		</div>
       </div>
-		
+
     </div>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -238,7 +323,7 @@
       </div>
     </div>
   </div>
-</div>	
+</div>
 </body>
 
 </html>

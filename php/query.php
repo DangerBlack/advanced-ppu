@@ -108,6 +108,31 @@
 		$ruolo=$user[0]['branca'];
 		return $ruolo;
 	}
+	function getRuolo(){
+		$id=getId();
+		$user=getUser($id);
+		$ruolo=$user[0]['ruolo'];
+		return $ruolo;
+	}
+	function getUserList(){
+		$database=connect();
+		$branca=getBranca();
+		$filtro_branca=[
+			"branca[=]"=>$branca
+		];
+		if(getRuolo()<2){
+			$filtro_branca=[];
+		}
+		$res=$database->select("utenti",[
+			"id",
+			"email",
+			"utente",
+            "photo",
+			"ruolo",
+			"branca"
+		],$filtro_branca);
+		return $res;
+	}
 	function insertUser($utente,$mail,$pswd){
 		$database=connect();
 		$res=$database->insert("utenti",[
