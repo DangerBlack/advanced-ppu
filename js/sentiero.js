@@ -169,9 +169,9 @@ function addNuovaMeta(idTappa,meta,impegno,datainizio,datafine){//TODO LATO SERV
 function getTappFromId(id){
 	switch(id){
 		case 1:
-			return "Baghera";
-		case 2:
 			return "Baloo";
+		case 2:
+			return "Baghera";
 		case 3:
 			return "Akela";
 		case 4:
@@ -188,10 +188,10 @@ function getTappFromId(id){
 }
 function getIdFromTapp(tapp){
 	switch(tapp){
-		case "Baghera":
+		case "Baloo":
 			return 1;
 		break;
-		case "Baloo":
+		case "Baghera":
 			return 2;
 		break;
 		case "Akela":

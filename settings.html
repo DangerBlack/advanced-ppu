@@ -46,8 +46,8 @@
                 var memBranca=4;
                 var memRuolo=4;
 				$(".error-message").hide();
-				function addUser(utente,email,pswd){
-					$.post("php/addUser.php",{"utente":utente,"email":email,"pswd":hex_sha1(pswd)},function(data){
+				function addUser(utente,email,pswd,ruolo,branca){
+					$.post("php/addUser.php",{"utente":utente,"email":email,"pswd":hex_sha1(pswd),"ruolo":ruolo,"branca":branca},function(data){
 						if(data==201){
 							alert("Utente creato con successo");
 						}
@@ -117,11 +117,13 @@
 				$(".updateInfo").click(function(){
 					var utente=$("#user").val();
 					var email=$("#email").val();
+                    var ruolo=$("#ruolo").val();
+                    var branca=$("#branca").val();
 					if((utente=="")||(email=="")){
 						$(this).parent().find(".error-message").html('<p><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> La mail o la password non sono stati definiti!</p>');
 						$(this).parent().find(".error-message").show();
 					}else{
-						$.post('php/updateUserInfo.php',{'utente':utente,'email':email},function(data){
+						$.post('php/updateUserInfo.php',{'utente':utente,'email':email,'ruolo':ruolo,'branca':branca},function(data){
 							if(data!=202){
 								$(this).parent().find(".error-message").html('<p><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> impossibile completare l\'operazione!</p>');
 								$(this).parent().find(".error-message").show();
@@ -140,7 +142,7 @@
 					  var modal = $(this);
 					  //alert(recipient);
 					  if(recipient=="@addUser"){
-						modal.find('.modal-title').html("Aggiungi un Utente");
+                        modal.find('.modal-title').html("Aggiungi un Utente");
 						modal.find('.modal-body').html('<p class="space"><label>Username: </label> <input id="form-utente" class="form-control" type="text" placeholder="Robert Baden-Powell" /></p>'+
 														'<p class="space"><label>Email: </label> <input id="form-email" class="form-control" type="text" placeholder="robert.bp@gilwell.uk" /></p>'+
 														'<p class="space"><label>Password: </label> <input id="form-pswd" class="form-control" type="text" placeholder="password" /></p>'+
@@ -151,8 +153,35 @@
 						  var utente=$("#form-utente").val();
 						  var email=$("#form-email").val();
 						  var pswd=$("#form-pswd").val();
-						  addUser(utente,email,pswd);
+                          var ruolo=$("#form-ruolo").val();
+                          var branca=$("#form-branca").val();
+						  addUser(utente,email,pswd,ruolo,branca);
 						});
+					  }
+                      if(recipient=="@editUser"){
+                            var data=button.data("json").replace(/'/g,'"');
+                            console.log(data);
+                            var js=JSON.parse(data);
+
+                            modal.find('.modal-title').html("Modifica l'Utente id: "+js.id);
+                            modal.find('.modal-body').html('<p class="space"><label>Username: </label> <input id="form-utente" class="form-control" type="text" placeholder="Robert Baden-Powell" value="'+js.utente+'" /></p>'+
+                            								'<p class="space"><label>Email: </label> <input id="form-email" class="form-control" type="text" placeholder="robert.bp@gilwell.uk" value="'+js.email+'"/></p>'+
+                                                            '<p class="space"><label>Ruolo: </label><select id="form-ruolo" class="form-control">'+getRuoloSelect(memRuolo)+'</select></p>'+
+                                                            '<p class="space"><label>Branca: </label><select id="form-branca" class="form-control">'+getBrancaSelect(memRuolo,memBranca)+'</select></p>');
+
+                            $("#form-ruolo").val(js.ruolo);
+                            $("#form-branca").val(js.branca);
+                            $("#send").click(function(){
+                              var utente=$("#form-utente").val();
+                              var email=$("#form-email").val();
+                              var pswd=$("#form-pswd").val();
+                              var ruolo=$("#form-ruolo").val();
+                              var branca=$("#form-branca").val();
+                              $.post('php/updateUserInfo.php',{'id':js.id,'utente':utente,'email':email,'ruolo':ruolo,'branca':branca},function(data){
+                                  if(data==202)
+                                    $('#myModal').modal('hide');
+                              });
+                            });
 					  }
 				});
                 function getBrancaFromNumber(n){
@@ -186,7 +215,7 @@
                                                 '<div class="media-body">'+
                                                     '<h4 class="media-heading">'+p.utente+' <button class="btn btn-xs btn-danger"> <span class="glyphicon glyphicon-trash"></span> </button></h4>'+
                                                     '<p>Branca: '+getBrancaFromNumber(parseInt(p.branca))+'</p>'+
-                                                    '<p><button class="btn btn-sm btn-info"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Change</button>'+
+                                                    '<p><button class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal" data-whatever="@editUser" data-json="'+JSON.stringify(p).replace(/"/g,"'")+'"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Change</button>'+
                                                     '</p>'+
                                                     '</div>'+
                                                 '</div>'+

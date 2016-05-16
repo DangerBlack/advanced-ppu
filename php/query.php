@@ -133,20 +133,24 @@
 		],$filtro_branca);
 		return $res;
 	}
-	function insertUser($utente,$mail,$pswd){
+	function insertUser($utente,$mail,$pswd,$ruolo,$branca){
 		$database=connect();
 		$res=$database->insert("utenti",[
 			"utente"=>$utente,
 			"email"=>$mail,
-			"pswd"=>$pswd
+			"pswd"=>$pswd,
+			"ruolo"=>$ruolo,
+			"branca"=>$branca
 		]);
 		return $res;
 	}
-	function updateUserInfo($id,$utente,$email){
+	function updateUserInfo($id,$utente,$email,$ruolo,$branca){
 		$database=connect();
 		$res=$database->update("utenti",[
 			"utente"=>$utente,
-			"email"=>$email
+			"email"=>$email,
+			"ruolo"=>$ruolo,
+			"branca"=>$branca
 		],[
 			"id[=]"=>$id
 		]);
