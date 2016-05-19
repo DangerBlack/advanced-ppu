@@ -45,9 +45,9 @@
 			$image->resize($width,$height);
 			$image->save("../archive/photo/" . $file_name_changed);
 
-			$id=$_GET['id'];
+			$id=getId();
 
-			updateScoutImage($id,$file_name_changed);
+			updateUserImage($id,$file_name_changed);
 			echo "202";
 		}
 	  }

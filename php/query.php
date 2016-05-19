@@ -156,6 +156,13 @@
 		]);
 		return $res;
 	}
+	function deleteUser($id){
+		$database=connect();
+		$res=$database->delete("utenti",[
+			'id[=]'=>$id
+		]);
+		return $res;
+	}
 	function insertScout(
 							$nome,
 							$cognome,
@@ -964,6 +971,16 @@
 			'photo'=>$photo
 		],[
 			'idscout[=]'=>$id_scout
+		]);
+		return $res;
+	}
+	function updateUserImage($id,$photo){
+		$database=connect();
+		$res=$database->update("utenti",
+		[
+			'photo'=>$photo
+		],[
+			'id[=]'=>$id
 		]);
 		return $res;
 	}

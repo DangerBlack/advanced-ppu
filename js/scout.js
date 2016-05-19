@@ -355,9 +355,19 @@ function editCommentoModal(id,modal,idCommento){
 	var titolo=$("#commento"+idCommento).find('.titolo').text();
 	var post=$("#commento"+idCommento).find('.post').text();
 	modal.find('.modal-title').html("Scrivi un commento");
-	modal.find('.modal-body').html('<p class="space"><label>Titolo: </label> <input id="titolo" type="text" placeholder="Chiacchierata" value="'+titolo+'"/></p>'+
-									'<label>Corpo: </label><br /> <textarea id="commento" type="text" placeholder="-testo-" >'+post+'</textarea><span class="rightText"><span id="counter">0</span><span>/500</span></span>');
 
+	modal.find('.modal-body').html('<div class="form-group">'+
+		'<label for="tiolo">Titolo</label>'+
+		'<div class="input-group">'+
+			'<input id="titolo" class="form-control" type="text" placeholder="Chiacchierata" value="'+titolo+'" required"/>'+
+			'<span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>'+
+		'</div>'+
+	'</div>'+
+	'<label>Corpo: </label><br /> <textarea id="commento" type="text" placeholder="-testo-" >'+post+'</textarea><span class="rightText"><span id="counter">0</span><span>/500</span></span>');
+	/*
+	modal.find('.modal-body').html('<p class="space"><label>Titolo: </label> <input id="titolo" class="form-control" type="text" placeholder="Chiacchierata" value="'+titolo+'"/></p>'+
+									'<label>Corpo: </label><br /> <textarea id="commento" type="text" placeholder="-testo-" >'+post+'</textarea><span class="rightText"><span id="counter">0</span><span>/500</span></span>');
+									*/
 	$("#commento").keypress(function(){
 		var l=$(this).val().length;
 		if(l>500){
