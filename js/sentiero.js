@@ -28,10 +28,18 @@ function initSentiero(id){
 			console.log(e);
 		}
 		$(".nome").html('<a href="scout.php?id='+id+'">'+s.nome+" "+s.cognome+"</a>");
+		var maxValF=0;
 		for(var k=0;k<s.tappe.length;k++){
 			var tnome=getTappFromId(parseInt(s.tappe[k].idtappe));
 			$("#conquistata"+tnome).prop('checked',trueAs1(s.tappe[k].conquistata));
 			$("#conquistata"+tnome).attr('value',s.tappe[k].id);
+
+			if(s.tappe[k].conquistata=="1"){
+				var temp=parseInt(s.tappe[k].idtappe)
+				if(maxValF<temp){
+					maxValF=s.tappe[k].idtappe;
+				}
+			}
 			$("#data"+tnome).val(toHRData(s.tappe[k].dataconquistata));
 			$(".data"+tnome).text(toHRData(s.tappe[k].dataconquistata));
 			$(".add"+tnome).attr("data-whatever",s.tappe[k].id);
@@ -54,6 +62,7 @@ function initSentiero(id){
 															'</tr>');
 			}
 		}
+		$('.nav-tabs li:eq('+(parseInt(maxValF))+') a').tab('show')
 		eventiSentiero(id);
 	});
 }

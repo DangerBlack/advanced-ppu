@@ -69,7 +69,7 @@ function initScout(id){
 					$(".tappa").attr("src","archive/"+s.tappe[i].immagine);
 					$("#listaImpegni").html('');
 					for(var j=0;j<s.tappe[i].mete.length;j++){
-						$("#listaImpegni").append('<li>'+s.tappe[i].mete[j].meta+'</li>');
+						$("#listaImpegni").append('<li>'+s.tappe[i].mete[j].impegno+'</li>');
 					}
 					break;
 				}

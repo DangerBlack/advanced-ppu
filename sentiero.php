@@ -110,7 +110,7 @@
 					<li role="presentation"><a data-toggle="tab" href="#tappaBaloo">Caccia di Baloo</a></li>
                     <li role="presentation"><a data-toggle="tab" href="#tappaBaghera">Caccia di Baghera</a></li>
 					<li role="presentation"><a data-toggle="tab" href="#tappaAkela">Caccia di Akela</a></li>
-					<li role="presentation" class="active"><a data-toggle="tab" href="#tappaScoperta">Tappa della Scoperta</a></li>
+					<li role="presentation"><a data-toggle="tab" href="#tappaScoperta">Tappa della Scoperta</a></li>
 					<li role="presentation"><a data-toggle="tab" href="#tappaCompetenza">Tappa della Competenza</a></li>
 					<li role="presentation"><a data-toggle="tab" href="#tappaResponsabilita">Tappa della Responsabilità</a></li>
 				</ul>
