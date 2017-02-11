@@ -79,7 +79,7 @@ function editSquadriglia(js,id,modal){
 		if(js[i].idsquadriglie==id){
 			modal.find('.modal-title').html("Aggiungi una squadriglia");
 			modal.find('.modal-body').html('<p class="space"><label>Nome: </label> <input id="sqName" type="text" placeholder="Paguri" value="'+js[i].nome+'"/></p>'+
-											'<p class="space"><label>Sesso:</label><select id="sesso"><option '+ifGetSelected(js[i].sesso,"M")+'value="M">Maschile</option><option '+ifGetSelected(js[i].sesso,"F")+'value="F">Femminile</option></select></p>'+
+											'<p class="space"><label>Sesso:</label><select id="sesso"><option '+ifGetSelected(js[i].sesso,"M")+'value="M">Maschile</option><option '+ifGetSelected(js[i].sesso,"F")+'value="F">Femminile</option><option '+ifGetSelected(js[i].sesso,"U")+'value="U">Mista</option></select></p>'+
 											'<label>Colore Primario: </label>'+
 											'<div class="input-group colore1">'+
 												'<input id="colore1" type="text" value="'+js[i].colore1+'" class="form-control" placeholder="#FFFFF"/>'+
