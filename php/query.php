@@ -20,7 +20,7 @@
 	*/
     require  'medoo.min.php';
 	function connect(){
-		/*
+		/**/
 		$database = new medoo([
 				// required
 				'database_type' => 'mysql',
@@ -37,12 +37,15 @@
 				PDO::ATTR_CASE => PDO::CASE_NATURAL
 			]
 		]);
-		*/
+		/**/
+
+		/*
 		$database = new medoo([
                 // required
                 'database_type' => 'sqlite',
                 'database_file' => '../archive/test_appu.sqlite'
         ]);
+		*/
 		return $database;
 	}
     //GESTIONE UTENTI LOGIN REGISTER ETC
@@ -920,7 +923,7 @@
 			'specialitascout.maestro',
 			'specialitascout.conquistata'
 		],[
-			'scout.status[=]'=>0,
+			'scout.status[=]'=>getBranca(),
 			'ORDER'=>['sname']
 		]);
 		return $res;

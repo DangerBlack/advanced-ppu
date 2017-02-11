@@ -64,8 +64,8 @@ function initScout(id){
 			if(s.status==2)
 				inizio=4;
 
-			for(var i=inizio;i<inizio+3;i++)/*TODO rimuovere magic number */
-				if(s.tappe[i].conquistata==0){
+			for(var i=0;i<s.tappe.length;i++)/*TODO rimuovere magic number */
+				if((s.tappe[i].idtappe>inizio)&&(s.tappe[i].conquistata==0)){
 					$(".tappa").attr("src","archive/"+s.tappe[i].immagine);
 					$("#listaImpegni").html('');
 					for(var j=0;j<s.tappe[i].mete.length;j++){
