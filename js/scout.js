@@ -17,6 +17,10 @@
     You should have received a copy of the GNU General Public License
     along with Advanced P.P.U.  If not, see <http://www.gnu.org/licenses/>.
 **/
+
+var STATUS_REPARTO=2;
+var STATUS_CLAN=3;
+
 function initScout(id){
 
 	$.post("php/getScout.php",{"id":id},function(data){
@@ -38,17 +42,23 @@ function initScout(id){
 			$("#cap").html(s.cap);
 			$("#provincia").html(s.provincia);
 			$("#nazione").html(s.nazione);
-			$.get("php/getSquadriglie.php",function(data){
-				$("#idsquadriglie").html('');
-				var js=JSON.parse(data);
-				console.log(js.length);
-				for(var i=0;i<js.length;i++){
-					var isSelected='';
-					if(js[i].idsquadriglie==s.idsquadriglie)
-						isSelected='selected="selected"';
-					$("#idsquadriglie").append('<option '+isSelected+' value="'+js[i].idsquadriglie+'" sesso="'+js[i].sesso+'">'+js[i].nome+'</option>');
-				}
-			});
+			if(s.status<STATUS_CLAN){
+				$.get("php/getSquadriglie.php",function(data){
+					$("#idsquadriglie").html('');
+					var js=JSON.parse(data);
+					console.log(js.length);
+					for(var i=0;i<js.length;i++){
+						var isSelected='';
+						if(js[i].idsquadriglie==s.idsquadriglie)
+							isSelected='selected="selected"';
+						$("#idsquadriglie").append('<option '+isSelected+' value="'+js[i].idsquadriglie+'" sesso="'+js[i].sesso+'">'+js[i].nome+'</option>');
+					}
+				});
+			}else{
+				$("#idsquadriglie").parent().parent().hide();
+				$("#idsquadriglie").hide();
+				$(".squadriglia").parent().hide();
+			}
 
 
 			//$("#note").html(s.varie.replace(/\n/g,"<br />"));
@@ -60,46 +70,52 @@ function initScout(id){
 			$("#mailmamma").html('<a href="mailto:'+s.mailmammma+'" target="_top">'+s.mailmamma+'</a>');
 			$("#mail").html('<a href="mailto:'+s.mail+'" target="_top">'+s.mail+'</a>');
 			$("#listaImpegni").html('');
-			var inizio=0;
-			if(s.status==2)
-				inizio=4;
+			if(s.status<STATUS_CLAN){
+				var inizio=0;
+				if(s.status==2)
+					inizio=4;
 
-			for(var i=0;i<s.tappe.length;i++)/*TODO rimuovere magic number */
-				if((s.tappe[i].idtappe>inizio)&&(s.tappe[i].conquistata==0)){
-					$(".tappa").attr("src","archive/"+s.tappe[i].immagine);
-					$("#listaImpegni").html('');
-					for(var j=0;j<s.tappe[i].mete.length;j++){
-						$("#listaImpegni").append('<li>'+s.tappe[i].mete[j].impegno+'</li>');
+				for(var i=0;i<s.tappe.length;i++)/*TODO rimuovere magic number */
+					if((s.tappe[i].idtappe>inizio)&&(s.tappe[i].conquistata==0)){
+						$(".tappa").attr("src","archive/"+s.tappe[i].immagine);
+						$("#listaImpegni").html('');
+						for(var j=0;j<s.tappe[i].mete.length;j++){
+							$("#listaImpegni").append('<li>'+s.tappe[i].mete[j].impegno+'</li>');
+						}
+						break;
 					}
-					break;
-				}
-			$("#listaSpecialita").html('');
-			$("#specInConquista").html('');
-			$.each(s.specialita,function(e,spec){
-				var count=0;
-				var concat='';
-				for(var i=0;i<spec['impegni'].length;i++){
-					count++;
-					concat+=spec['impegni'][i].impegno +'<br />';
-				}
-				if(spec.conquistata!=0)
-					$("#listaSpecialita").append('<li class="spec" value="'+spec.idspecialita+'" ><a href="#" data-toggle="tooltip" data-placement="bottom"'+
-													   'title="" data-html="true" data-original-title="'+concat+'"'+
-													   'class="info-tooltip">'+
-													'<img src="archive/'+spec.immagine+'" />'+
-													'<p>'+spec.nome+' <span class="badge">'+count+'</span></p>'+
-													'</a>'+
-												'</li>');
-				else
-					$("#specInConquista").append('<li class="spec" value="'+spec.idspecialita+'"><a href="#" data-toggle="tooltip" data-placement="bottom"'+
-													   'title="" data-html="true" data-original-title="'+concat+'"'+
-													   'class="info-tooltip">'+
-													'<img src="archive/'+spec.immagine+'" />'+
-													'<p>'+spec.nome+' <span class="badge">'+count+'</span></p>'+
-													'</a>'+
-												'</li>');
-			});
-			if(s.status==2){
+				$("#listaSpecialita").html('');
+				$("#specInConquista").html('');
+				$.each(s.specialita,function(e,spec){
+					var count=0;
+					var concat='';
+					for(var i=0;i<spec['impegni'].length;i++){
+						count++;
+						concat+=spec['impegni'][i].impegno +'<br />';
+					}
+					if(spec.conquistata!=0)
+						$("#listaSpecialita").append('<li class="spec" value="'+spec.idspecialita+'" ><a href="#" data-toggle="tooltip" data-placement="bottom"'+
+														   'title="" data-html="true" data-original-title="'+concat+'"'+
+														   'class="info-tooltip">'+
+														'<img src="archive/'+spec.immagine+'" />'+
+														'<p>'+spec.nome+' <span class="badge">'+count+'</span></p>'+
+														'</a>'+
+													'</li>');
+					else
+						$("#specInConquista").append('<li class="spec" value="'+spec.idspecialita+'"><a href="#" data-toggle="tooltip" data-placement="bottom"'+
+														   'title="" data-html="true" data-original-title="'+concat+'"'+
+														   'class="info-tooltip">'+
+														'<img src="archive/'+spec.immagine+'" />'+
+														'<p>'+spec.nome+' <span class="badge">'+count+'</span></p>'+
+														'</a>'+
+													'</li>');
+				});
+			}else{
+				$("#listaImpegni").parent().parent().hide()
+				$("#listaSpecialita").parent().parent().hide();
+				$("#specInConquista").parent().parent().hide();
+			}
+			if(s.status==STATUS_REPARTO){
 				$("#listaBrevetti").html('');
 				$("#brevInConquista").html('');
 				$.each(s.brevetti,function(e,brev){
