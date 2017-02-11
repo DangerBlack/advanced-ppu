@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generato il: Set 13, 2015 alle 16:27
--- Versione del server: 5.5.44-0ubuntu0.14.04.1
--- Versione PHP: 5.5.9-1ubuntu4.11
+-- Generation Time: Feb 11, 2017 at 05:24 PM
+-- Server version: 5.5.54-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `brevetti`
+-- Table structure for table `brevetti`
 --
 
 CREATE TABLE IF NOT EXISTS `brevetti` (
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `brevetti` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `brevettiimpegni`
+-- Table structure for table `brevettiimpegni`
 --
 
 CREATE TABLE IF NOT EXISTS `brevettiimpegni` (
@@ -48,12 +48,12 @@ CREATE TABLE IF NOT EXISTS `brevettiimpegni` (
   `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `completato` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `brevettiscout`
+-- Table structure for table `brevettiscout`
 --
 
 CREATE TABLE IF NOT EXISTS `brevettiscout` (
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `brevettiscout` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `commenti`
+-- Table structure for table `commenti`
 --
 
 CREATE TABLE IF NOT EXISTS `commenti` (
@@ -83,12 +83,12 @@ CREATE TABLE IF NOT EXISTS `commenti` (
   `titolo` varchar(100) NOT NULL,
   `testo` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `metescout`
+-- Table structure for table `metescout`
 --
 
 CREATE TABLE IF NOT EXISTS `metescout` (
@@ -100,12 +100,12 @@ CREATE TABLE IF NOT EXISTS `metescout` (
   `meta` varchar(250) DEFAULT NULL,
   `impegno` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `scout`
+-- Table structure for table `scout`
 --
 
 CREATE TABLE IF NOT EXISTS `scout` (
@@ -134,12 +134,12 @@ CREATE TABLE IF NOT EXISTS `scout` (
   `status` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idscout`),
   KEY `fk_scout_squadriglie_idx` (`squadriglie_idsquadriglie`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `scoutStorico`
+-- Table structure for table `scoutStorico`
 --
 
 CREATE TABLE IF NOT EXISTS `scoutStorico` (
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `scoutStorico` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `specialita`
+-- Table structure for table `specialita`
 --
 
 CREATE TABLE IF NOT EXISTS `specialita` (
@@ -182,13 +182,14 @@ CREATE TABLE IF NOT EXISTS `specialita` (
   `nome` varchar(45) NOT NULL,
   `immagine` varchar(45) DEFAULT NULL,
   `esempi` text,
+  `status` int(11) NOT NULL DEFAULT '2',
   PRIMARY KEY (`idspecialita`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=151 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=144 ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `specialitaimpegni`
+-- Table structure for table `specialitaimpegni`
 --
 
 CREATE TABLE IF NOT EXISTS `specialitaimpegni` (
@@ -199,12 +200,12 @@ CREATE TABLE IF NOT EXISTS `specialitaimpegni` (
   `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `completato` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=82 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=200 ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `specialitascout`
+-- Table structure for table `specialitascout`
 --
 
 CREATE TABLE IF NOT EXISTS `specialitascout` (
@@ -223,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `specialitascout` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `squadriglie`
+-- Table structure for table `squadriglie`
 --
 
 CREATE TABLE IF NOT EXISTS `squadriglie` (
@@ -233,14 +234,15 @@ CREATE TABLE IF NOT EXISTS `squadriglie` (
   `guidone` varchar(45) DEFAULT NULL,
   `colore1` varchar(6) NOT NULL DEFAULT 'FFFFFF',
   `colore2` varchar(6) NOT NULL DEFAULT 'FFFFFF',
+  `status` int(11) NOT NULL DEFAULT '2',
   PRIMARY KEY (`idsquadriglie`),
   UNIQUE KEY `nome_UNIQUE` (`nome`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `tappe`
+-- Table structure for table `tappe`
 --
 
 CREATE TABLE IF NOT EXISTS `tappe` (
@@ -249,12 +251,12 @@ CREATE TABLE IF NOT EXISTS `tappe` (
   `immagine` varchar(45) DEFAULT NULL,
   `metodo` text,
   PRIMARY KEY (`idtappe`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `tappescout`
+-- Table structure for table `tappescout`
 --
 
 CREATE TABLE IF NOT EXISTS `tappescout` (
@@ -264,12 +266,12 @@ CREATE TABLE IF NOT EXISTS `tappescout` (
   `dataconquistata` date DEFAULT NULL,
   `conquistata` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=172 ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `utenti`
+-- Table structure for table `utenti`
 --
 
 CREATE TABLE IF NOT EXISTS `utenti` (
@@ -278,8 +280,10 @@ CREATE TABLE IF NOT EXISTS `utenti` (
   `email` varchar(300) DEFAULT NULL,
   `pswd` text NOT NULL,
   `photo` varchar(200) NOT NULL DEFAULT 'user.jpg',
+  `ruolo` int(11) NOT NULL DEFAULT '2',
+  `branca` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
